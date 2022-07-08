@@ -1,0 +1,7 @@
+tags
+tags.lock
+logs/*.log
+.ipynb_checkpoints
+__pycache__
+*.swp
+
