@@ -1,20 +1,15 @@
-from geometor.utils import *
-from geometor.model import *
-from geometor.render import *
-from geometor.pappus import *
-from itertools import permutations
+from phyllotaxis import *
 
-sp.init_printing()
-
-BUILD = True
-ANALYZE = True
+BUILD = False
+ANALYZE = False
 
 RINGS = True
 POLYGON = False
+DOT = True
 #  num_rings=144
 num_rings = int(input(f'\nnumber of rings: '))
 
-NAME = f'rings-{num_rings}'
+NAME = f'rings/{num_rings}'
 NAME += input(f'\nsession name: {NAME}')
 log_init(NAME)
 start_time = timer()
@@ -35,16 +30,11 @@ print_log(f'sweep: {sweep} = {sweep.evalf()}')
 theta = math.degrees(sweep)
 print_log(f'theta: {theta}')
 
-rays = []
+dots = []
+rings = []
 
 for i in range(0, num_rings):
-    #  ray = spg.Ray(A, angle=i*sweep)
-    #  print(ray)
-    #  rays.append(ray)
     rad = num_rings - i
-    #  c = circle(A, point(0, rad))
-    #  ints = c.intersection(ray)
-    #  pt = ints[0]
     pt = point(rad, 0)
     pt = pt.rotate(i*sweep)
     #  print(pt)
@@ -54,11 +44,17 @@ for i in range(0, num_rings):
     #  add_point(pt)
     pts.append(pt)
     history.append(pt)
+    if DOT:
+        dot_radius = sp.sqrt(rad)
+        dot_rad_pt = point(pt.x + dot_radius, pt.y)
+        c = circle(pt, dot_rad_pt)
+        c.classes = ['dot']
+        dots.append(c)
+
     if RINGS:
         c = circle(A, pt, classes=['ring'])
         #  add_element(circle(A, pt))
-        elements.append(c)
-        history.append(c)
+        rings.append(c)
 
     #  plot_wedge_2(ax, A, leafs-i, theta*(i), theta*(i+1), linestyle='-', ec='#000', fc='#c903', linewidth=2)
 
@@ -96,7 +92,7 @@ if ANALYZE:
 
 # PLOT *********************************
 print_log(f'\nPLOT: {NAME}')
-limx, limy = get_limits_from_points(pts, margin=.25)
+limx, limy = get_limits_from_points(pts, margin=math.sqrt(num_rings))
 limx, limy = adjust_lims(limx, limy)
 bounds = set_bounds(limx, limy)
 print_log()
@@ -116,7 +112,11 @@ fig.suptitle(title, fontdict={'color': '#960', 'size':'small'})
 print_log('\nPlot Summary')
 xlabel = f'elements: {len(elements)} | points: {len(pts)}'
 ax_prep(ax, ax_btm, bounds, xlabel)
-plot_sequence(ax, history, bounds)
+if DOT:
+    for dot in dots:
+        plot_circle(ax, dot, edgecolor='k', facecolor='r', linestyle='-', fill=True)
+
+#  plot_sequence(ax, history, bounds)
 snapshot(NAME, '00000.png')
 
 #  leafs=3
@@ -126,6 +126,7 @@ snapshot(NAME, '00000.png')
 if BUILD:
     print_log('\nPlot Build')
     build_sequence(NAME, ax, ax_btm, history, bounds, margin=4)
+
 
 if ANALYZE:
     pass
@@ -147,5 +148,5 @@ else:
 
 
 
-#  plt.show()
+plt.show()
 
