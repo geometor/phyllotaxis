@@ -16,28 +16,32 @@ start_time = timer()
 
 print_log(f'\nMODEL: {NAME}')
 
+num_colors = 21
+cmap_name = 'YlGn'
+cmap_name = 'copper'
+colors = get_colors(cmap_name, num_colors)
+
 # add starting points
-#  A, B = begin_zero()
 A = add_point(point(0, 0))
-
-
-#  add_element(circle(A, B))
-
-#  sweep = 2 * sp.pi - (2 * sp.pi / phi)
-sweep = 2 * sp.pi - (2 * sp.pi * sp.Rational(89, 144))
-print_log(f'sweep: {sweep} = {sweep.evalf()}')
+#  sweep = sweep_phi()
+sweep = sweep_rational(89, 144)
+print_log('Sweep:')
+print_log(f'    radians: {sweep} = {sweep.evalf()}')
 
 theta = math.degrees(sweep)
-print_log(f'theta: {theta}')
+print_log(f'    degrees: {theta}')
 
 dots = []
 rings = []
+
 
 for i in range(0, num_rings):
     rad = num_rings - i
     pt = point(rad, 0)
     pt = pt.rotate(i*sweep)
-    #  print(pt)
+    print(i)
+    print(f'    x: {pt.x}')
+    print(f'    y: {pt.y}')
     pt.classes = []
     pt.parents = set()
     pt.elements = set()
@@ -53,14 +57,7 @@ for i in range(0, num_rings):
 
     if RINGS:
         c = circle(A, pt, classes=['ring'])
-        #  add_element(circle(A, pt))
         rings.append(c)
-
-    #  plot_wedge_2(ax, A, leafs-i, theta*(i), theta*(i+1), linestyle='-', ec='#000', fc='#c903', linewidth=2)
-
-
-#  print('\nPoints: ')
-#  print(pts)
 
 if POLYGON:
     add_polygon(polygon(pts))
@@ -86,35 +83,37 @@ if ANALYZE:
         #  breakpoint()
         add_polygon(segment(pt, nearest_pt))
 
-
-
-
-
 # PLOT *********************************
 print_log(f'\nPLOT: {NAME}')
-limx, limy = get_limits_from_points(pts, margin=math.sqrt(num_rings))
-limx, limy = adjust_lims(limx, limy)
+scale = num_rings + math.sqrt(num_rings)
+#  limx, limy = get_limits_from_points(pts, margin=math.sqrt(num_rings))
+#  limx, limy = adjust_lims(limx, limy)
+limx = (-scale, scale)
+limy = (-scale, scale)
 bounds = set_bounds(limx, limy)
 print_log()
 print_log(f'limx: {limx}')
 print_log(f'limy: {limy}')
 
-#  plt.ion()
-fig, (ax, ax_btm) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [10, 1]})
-ax_btm.axis('off')
-ax.axis('off')
+#  fig, (ax, ax_btm) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [10, 1]})
+#  ax_btm.axis('off')
+#  ax.axis('off')
+plt.clf()
+fig, ax = ax_prep_square(bounds)
 ax.set_aspect('equal')
 plt.tight_layout()
+if DOT:
+    for i, dot in enumerate(dots):
+        #  plot_circle(ax, dot, edgecolor='k', facecolor='r', linestyle='-', fill=True)
+        color = colors[i % num_colors]
+        plot_circle(ax, dot, edgecolor='k', facecolor=color, linewidth=1, linestyle='-', fill=True)
 
-title = f'G E O M E T O R'
-fig.suptitle(title, fontdict={'color': '#960', 'size':'small'})
+#  title = f'G E O M E T O R'
+#  fig.suptitle(title, fontdict={'color': '#960', 'size':'small'})
 
 print_log('\nPlot Summary')
-xlabel = f'elements: {len(elements)} | points: {len(pts)}'
-ax_prep(ax, ax_btm, bounds, xlabel)
-if DOT:
-    for dot in dots:
-        plot_circle(ax, dot, edgecolor='k', facecolor='r', linestyle='-', fill=True)
+#  xlabel = f'elements: {len(elements)} | points: {len(pts)}'
+#  ax_prep(ax, ax_btm, bounds, xlabel)
 
 #  plot_sequence(ax, history, bounds)
 snapshot(NAME, '00000.png')

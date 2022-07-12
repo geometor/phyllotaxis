@@ -2,26 +2,19 @@
 
 from PIL import Image
 
- 
-
 # Create an Image object from an Image
-filename = '/home/phiarchitect/Sessions/spirals/copper/0005/0144.png'
+folder = '/home/phi/Sessions/rings/610/'
+filename = folder + '00000.png'
 img  = Image.open(filename)
 
-pad = 100
-w, h = img.size
-margin = (w - h) / 2
-left = margin + pad
-right = w - margin - pad
-top = 0 + pad
-bottom = h - pad
-img = img.crop((left, top, right, bottom))
-img.show()
+bg_img = Image.new("RGBA", img.size) # Create a white rgba background
 
-for i in range(10):
-    f = f'/home/phiarchitect/Sessions/zoetrope/{i}.png'
+for i in range(144):
+    f = f'{folder}/zoetrope/{i:0>5}.png'
+    print(f)
     img_rotated = img.rotate(i * 137.5)
-    img_rotated.save(f)
+    bg_img.paste(img_rotated, (0, 0), img_rotated)
+    bg_img.save(f)
 
 #  img.show()
 #  img_rotated.show()
