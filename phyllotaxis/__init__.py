@@ -10,21 +10,11 @@ from itertools import permutations
 
 sp.init_printing()
 
-def get_colors(cmap_name, steps):
-    cmap = mp.cm.get_cmap(cmap_name)
-    colors = []
-    offset = 1 / (2 * steps)
-    for step in range(steps):
-        color_scale = (((step + offset) % steps) / steps)
-        #  color_scale = color_scale + (1 / (color_cycle * 2))
-        #  if rev:
-            #  color_scale = 1 - color_scale
-        colors.append(cmap(color_scale))
-    return colors
 
 def sweep_phi():
     '''use algebraic phi value for fraction of circle'''
     return 2 * sp.pi - (2 * sp.pi / phi)
+
 
 def sweep_rational(n, m):
     '''use two fibonacci numbers for fraction of circle'''
@@ -33,7 +23,7 @@ def sweep_rational(n, m):
 
 def find_point_distances(pt, other_pts):
     distances = {}
-    for test_pt in other_pts[i+1:]:
+    for test_pt in other_pts:
         d = float(pt.distance(test_pt))
         distances[d] = test_pt
     #  nearest_pt_id = distances.index(min(distances)) + i + 1
@@ -60,7 +50,7 @@ def get_node_points(num_nodes, sweep):
     return result
     
 
-def find_nearest_points(test_points, num_nearest=3)):
+def find_nearest_points(test_points, num_nearest=3):
     '''for each point in list, find nearest points from remainder of list'''
     result = {}
     for i, pt in enumerate(test_points):
