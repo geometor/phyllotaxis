@@ -9,7 +9,7 @@ for arg in sys.argv:
 from PIL import Image
 
 # Create an Image object from an Image
-folder = '/home/phi/Sessions/pyllotaxis/twilight/008/00244'
+folder = '/home/phi/Sessions/pyllotaxis/twilight/008/00609'
 z_folder = folder + '/zoetrope'    
 os.makedirs(z_folder, exist_ok=True)
 
