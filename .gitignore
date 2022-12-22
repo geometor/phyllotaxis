@@ -1,7 +1,8 @@
-tags
-tags.lock
-logs/*.log
-.ipynb_checkpoints
-__pycache__
 *.swp
-
+tags
+__pycache__
+.ipynb_checkpoints
+.doctrees
+*.egg-info/
+*.egg-info
+*.py[cod]
