@@ -1,12 +1,23 @@
-GEOMETOR explorer
-=================
+GEOMETOR • phyllotaxis
+======================
 
-Python library for exploring geometric constructions
-----------------------------------------------------
+.. include:: README.rst
 
 
-.. image:: _static/all-zoom.png
+recent logs:
+------------
 
+.. postlist:: 5
+   :excerpts:
+
+
+urgent todos:
+-------------
+
+.. postlist:: 
+   :category: TODO
+   :tags: urgent
+   :excerpts:
 
 .. toctree::
    :hidden:
