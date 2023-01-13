@@ -24,8 +24,11 @@ urgent todos:
    :maxdepth: 3
    :caption: Contents:
 
-   docsrc/usage.rst
-   docsrc/modules.rst
+   MISSION <mission/index.rst>
+   MODULES <modules/index.rst>
+   LOG </log#http://>
+   REFERENCES <refs/index.rst>
+   ABOUT <about.rst>
 
 
 
