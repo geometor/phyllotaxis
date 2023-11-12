@@ -24,11 +24,11 @@ blog_authors = {
     "phi": ("phi ARCHITECT", None),
 }
 
-html_theme_options = {
-    'logo': 'logo.png',
-    'logo_name': True,
-    'github_user': org,
-    'github_repo': repo,
-    'github_button': True,
+html_context = {
+    "display_github": True, # Integrate GitHub
+    "github_user": org, # Username
+    "github_repo": repo, # Repo name
+    "github_version": "main", # Version
+    "conf_py_path": "/docsrc/", # Path in the checkout to the docs root
 }
 
