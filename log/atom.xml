@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://geometor.github.io/phyllotaxis</id>
   <title>GEOMETOR • phyllotaxis</title>
-  <updated>2023-11-12T23:51:20.620468+00:00</updated>
+  <updated>2023-11-13T18:07:55.195395+00:00</updated>
   <link href="https://geometor.github.io/phyllotaxis"/>
   <link href="https://geometor.github.io/phyllotaxis/log/atom.xml" rel="self"/>
   <generator uri="https://ablog.readthedocs.org/" version="unknown.dev">ABlog</generator>
