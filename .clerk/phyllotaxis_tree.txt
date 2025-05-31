@@ -1,0 +1,41 @@
+/home/phiarchitect/PROJECTS/geometor/phyllotaxis
+├── CHANGELOG.rst
+├── docsrc
+│   ├── conf.py
+│   ├── demos
+│   │   └── index.rst
+│   ├── index.rst
+│   ├── intro.rst
+│   ├── log
+│   │   └── 22.356-153850.rst
+│   ├── mission
+│   │   └── index.rst
+│   ├── modules
+│   │   ├── index.rst
+│   │   └── phyllotaxis.rst
+│   ├── __pycache__
+│   ├── refs
+│   │   └── index.rst
+│   ├── _static
+│   │   ├── all-zoom.png
+│   │   ├── custom.css
+│   │   └── logo.png
+│   └── usage
+│       └── index.rst
+├── LICENSE
+├── README.md
+├── rings.py
+├── setup.py
+├── spiral-polar.ipynb
+├── spirals-2.py
+├── spirals.py
+├── src
+│   └── geometor
+│       ├── __init__.py
+│       └── phyllotaxis
+│           └── __init__.py
+├── wedges.ipynb
+├── wedges.py
+└── zoetrope.py
+
+12 directories, 26 files
