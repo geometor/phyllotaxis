@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Phyllotaxis Visualization</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+    }
+
+    #rendererContainer {
+      /* Container for Three.js canvas */
+      width: 100vw;
+      height: 100vh;
+      flex-grow: 1;
+    }
+
+    #controlsPanel {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 290px;
+      /* Slightly wider for new controls */
+      background-color: #222831;
+      padding: 15px;
+      box-shadow: 3px 0 8px rgba(0, 0, 0, 0.4);
+      transform: translateX(0);
+      transition: transform 0.3s ease-in-out;
+      z-index: 1000;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    #controlsPanel.collapsed {
+      transform: translateX(-290px);
+    }
+
+    #controlsContent {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #controlsToggle {
+      position: absolute;
+      left: 290px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 60px;
+      background-color: #393e46;
+      color: #eeeeee;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      font-size: 16px;
+      line-height: 60px;
+      text-align: center;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+      z-index: 5;
+    }
+
+    .control-group {
+      margin-bottom: 6px;
+    }
+
+    .input-label,
+    .checkbox-label {
+      font-size: 0.8em;
+      color: #cccccc;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .dark-input,
+    select.dark-input {
+      width: 100%;
+      padding: 5px 7px;
+      border-radius: 3px;
+      background-color: #393e46;
+      color: #eeeeee;
+      border: 1px solid #4a4e57;
+      font-size: 0.85em;
+      box-sizing: border-box;
+    }
+
+    input[type="number"].dark-input {
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"].dark-input::-webkit-outer-spin-button,
+    input[type="number"].dark-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="range"].dark-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      background: #4a4e57;
+      border-radius: 3px;
+      outline: none;
+      padding: 0;
+      margin-top: 3px;
+    }
+
+    input[type="range"].dark-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #00adb5;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid #222831;
+    }
+
+    input[type="range"].dark-slider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      background: #00adb5;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid #222831;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn {
+      flex-grow: 1;
+      padding: 6px 8px;
+      border-radius: 3px;
+      font-weight: normal;
+      font-size: 0.8em;
+      transition: background-color 0.2s ease-in-out;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: #00adb5;
+      color: #eeeeee;
+      border-color: #00979d;
+    }
+
+    .btn-primary:hover {
+      background-color: #00c0ca;
+    }
+
+    .btn-secondary {
+      background-color: #393e46;
+      color: #eeeeee;
+      border-color: #4a4e57;
+    }
+
+    .btn-secondary:hover {
+      background-color: #4a4e57;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    input[type="checkbox"].dark-checkbox {
+      width: 12px;
+      height: 12px;
+      margin-right: 6px;
+      accent-color: #00adb5;
+      vertical-align: middle;
+    }
+
+    .checkbox-label-inline {
+      font-size: 0.8em;
+      color: #cccccc;
+      cursor: pointer;
+      vertical-align: middle;
+    }
+
+    .panel-info-text {
+      font-size: 0.75em;
+      color: #aaaaaa;
+      margin-top: 6px;
+    }
+
+    .panel-info-text span {
+      color: #cccccc;
+      font-weight: bold;
+    }
+
+    .keymap-info {
+      margin-top: 15px;
+      padding-top: 8px;
+      border-top: 1px solid #4a4e57;
+    }
+
+    .keymap-info h4 {
+      font-size: 0.9em;
+      color: #00adb5;
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    .keymap-info ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .keymap-info li {
+      font-size: 0.75em;
+      color: #bbbbbb;
+      margin-bottom: 3px;
+    }
+
+    .keymap-info li kbd {
+      background-color: #393e46;
+      padding: 1px 4px;
+      border-radius: 2px;
+      border: 1px solid #4a4e57;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="controlsPanel">
+    <button id="controlsToggle">&lt;</button>
+    <div id="controlsContent">
+      <div class="control-group button-group">
+        <button id="startButton" class="btn btn-primary">Start</button>
+        <button id="resetButton" class="btn btn-secondary">Reset</button>
+      </div>
+
+      <div class="control-group">
+        <label for="speedSlider" class="input-label">Generation Speed (a/A):</label>
+        <input type="range" id="speedSlider" min="1" max="20" value="5" class="dark-slider">
+      </div>
+      <hr style="border-color: #4a4e57; margin: 5px 0;">
+      <h5 style="font-size:0.85em; color:#00adb5; margin: 5px 0 0 0;">Growth Parameters</h5>
+      <div class="control-group">
+        <label for="scaleSlider" class="input-label">XY Spread Scale (s/S):</label>
+        <input type="range" id="scaleSlider" min="0.5" max="15" value="2" step="0.1" class="dark-slider">
+      </div>
+      <div class="control-group">
+        <label for="sizeSlider" class="input-label">Base Size (b/B):</label>
+        <input type="range" id="sizeSlider" min="0.05" max="5" value="0.2" step="0.01" class="dark-slider">
+      </div>
+      <div class="control-group">
+        <label for="verticalGrowthRateSlider" class="input-label">Initial Vertical Growth:</label>
+        <input type="range" id="verticalGrowthRateSlider" min="0.01" max="2" value="0.2" step="0.01"
+          class="dark-slider">
+      </div>
+      <div class="control-group">
+        <label for="maxFastGrowthInput" class="input-label">Primordia for Fast Growth:</label>
+        <input type="number" id="maxFastGrowthInput" min="0" max="1000" value="50" class="dark-input">
+      </div>
+      <div class="control-group">
+        <label for="slowGrowthFactorSlider" class="input-label">Slow Growth Factor:</label>
+        <input type="range" id="slowGrowthFactorSlider" min="0" max="1" value="0.1" step="0.01" class="dark-slider">
+      </div>
+      <hr style="border-color: #4a4e57; margin: 5px 0;">
+      <h5 style="font-size:0.85em; color:#00adb5; margin: 5px 0 0 0;">Color Parameters</h5>
+      <div class="control-group">
+        <label for="paletteSizeInput" class="input-label">Palette Colors (Up/Down Arrow):</label>
+        <input type="number" id="paletteSizeInput" min="0" max="64" value="0" class="dark-input">
+      </div>
+      <div class="control-group">
+        <label for="colorThemeSelect" class="input-label">Color Theme (Left/Right Arrow):</label>
+        <select id="colorThemeSelect" class="dark-input">
+          <option value="continuous_spectrum">Continuous Spectrum</option>
+          <option value="custom_palette">Custom Palette (Full Spectrum Hues)</option>
+          <option value="greens">Greens (Dark to Light)</option>
+          <option value="autumn">Autumn (Reds, Oranges, Yellows)</option>
+          <option value="forest">Forest (Browns, Deep Greens)</option>
+          <option value="sunset">Sunset (Pinks, Oranges, Reds)</option>
+          <option value="ocean">Ocean (Teals, Blues)</option>
+          <option value="galactic">Galactic (Blues, Purples, Pinks)</option>
+          <option value="galactic_v2">Galactic #2 (Black-Pink-Blue-Black)</option>
+          <option value="galactic_v3">Galactic #3 (Black-LightBlue-Black)</option>
+          <option value="galactic_v4">Galactic #4 (Black-Blue~Magenta-Black)</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <div class="checkbox-container">
+          <input type="checkbox" id="cycleColorsCheckbox" class="dark-checkbox">
+          <label for="cycleColorsCheckbox" class="checkbox-label-inline">Cycle Colors (C)</label>
+        </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="reverseCycleCheckbox" class="dark-checkbox">
+          <label for="reverseCycleCheckbox" class="checkbox-label-inline">Reverse Cycle (X)</label>
+        </div>
+      </div>
+      <hr style="border-color: #4a4e57; margin: 5px 0;">
+      <div class="panel-info-text">
+        Primordia count: <span id="primordiaCountDisplay">0</span>
+      </div>
+      <div class="panel-info-text" style="font-size: 0.7em;">
+        Growth Factor (Size): <span id="growthFactorDisplay">0.05</span> (fixed)
+      </div>
+
+      <div class="keymap-info">
+        <h4>Keyboard Shortcuts</h4>
+        <ul>
+          <li><kbd>Space</kbd> - Play/Pause</li>
+          <li><kbd>R</kbd> - Reset</li>
+          <li><kbd>T</kbd> - Toggle Controls Panel</li>
+          <li><kbd>a</kbd>/<kbd>A</kbd> - Generation Speed +/-</li>
+          <li><kbd>s</kbd>/<kbd>S</kbd> - XY Spread +/-</li>
+          <li><kbd>b</kbd>/<kbd>B</kbd> - Base Size +/-</li>
+          <li><kbd>↑</kbd>/<kbd>↓</kbd> - Palette Colors +/-</li>
+          <li><kbd>←</kbd>/<kbd>→</kbd> - Color Theme +/-</li>
+          <li><kbd>C</kbd> - Toggle Color Cycle</li>
+          <li><kbd>X</kbd> - Toggle Reverse Cycle</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="rendererContainer"></div>
+
+  <script>
+    // --- Three.js Setup ---
+    let scene, camera, renderer, controls;
+    const primordiumGeometry = new THREE.SphereGeometry(1, 16, 12);
+
+    function initThreeJS() {
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
+
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 15, 30); // Adjusted initial camera for better view
+      camera.lookAt(0, 10, 0); // Look towards the growing structure
+
+      renderer = new THREE.WebGLRenderer({antialias: true});
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById('rendererContainer').appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0x707070);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
+      directionalLight.position.set(5, 10, 7.5).normalize();
+      scene.add(directionalLight);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.screenSpacePanning = false;
+      controls.minDistance = 1;
+      controls.maxDistance = 500;
+      controls.target.set(0, 10, 0); // Orbit around a point slightly up
+      controls.update();
+    }
+
+    // --- DOM Elements & Parameters ---
+    const controlsPanel = document.getElementById('controlsPanel');
+    const controlsToggle = document.getElementById('controlsToggle');
+    const startButton = document.getElementById('startButton');
+    const resetButton = document.getElementById('resetButton');
+    const speedSlider = document.getElementById('speedSlider');
+    const scaleSlider = document.getElementById('scaleSlider');
+    const sizeSlider = document.getElementById('sizeSlider');
+    const primordiaCountDisplay = document.getElementById('primordiaCountDisplay');
+    const growthFactorDisplay = document.getElementById('growthFactorDisplay');
+    const paletteSizeInput = document.getElementById('paletteSizeInput');
+    const colorThemeSelect = document.getElementById('colorThemeSelect');
+    const cycleColorsCheckbox = document.getElementById('cycleColorsCheckbox');
+    const reverseCycleCheckbox = document.getElementById('reverseCycleCheckbox');
+    const verticalGrowthRateSlider = document.getElementById('verticalGrowthRateSlider');
+    const maxFastGrowthInput = document.getElementById('maxFastGrowthInput');
+    const slowGrowthFactorSlider = document.getElementById('slowGrowthFactorSlider');
+
+    // Parameters
+    const goldenAngle = 137.50776 * (Math.PI / 180);
+    let xySpreadScale = parseFloat(scaleSlider.value);
+    let primordiumBaseSize = parseFloat(sizeSlider.value);
+    const primordiumSizeGrowthFactor = 0.05;
+    growthFactorDisplay.textContent = primordiumSizeGrowthFactor;
+
+    let initialVerticalGrowthRate = parseFloat(verticalGrowthRateSlider.value);
+    let maxPrimordiaForFastGrowth = parseInt(maxFastGrowthInput.value);
+    let slowGrowthFactor = parseFloat(slowGrowthFactorSlider.value);
+    let currentMeristemZ = 0;
+
+    let phyllotaxisTimeoutId; // For setTimeout of phyllotaxis logic
+    let isAnimating = false;
+    let primordiaData = [];
+    let nextPrimordiumId = 0;
+
+    let numberOfPaletteColors = parseInt(paletteSizeInput.value);
+    let selectedColorTheme = colorThemeSelect.value;
+    let colorPalette = [];
+    let isColorCycling = cycleColorsCheckbox.checked;
+    let isCycleReversed = reverseCycleCheckbox.checked;
+    let paletteCycleOffset = 0;
+
+    const CONTINUOUS_HUE_STEP = 13;
+    const CONTINUOUS_SAT_BASE = 70;
+    const CONTINUOUS_LGT_BASE = 60;
+
+    const NEAR_BLACK = {h: 270, s: 15, l: 10};
+    const LIGHT_BLUE_CENTER = {h: 200, s: 80, l: 70};
+    const LIGHT_BLUE_PEAK = {h: 200, s: 85, l: 65};
+    const LIGHT_MAGENTA_PEAK = {h: 320, s: 85, l: 65};
+    const DARK_PURPLE_MID = {h: 270, s: 60, l: 30};
+
+    const colorThemes = {
+      'greens': [80, 140, 50, 75, 30, 70],
+      'autumn': [0, 50, 60, 85, 40, 65],
+      'forest': [25, 130, 30, 60, 25, 50],
+      'sunset': [300, 30, 70, 90, 45, 70],
+      'ocean': [180, 240, 50, 80, 30, 65],
+      'galactic': [230, 330, 60, 90, 35, 65],
+      'galactic_v2': [330, 240, 70, 90, 50, 65],
+      'galactic_v3': [LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.l, LIGHT_BLUE_CENTER.l],
+      'galactic_v4': []
+    };
+
+    function hslString(h, s, l) {
+      return `hsl(${Math.round(h % 360)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+    }
+
+    function interpolateHue(h1, h2, t) {
+      const diff = h2 - h1;
+      let newHue;
+      if (Math.abs(diff) > 180) {
+        if (diff > 0) {newHue = h1 + t * (diff - 360);}
+        else {newHue = h1 + t * (diff + 360);}
+      } else {newHue = h1 + t * diff;}
+      return (newHue + 360);
+    }
+
+    function interpolateColorsSegment(targetPalette, startIndex, endIndex, startColorHSL, endColorHSL) {
+      const steps = endIndex - startIndex;
+      if (steps <= 0) return;
+      for (let i = 1; i < steps; i++) {
+        const t = i / steps;
+        const h = interpolateHue(startColorHSL.h, endColorHSL.h, t);
+        const s = startColorHSL.s + t * (endColorHSL.s - startColorHSL.s);
+        const l = startColorHSL.l + t * (endColorHSL.l - startColorHSL.l);
+        if (startIndex + i < targetPalette.length) {
+          targetPalette[startIndex + i] = hslString(h, s, l);
+        }
+      }
+    }
+
+    function generateColorPalette() {
+      colorPalette = [];
+      const numColors = numberOfPaletteColors;
+      if (numColors <= 0 || selectedColorTheme === 'continuous_spectrum') return;
+
+      if (selectedColorTheme === 'custom_palette') {
+        const S = 75; const L = 65;
+        if (numColors === 1) {colorPalette.push(hslString(220, S, L)); return;}
+        for (let i = 0; i < numColors; i++) {
+          colorPalette.push(hslString((i * (360 / numColors)), S, L));
+        }
+      } else if (selectedColorTheme === 'galactic_v3') {
+        const nearBlackStr = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+        const lightBlueStr = hslString(LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.l);
+        if (numColors === 1) {colorPalette.push(lightBlueStr);}
+        else if (numColors === 2) {colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr);}
+        else if (numColors === 3) {colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); colorPalette.push(nearBlackStr);}
+        else {
+          const midPointIndex = Math.floor((numColors - 1) / 2);
+          colorPalette = new Array(numColors);
+          colorPalette[0] = nearBlackStr;
+          colorPalette[midPointIndex] = lightBlueStr;
+          colorPalette[numColors - 1] = nearBlackStr;
+          interpolateColorsSegment(colorPalette, 0, midPointIndex, NEAR_BLACK, LIGHT_BLUE_CENTER);
+          interpolateColorsSegment(colorPalette, midPointIndex, numColors - 1, LIGHT_BLUE_CENTER, NEAR_BLACK);
+        }
+      } else if (selectedColorTheme === 'galactic_v4') {
+        const nearBlackStr = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+        const lightBlueStr = hslString(LIGHT_BLUE_PEAK.h, LIGHT_BLUE_PEAK.s, LIGHT_BLUE_PEAK.l);
+        const darkPurpleStr = hslString(DARK_PURPLE_MID.h, DARK_PURPLE_MID.s, DARK_PURPLE_MID.l);
+        const lightMagentaStr = hslString(LIGHT_MAGENTA_PEAK.h, LIGHT_MAGENTA_PEAK.s, LIGHT_MAGENTA_PEAK.l);
+
+        if (numColors === 1) {colorPalette.push(lightBlueStr);}
+        else if (numColors === 2) {colorPalette.push(lightBlueStr); colorPalette.push(lightMagentaStr);}
+        else if (numColors === 3) {colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); colorPalette.push(nearBlackStr);}
+        else if (numColors === 4) {
+          colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr);
+          colorPalette.push(lightMagentaStr); colorPalette.push(nearBlackStr);
+        } else {
+          colorPalette = new Array(numColors);
+          colorPalette[0] = nearBlackStr;
+          colorPalette[numColors - 1] = nearBlackStr;
+          let idxP1 = Math.max(1, Math.floor((numColors - 1) * 0.25));
+          let idxMid = Math.max(idxP1 + 1, Math.floor((numColors - 1) * 0.5));
+          let idxP2 = Math.max(idxMid + 1, Math.floor((numColors - 1) * 0.75));
+          if (idxP2 >= numColors - 1) idxP2 = numColors - 2;
+          if (idxMid >= idxP2) idxMid = Math.max(idxP1 + 1, idxP2 - 1);
+          if (idxP1 >= idxMid) idxP1 = Math.max(1, idxMid - 1);
+          if (numColors === 5) {idxP1 = 1; idxMid = 2; idxP2 = 3;}
+
+          colorPalette[idxP1] = lightBlueStr;
+          colorPalette[idxMid] = darkPurpleStr;
+          colorPalette[idxP2] = lightMagentaStr;
+
+          interpolateColorsSegment(colorPalette, 0, idxP1, NEAR_BLACK, LIGHT_BLUE_PEAK);
+          interpolateColorsSegment(colorPalette, idxP1, idxMid, LIGHT_BLUE_PEAK, DARK_PURPLE_MID);
+          interpolateColorsSegment(colorPalette, idxMid, idxP2, DARK_PURPLE_MID, LIGHT_MAGENTA_PEAK);
+          interpolateColorsSegment(colorPalette, idxP2, numColors - 1, LIGHT_MAGENTA_PEAK, NEAR_BLACK);
+        }
+      } else if (selectedColorTheme === 'forest') {
+        const theme = colorThemes[selectedColorTheme];
+        const [, , sS, sE, lS, lE] = theme;
+        colorPalette = new Array(numColors);
+
+        const numBrowns = Math.ceil(numColors / 2);
+        const numGreens = numColors - numBrowns;
+
+        for (let k = 0; k < numBrowns; k++) {
+          const t_hue = numBrowns <= 1 ? 0.5 : k / (Math.max(1, numBrowns - 1));
+          const h_val = 25 + t_hue * (45 - 25);
+          const t_sl = numColors <= 1 ? 0.5 : k / (Math.max(1, numColors - 1));
+          const s_val = sS + t_sl * (sE - sS);
+          const l_val = lS + t_sl * (lE - lS);
+          colorPalette[k] = hslString(h_val, s_val, l_val);
+        }
+        for (let k = 0; k < numGreens; k++) {
+          const t_hue = numGreens <= 1 ? 0.5 : k / (Math.max(1, numGreens - 1));
+          const h_val = 90 + t_hue * (130 - 90);
+          const t_sl = numColors <= 1 ? 0.5 : (k + numBrowns) / (Math.max(1, numColors - 1));
+          const s_val = sS + t_sl * (sE - sS);
+          const l_val = lS + t_sl * (lE - lS);
+          if (numBrowns + k < numColors) {
+            colorPalette[numBrowns + k] = hslString(h_val, s_val, l_val);
+          } else if (numGreens === 1 && numBrowns === 0) {
+            colorPalette[0] = hslString(h_val, s_val, l_val);
+          }
+        }
+      } else if (colorThemes[selectedColorTheme]) {
+        const theme = colorThemes[selectedColorTheme];
+        const [hS, hE, sS, sE, lS, lE] = theme;
+        if (numColors === 1) {
+          let avgHue = (hS + hE) / 2;
+          if (hS > hE && (selectedColorTheme === 'sunset' || selectedColorTheme === 'galactic' || selectedColorTheme === 'galactic_v2')) {
+            avgHue = (hS + (hE + 360)) / 2 % 360;
+          }
+          colorPalette.push(hslString(avgHue, (sS + sE) / 2, (lS + lE) / 2)); return;
+        }
+        for (let i = 0; i < numColors; i++) {
+          const t = (numColors === 1) ? 0.5 : i / (numColors - 1);
+          let hue;
+          if (hS > hE && (selectedColorTheme === 'sunset' || selectedColorTheme === 'galactic' || selectedColorTheme === 'galactic_v2')) {
+            hue = interpolateHue(hS, hE + 360, t);
+          } else {hue = hS + t * (hE - hS);}
+          colorPalette.push(hslString(hue, sS + t * (sE - sS), lS + t * (lE - lS)));
+        }
+        if (selectedColorTheme === 'galactic_v2' && colorPalette.length > 0) {
+          if (numColors >= 3) {
+            colorPalette[0] = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+            colorPalette[numColors - 1] = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+          }
+        }
+      }
+    }
+
+    function updatePrimordiaColors() {
+      primordiaData.forEach(pData => {
+        let colorString;
+        if (numberOfPaletteColors <= 0 || selectedColorTheme === 'continuous_spectrum') {
+          const hue = (pData.id * CONTINUOUS_HUE_STEP);
+          colorString = hslString(hue, CONTINUOUS_SAT_BASE + (pData.id % 10) * 2, CONTINUOUS_LGT_BASE + (pData.id % 10));
+        } else if (colorPalette.length > 0) {
+          let effectiveIndex = pData.id + paletteCycleOffset;
+          while (effectiveIndex < 0) {effectiveIndex += colorPalette.length * 10000;}
+          colorString = colorPalette[effectiveIndex % colorPalette.length];
+        } else {
+          const hue = (pData.id * CONTINUOUS_HUE_STEP);
+          colorString = hslString(hue, CONTINUOUS_SAT_BASE + (pData.id % 10) * 2, CONTINUOUS_LGT_BASE + (pData.id % 10));
+        }
+        pData.color = colorString;
+        if (pData.mesh) {
+          pData.mesh.material.color.set(colorString);
+        }
+      });
+    }
+
+    function resizeThreeJSCanvas() {
+      if (camera && renderer) {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+    }
+    window.addEventListener('resize', resizeThreeJSCanvas);
+
+    controlsToggle.addEventListener('click', () => {
+      controlsPanel.classList.toggle('collapsed');
+      controlsToggle.textContent = controlsPanel.classList.contains('collapsed') ? '>' : '<';
+    });
+
+    function recalculateAllPrimordiaPositionsAndSizes() {
+      const numElements = primordiaData.length;
+      if (numElements === 0) return;
+
+      primordiaData.forEach(pData => {
+        const k_effective = (numElements - 1) - pData.id;
+
+        const angle = pData.id * goldenAngle;
+        const radius = xySpreadScale * Math.sqrt(k_effective);
+
+        pData.mesh.position.x = radius * Math.cos(angle);
+        pData.mesh.position.y = radius * Math.sin(angle);
+        // pData.mesh.position.z is set at creation and remains fixed
+
+        const currentSize = primordiumBaseSize + primordiumSizeGrowthFactor * Math.sqrt(k_effective);
+        const effectiveSize = Math.max(0.01, currentSize);
+        pData.mesh.scale.set(effectiveSize, effectiveSize, effectiveSize);
+      });
+    }
+
+    // Continuous Rendering Loop
+    function renderScene() {
+      requestAnimationFrame(renderScene);
+      if (controls) controls.update(); // Update OrbitControls
+      if (renderer && scene && camera) renderer.render(scene, camera); // Render the scene
+    }
+
+    // Phyllotaxis Logic Loop
+    function mainPhyllotaxisLogicLoop() {
+      if (!isAnimating) return;
+
+      let currentVerticalRate = initialVerticalGrowthRate;
+      if (nextPrimordiumId > maxPrimordiaForFastGrowth) {
+        currentVerticalRate *= slowGrowthFactor;
+      }
+      currentMeristemZ += currentVerticalRate;
+
+      if (isColorCycling && numberOfPaletteColors > 0 && colorPalette.length > 0) {
+        if (isCycleReversed) {paletteCycleOffset--;}
+        else {paletteCycleOffset++;}
+        updatePrimordiaColors();
+      }
+
+      const currentId = nextPrimordiumId;
+      let colorString;
+
+      if (numberOfPaletteColors <= 0 || selectedColorTheme === 'continuous_spectrum') {
+        const hue = (currentId * CONTINUOUS_HUE_STEP);
+        colorString = hslString(hue, CONTINUOUS_SAT_BASE + (currentId % 10) * 2, CONTINUOUS_LGT_BASE + (currentId % 10));
+      } else if (colorPalette.length > 0) {
+        let effectiveIndex = currentId + paletteCycleOffset;
+        while (effectiveIndex < 0) {effectiveIndex += colorPalette.length * 10000;}
+        colorString = colorPalette[effectiveIndex % colorPalette.length];
+      } else {
+        const hue = (currentId * CONTINUOUS_HUE_STEP);
+        colorString = hslString(hue, CONTINUOUS_SAT_BASE + (currentId % 10) * 2, CONTINUOUS_LGT_BASE + (currentId % 10));
+      }
+
+      const material = new THREE.MeshStandardMaterial({color: colorString, roughness: 0.5, metalness: 0.1});
+      const primordiumMesh = new THREE.Mesh(primordiumGeometry, material);
+      primordiumMesh.position.z = currentMeristemZ;
+
+      scene.add(primordiumMesh);
+      primordiaData.push({id: currentId, color: colorString, creationZ: currentMeristemZ, mesh: primordiumMesh});
+
+      nextPrimordiumId++;
+      primordiaCountDisplay.textContent = primordiaData.length;
+
+      recalculateAllPrimordiaPositionsAndSizes();
+
+      // Schedule next logic step
+      const speed = parseInt(speedSlider.value);
+      if (isAnimating) {
+        phyllotaxisTimeoutId = setTimeout(mainPhyllotaxisLogicLoop, 1000 / (speed * 2.5));
+      }
+    }
+
+    // --- Event Listeners ---
+    startButton.addEventListener('click', () => {
+      if (!isAnimating) {
+        isAnimating = true;
+        if (primordiaData.length === 0) {
+          currentMeristemZ = 0;
+          resizeThreeJSCanvas();
+        }
+        mainPhyllotaxisLogicLoop();
+        startButton.textContent = 'Pause';
+        startButton.classList.replace('btn-primary', 'btn-secondary');
+      } else {
+        isAnimating = false;
+        clearTimeout(phyllotaxisTimeoutId);
+        startButton.textContent = 'Resume';
+        startButton.classList.replace('btn-secondary', 'btn-primary');
+      }
+    });
+
+    resetButton.addEventListener('click', () => {
+      isAnimating = false;
+      clearTimeout(phyllotaxisTimeoutId);
+
+      primordiaData.forEach(pData => {
+        if (pData.mesh) scene.remove(pData.mesh);
+      });
+      primordiaData = [];
+
+      nextPrimordiumId = 0;
+      paletteCycleOffset = 0;
+      currentMeristemZ = 0;
+      primordiaCountDisplay.textContent = 0;
+
+      // No need to explicitly call renderer.render here, renderScene loop handles it.
+      startButton.textContent = 'Start';
+      startButton.classList.replace('btn-secondary', 'btn-primary');
+    });
+
+    speedSlider.addEventListener('input', () => { });
+    scaleSlider.addEventListener('input', () => {
+      xySpreadScale = parseFloat(scaleSlider.value);
+      recalculateAllPrimordiaPositionsAndSizes();
+      // No explicit render needed if renderScene is running
+    });
+    sizeSlider.addEventListener('input', () => {
+      primordiumBaseSize = parseFloat(sizeSlider.value);
+      recalculateAllPrimordiaPositionsAndSizes();
+    });
+    verticalGrowthRateSlider.addEventListener('input', () => {
+      initialVerticalGrowthRate = parseFloat(verticalGrowthRateSlider.value);
+    });
+    maxFastGrowthInput.addEventListener('input', () => {
+      maxPrimordiaForFastGrowth = parseInt(maxFastGrowthInput.value);
+      if (isNaN(maxPrimordiaForFastGrowth)) maxPrimordiaForFastGrowth = 50; // Default if NaN
+    });
+    slowGrowthFactorSlider.addEventListener('input', () => {
+      slowGrowthFactor = parseFloat(slowGrowthFactorSlider.value);
+    });
+
+
+    function handleColorSettingsChange() {
+      numberOfPaletteColors = parseInt(paletteSizeInput.value);
+      if (isNaN(numberOfPaletteColors) || numberOfPaletteColors < 0) {
+        numberOfPaletteColors = 0;
+        paletteSizeInput.value = 0;
+      } else {
+        const maxPalette = 64;
+        numberOfPaletteColors = Math.min(numberOfPaletteColors, maxPalette);
+        if (parseInt(paletteSizeInput.value) > maxPalette) paletteSizeInput.value = maxPalette;
+      }
+      selectedColorTheme = colorThemeSelect.value;
+      isColorCycling = cycleColorsCheckbox.checked;
+      isCycleReversed = reverseCycleCheckbox.checked;
+
+      if (!isColorCycling) {
+        paletteCycleOffset = 0;
+      }
+
+      generateColorPalette();
+      updatePrimordiaColors();
+      // No explicit render needed if renderScene is running
+    }
+
+    paletteSizeInput.addEventListener('input', handleColorSettingsChange);
+    colorThemeSelect.addEventListener('change', handleColorSettingsChange);
+    cycleColorsCheckbox.addEventListener('change', handleColorSettingsChange);
+    reverseCycleCheckbox.addEventListener('change', handleColorSettingsChange);
+
+    // Keymap Handler
+    document.addEventListener('keydown', (event) => {
+      if (event.target.tagName === 'INPUT' || event.target.tagName === 'SELECT') {
+        if (event.key.toLowerCase() !== 't') {
+          return;
+        }
+      }
+
+      let valueChanged = false;
+      let sliderChanged = false;
+      let sliderToUpdate = null;
+
+      switch (event.key) {
+        case ' ': event.preventDefault(); startButton.click(); break;
+        case 'R': case 'r': resetButton.click(); break;
+        case 'T': case 't': controlsToggle.click(); break;
+        case 'A':
+          speedSlider.value = Math.min(parseInt(speedSlider.max), parseInt(speedSlider.value) + 1);
+          break;
+        case 'a':
+          speedSlider.value = Math.max(parseInt(speedSlider.min), parseInt(speedSlider.value) - 1);
+          break;
+        case 'S':
+          scaleSlider.value = Math.min(parseFloat(scaleSlider.max), parseFloat(scaleSlider.value) + 0.5).toFixed(1);
+          sliderChanged = true; sliderToUpdate = scaleSlider;
+          break;
+        case 's':
+          scaleSlider.value = Math.max(parseFloat(scaleSlider.min), parseFloat(scaleSlider.value) - 0.5).toFixed(1);
+          sliderChanged = true; sliderToUpdate = scaleSlider;
+          break;
+        case 'B':
+          sizeSlider.value = Math.min(parseFloat(sizeSlider.max), parseFloat(sizeSlider.value) + 0.2).toFixed(1);
+          sliderChanged = true; sliderToUpdate = sizeSlider;
+          break;
+        case 'b':
+          sizeSlider.value = Math.max(parseFloat(sizeSlider.min), parseFloat(sizeSlider.value) - 0.2).toFixed(1);
+          sliderChanged = true; sliderToUpdate = sizeSlider;
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          paletteSizeInput.value = Math.min(parseInt(paletteSizeInput.max), parseInt(paletteSizeInput.value) + 1);
+          valueChanged = true;
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          paletteSizeInput.value = Math.max(parseInt(paletteSizeInput.min), parseInt(paletteSizeInput.value) - 1);
+          valueChanged = true;
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          colorThemeSelect.selectedIndex = (colorThemeSelect.selectedIndex + 1) % colorThemeSelect.options.length;
+          valueChanged = true;
+          break;
+        case 'ArrowLeft':
+          event.preventDefault();
+          colorThemeSelect.selectedIndex = (colorThemeSelect.selectedIndex - 1 + colorThemeSelect.options.length) % colorThemeSelect.options.length;
+          valueChanged = true;
+          break;
+        case 'C': case 'c':
+          cycleColorsCheckbox.checked = !cycleColorsCheckbox.checked;
+          valueChanged = true;
+          break;
+        case 'X': case 'x':
+          reverseCycleCheckbox.checked = !reverseCycleCheckbox.checked;
+          valueChanged = true;
+          break;
+      }
+
+      if (sliderChanged && sliderToUpdate) {
+        sliderToUpdate.dispatchEvent(new Event('input'));
+      }
+      if (valueChanged) {
+        handleColorSettingsChange();
+      }
+    });
+
+    // --- Initial Setup ---
+    initThreeJS();
+    isColorCycling = cycleColorsCheckbox.checked;
+    isCycleReversed = reverseCycleCheckbox.checked;
+    generateColorPalette();
+    resizeThreeJSCanvas();
+    controlsToggle.textContent = controlsPanel.classList.contains('collapsed') ? '>' : '<';
+    renderScene(); // Start the continuous rendering loop
+  </script>
+</body>
+
+</html>

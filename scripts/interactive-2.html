@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phyllotaxis Visualization - Full Screen Dark Mode with Keymaps</title>
+    <style>
+        /* Basic Reset and Body Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Dark background for the page */
+            color: #e0e0e0; /* Light text color */
+            font-family: Arial, sans-serif; /* Simple system font */
+            overflow: hidden; /* Prevent scrollbars from panel movement */
+            display: flex; /* Use flex for layout */
+        }
+
+        /* Canvas Styling */
+        #phyllotaxisCanvas {
+            display: block;
+            background-color: #000000; /* Black background for canvas */
+            width: 100vw; /* Fill viewport width */
+            height: 100vh; /* Fill viewport height */
+            flex-grow: 1; /* Allow canvas to take remaining space */
+        }
+
+        /* Control Panel Styling */
+        #controlsPanel {
+            position: fixed; /* Fixed position on the left */
+            left: 0;
+            top: 0;
+            height: 100vh; /* Full viewport height */
+            width: 280px; /* Width of the panel */
+            background-color: #222831; /* Dark panel background */
+            padding: 15px; /* Slightly reduced padding */
+            box-shadow: 3px 0 8px rgba(0, 0, 0, 0.4); /* Shadow for depth */
+            transform: translateX(0); /* Initially visible */
+            transition: transform 0.3s ease-in-out; /* Smooth slide animation */
+            z-index: 1000; /* Ensure panel is above canvas */
+            overflow-y: auto; /* Allow scrolling within panel if content overflows */
+            box-sizing: border-box;
+        }
+
+        #controlsPanel.collapsed {
+            transform: translateX(-280px); /* Slide out */
+        }
+        
+        #controlsContent {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Slightly reduced space between control groups */
+        }
+
+        /* Toggle Button for Control Panel */
+        #controlsToggle {
+            position: absolute;
+            left: 280px; 
+            top: 50%;
+            transform: translateY(-50%); 
+            width: 30px;
+            height: 60px;
+            background-color: #393e46; 
+            color: #eeeeee;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            font-size: 16px;
+            line-height: 60px; 
+            text-align: center;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+            z-index: 5; 
+        }
+        
+        /* General Control Element Styling */
+        .control-group {
+            margin-bottom: 8px; /* Reduced margin */
+        }
+
+        .input-label, .checkbox-label {
+            font-size: 0.8em; /* Even smaller labels */
+            color: #cccccc;
+            display: block;
+            margin-bottom: 4px; /* Reduced margin */
+        }
+
+        .dark-input, select.dark-input {
+            width: 100%; 
+            padding: 5px 7px; /* More compact padding */
+            border-radius: 3px;
+            background-color: #393e46; 
+            color: #eeeeee; 
+            border: 1px solid #4a4e57; 
+            font-size: 0.85em; /* Smaller font in inputs */
+            box-sizing: border-box; 
+        }
+        
+        input[type="number"].dark-input {
+             -moz-appearance: textfield; 
+        }
+        input[type="number"].dark-input::-webkit-outer-spin-button,
+        input[type="number"].dark-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="range"].dark-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 5px; /* Slimmer slider track */
+            background: #4a4e57; 
+            border-radius: 3px;
+            outline: none;
+            padding: 0;
+            margin-top: 4px; /* Reduced margin */
+        }
+
+        input[type="range"].dark-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px; /* Smaller thumb */
+            height: 12px;
+            background: #00adb5; 
+            border-radius: 50%;
+            cursor: pointer;
+            border: 1px solid #222831; 
+        }
+
+        input[type="range"].dark-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #00adb5;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 1px solid #222831;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 6px; /* Reduced space between buttons */
+        }
+
+        .btn {
+            flex-grow: 1; 
+            padding: 6px 8px; /* More compact button padding */
+            border-radius: 3px;
+            font-weight: normal; 
+            font-size: 0.8em; /* Smaller button text */
+            transition: background-color 0.2s ease-in-out;
+            cursor: pointer;
+            border: 1px solid transparent;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #00adb5; 
+            color: #eeeeee;
+            border-color: #00979d;
+        }
+        .btn-primary:hover { background-color: #00c0ca; }
+
+        .btn-secondary {
+            background-color: #393e46; 
+            color: #eeeeee;
+            border-color: #4a4e57;
+        }
+        .btn-secondary:hover { background-color: #4a4e57; }
+        
+        .checkbox-container { 
+            display: flex;
+            align-items: center;
+            margin-top: 6px; /* Reduced margin */
+        }
+
+        input[type="checkbox"].dark-checkbox {
+            width: 12px; /* Smaller checkbox */
+            height: 12px;
+            margin-right: 6px; /* Reduced margin */
+            accent-color: #00adb5; 
+            vertical-align: middle;
+        }
+        .checkbox-label-inline { 
+            font-size: 0.8em; /* Smaller checkbox label */
+            color: #cccccc;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .panel-info-text {
+            font-size: 0.75em; /* Smaller info text */
+            color: #aaaaaa;
+            margin-top: 8px; /* Reduced margin */
+        }
+        .panel-info-text span {
+            color: #cccccc;
+            font-weight: bold;
+        }
+        
+        .keymap-info {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #4a4e57;
+        }
+        .keymap-info h4 {
+            font-size: 0.9em;
+            color: #00adb5;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        .keymap-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .keymap-info li {
+            font-size: 0.75em;
+            color: #bbbbbb;
+            margin-bottom: 4px;
+        }
+        .keymap-info li kbd {
+            background-color: #393e46;
+            padding: 1px 4px;
+            border-radius: 2px;
+            border: 1px solid #4a4e57;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="controlsPanel">
+        <button id="controlsToggle">&lt;</button> 
+        <div id="controlsContent">
+            <div class="control-group button-group">
+                <button id="startButton" class="btn btn-primary">Start</button>
+                <button id="stopButton" class="btn btn-secondary">Stop</button>
+                <button id="resetButton" class="btn btn-secondary">Reset</button>
+            </div>
+
+            <div class="control-group">
+                <label for="speedSlider" class="input-label">Animation Speed (A/S):</label>
+                <input type="range" id="speedSlider" min="1" max="20" value="5" class="dark-slider">
+            </div>
+
+            <div class="control-group">
+                <label for="scaleSlider" class="input-label">Spread Scale (c):</label>
+                <input type="range" id="scaleSlider" min="1" max="15" value="5" step="0.1" class="dark-slider">
+            </div>
+
+            <div class="control-group">
+                <label for="sizeSlider" class="input-label">Base Primordium Size:</label>
+                <input type="range" id="sizeSlider" min="0.5" max="10" value="1.5" step="0.1" class="dark-slider">
+            </div>
+
+            <div class="control-group">
+                <label for="paletteSizeInput" class="input-label">Palette Colors (Up/Down Arrow):</label>
+                <input type="number" id="paletteSizeInput" min="0" max="64" value="0" class="dark-input">
+            </div>
+
+            <div class="control-group">
+                <label for="colorThemeSelect" class="input-label">Color Theme (Left/Right Arrow):</label>
+                <select id="colorThemeSelect" class="dark-input">
+                    <option value="continuous_spectrum">Continuous Spectrum</option>
+                    <option value="custom_palette">Custom Palette (Full Spectrum Hues)</option>
+                    <option value="greens">Greens (Dark to Light)</option>
+                    <option value="autumn">Autumn (Reds, Oranges, Yellows)</option>
+                    <option value="forest">Forest (Browns, Deep Greens)</option>
+                    <option value="sunset">Sunset (Pinks, Oranges, Reds)</option>
+                    <option value="ocean">Ocean (Teals, Blues)</option>
+                    <option value="galactic">Galactic (Blues, Purples, Pinks)</option>
+                    <option value="galactic_v2">Galactic #2 (Black-Pink-Blue-Black)</option>
+                    <option value="galactic_v3">Galactic #3 (Black-LightBlue-Black)</option>
+                    <option value="galactic_v4">Galactic #4 (Black-Blue~Magenta-Black)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="cycleColorsCheckbox" class="dark-checkbox">
+                    <label for="cycleColorsCheckbox" class="checkbox-label-inline">Cycle Colors (C)</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="reverseCycleCheckbox" class="dark-checkbox">
+                    <label for="reverseCycleCheckbox" class="checkbox-label-inline">Reverse Cycle (X)</label>
+                </div>
+            </div>
+
+            <div class="panel-info-text">
+                Primordia count: <span id="primordiaCount">0</span>
+            </div>
+            <div class="panel-info-text" style="font-size: 0.7em;">
+                Growth Factor: <span id="growthFactorDisplay">0.25</span> (fixed)
+            </div>
+
+            <div class="keymap-info">
+                <h4>Keyboard Shortcuts</h4>
+                <ul>
+                    <li><kbd>Space</kbd> - Play/Pause</li>
+                    <li><kbd>R</kbd> - Reset</li>
+                    <li><kbd>T</kbd> - Toggle Controls Panel</li>
+                    <li><kbd>A</kbd> / <kbd>S</kbd> - Anim. Speed +/-</li>
+                    <li><kbd>↑</kbd> / <kbd>↓</kbd> - Palette Colors +/-</li>
+                    <li><kbd>←</kbd> / <kbd>→</kbd> - Color Theme +/-</li>
+                    <li><kbd>C</kbd> - Toggle Color Cycle</li>
+                    <li><kbd>X</kbd> - Toggle Reverse Cycle</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="phyllotaxisCanvas"></canvas>
+
+    <script>
+        // Get canvas and context
+        const canvas = document.getElementById('phyllotaxisCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // DOM Elements for controls
+        const controlsPanel = document.getElementById('controlsPanel');
+        const controlsToggle = document.getElementById('controlsToggle');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const resetButton = document.getElementById('resetButton');
+        const speedSlider = document.getElementById('speedSlider');
+        const scaleSlider = document.getElementById('scaleSlider');
+        const sizeSlider = document.getElementById('sizeSlider');
+        const primordiaCountDisplay = document.getElementById('primordiaCount');
+        const growthFactorDisplay = document.getElementById('growthFactorDisplay');
+        const paletteSizeInput = document.getElementById('paletteSizeInput'); 
+        const colorThemeSelect = document.getElementById('colorThemeSelect'); 
+        const cycleColorsCheckbox = document.getElementById('cycleColorsCheckbox'); 
+        const reverseCycleCheckbox = document.getElementById('reverseCycleCheckbox');
+
+        // Parameters
+        const goldenAngle = 137.50776 * (Math.PI / 180); 
+        let scaleConstant = parseFloat(scaleSlider.value); 
+        let primordiumBaseSize = parseFloat(sizeSlider.value); 
+        const growthFactor = 0.25; 
+        growthFactorDisplay.textContent = growthFactor;
+
+        let animationFrameId;
+        let isAnimating = false;
+        let primordia = []; 
+        let nextPrimordiumId = 0; 
+
+        // Color Palette variables
+        let numberOfPaletteColors = parseInt(paletteSizeInput.value);
+        let selectedColorTheme = colorThemeSelect.value;
+        let colorPalette = [];
+        let isColorCycling = cycleColorsCheckbox.checked; 
+        let isCycleReversed = reverseCycleCheckbox.checked; 
+        let paletteCycleOffset = 0; 
+
+        const CONTINUOUS_HUE_STEP = 13;
+        const CONTINUOUS_SAT_BASE = 70; 
+        const CONTINUOUS_LGT_BASE = 60; 
+
+        const NEAR_BLACK = { h: 270, s: 15, l: 10 }; 
+        const LIGHT_BLUE_CENTER = { h: 200, s: 80, l: 70 }; 
+        const LIGHT_BLUE_PEAK = { h: 200, s: 85, l: 65 };   
+        const LIGHT_MAGENTA_PEAK = { h: 320, s: 85, l: 65 }; 
+        const DARK_PURPLE_MID = { h: 270, s: 60, l: 30 };    
+
+        const colorThemes = {
+            'greens': [80, 140, 50, 75, 30, 70],    
+            'autumn': [0, 50, 60, 85, 40, 65],      
+            'forest': [25, 130, 30, 60, 25, 50], 
+            'sunset': [300, 30, 70, 90, 45, 70],    
+            'ocean': [180, 240, 50, 80, 30, 65],
+            'galactic': [230, 330, 60, 90, 35, 65],
+            'galactic_v2': [330, 240, 70, 90, 50, 65], 
+            'galactic_v3': [LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.l, LIGHT_BLUE_CENTER.l],
+            'galactic_v4': [] 
+        };
+        
+        function hslString(h, s, l) {
+            return `hsl(${Math.round(h % 360)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+        }
+
+        function interpolateHue(h1, h2, t) {
+            const diff = h2 - h1;
+            let newHue;
+            if (Math.abs(diff) > 180) { 
+                if (diff > 0) { newHue = h1 + t * (diff - 360); } 
+                else { newHue = h1 + t * (diff + 360); }
+            } else { newHue = h1 + t * diff; }
+            return (newHue + 360); 
+        }
+
+        function interpolateColorsSegment(targetPalette, startIndex, endIndex, startColorHSL, endColorHSL) {
+            const steps = endIndex - startIndex;
+            if (steps <= 0) return;
+            for (let i = 1; i < steps; i++) {
+                const t = i / steps;
+                const h = interpolateHue(startColorHSL.h, endColorHSL.h, t);
+                const s = startColorHSL.s + t * (endColorHSL.s - startColorHSL.s);
+                const l = startColorHSL.l + t * (endColorHSL.l - startColorHSL.l);
+                if (startIndex + i < targetPalette.length) { 
+                    targetPalette[startIndex + i] = hslString(h, s, l);
+                }
+            }
+        }
+
+        function generateColorPalette() {
+            colorPalette = [];
+            const numColors = numberOfPaletteColors; 
+            if (numColors <= 0 || selectedColorTheme === 'continuous_spectrum') return; 
+
+            if (selectedColorTheme === 'custom_palette') {
+                const S = 75; const L = 65; 
+                if (numColors === 1) { colorPalette.push(hslString(220, S, L)); return; }
+                for (let i = 0; i < numColors; i++) {
+                    colorPalette.push(hslString((i * (360 / numColors)), S, L));
+                }
+            } else if (selectedColorTheme === 'galactic_v3') {
+                const nearBlackStr = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+                const lightBlueStr = hslString(LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.l);
+                if (numColors === 1) { colorPalette.push(lightBlueStr); } 
+                else if (numColors === 2) { colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); } 
+                else if (numColors === 3) { colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); colorPalette.push(nearBlackStr); } 
+                else { 
+                    const midPointIndex = Math.floor((numColors - 1) / 2);
+                    colorPalette = new Array(numColors); 
+                    colorPalette[0] = nearBlackStr;
+                    colorPalette[midPointIndex] = lightBlueStr;
+                    colorPalette[numColors - 1] = nearBlackStr;
+                    interpolateColorsSegment(colorPalette, 0, midPointIndex, NEAR_BLACK, LIGHT_BLUE_CENTER);
+                    interpolateColorsSegment(colorPalette, midPointIndex, numColors - 1, LIGHT_BLUE_CENTER, NEAR_BLACK);
+                }
+            } else if (selectedColorTheme === 'galactic_v4') {
+                const nearBlackStr = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+                const lightBlueStr = hslString(LIGHT_BLUE_PEAK.h, LIGHT_BLUE_PEAK.s, LIGHT_BLUE_PEAK.l);
+                const darkPurpleStr = hslString(DARK_PURPLE_MID.h, DARK_PURPLE_MID.s, DARK_PURPLE_MID.l);
+                const lightMagentaStr = hslString(LIGHT_MAGENTA_PEAK.h, LIGHT_MAGENTA_PEAK.s, LIGHT_MAGENTA_PEAK.l);
+
+                if (numColors === 1) { colorPalette.push(lightBlueStr); }
+                else if (numColors === 2) { colorPalette.push(lightBlueStr); colorPalette.push(lightMagentaStr); }
+                else if (numColors === 3) { colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); colorPalette.push(nearBlackStr); }
+                else if (numColors === 4) { 
+                    colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); 
+                    colorPalette.push(lightMagentaStr); colorPalette.push(nearBlackStr); 
+                } else { 
+                    colorPalette = new Array(numColors); 
+                    colorPalette[0] = nearBlackStr;
+                    colorPalette[numColors - 1] = nearBlackStr;
+                    let idxP1 = Math.max(1, Math.floor((numColors - 1) * 0.25));
+                    let idxMid = Math.max(idxP1 + 1, Math.floor((numColors - 1) * 0.5));
+                    let idxP2 = Math.max(idxMid + 1, Math.floor((numColors - 1) * 0.75));
+                    if (idxP2 >= numColors - 1) idxP2 = numColors - 2;
+                    if (idxMid >= idxP2) idxMid = Math.max(idxP1 + 1, idxP2 - 1); 
+                    if (idxP1 >= idxMid) idxP1 = Math.max(1, idxMid - 1); 
+                    if (numColors === 5) { idxP1 = 1; idxMid = 2; idxP2 = 3; }
+
+                    colorPalette[idxP1] = lightBlueStr;
+                    colorPalette[idxMid] = darkPurpleStr;
+                    colorPalette[idxP2] = lightMagentaStr;
+
+                    interpolateColorsSegment(colorPalette, 0, idxP1, NEAR_BLACK, LIGHT_BLUE_PEAK);
+                    interpolateColorsSegment(colorPalette, idxP1, idxMid, LIGHT_BLUE_PEAK, DARK_PURPLE_MID);
+                    interpolateColorsSegment(colorPalette, idxMid, idxP2, DARK_PURPLE_MID, LIGHT_MAGENTA_PEAK);
+                    interpolateColorsSegment(colorPalette, idxP2, numColors - 1, LIGHT_MAGENTA_PEAK, NEAR_BLACK);
+                }
+            } else if (selectedColorTheme === 'forest') {
+                const theme = colorThemes[selectedColorTheme];
+                const [, , sS, sE, lS, lE] = theme;
+                colorPalette = new Array(numColors);
+                
+                const numBrowns = Math.ceil(numColors / 2);
+                const numGreens = numColors - numBrowns;
+
+                for (let k = 0; k < numBrowns; k++) {
+                    const t_hue = numBrowns <= 1 ? 0.5 : k / (numBrowns - 1);
+                    const h_val = 25 + t_hue * (45 - 25); // Browns H:25-45
+                    const t_sl = numColors <=1 ? 0.5 : k / (numColors -1); // S/L over entire palette range
+                    const s_val = sS + t_sl * (sE - sS);
+                    const l_val = lS + t_sl * (lE - lS);
+                    colorPalette[k] = hslString(h_val, s_val, l_val);
+                }
+                for (let k = 0; k < numGreens; k++) {
+                    const t_hue = numGreens <= 1 ? 0.5 : k / (numGreens - 1);
+                    const h_val = 90 + t_hue * (130 - 90); // Greens H:90-130
+                    const t_sl = numColors <=1 ? 0.5 : (k + numBrowns) / (numColors -1);
+                    const s_val = sS + t_sl * (sE - sS);
+                    const l_val = lS + t_sl * (lE - lS);
+                    if (numBrowns + k < numColors) { // Check boundary
+                       colorPalette[numBrowns + k] = hslString(h_val, s_val, l_val);
+                    }
+                }
+            } else if (colorThemes[selectedColorTheme]) { 
+                const theme = colorThemes[selectedColorTheme];
+                const [hS, hE, sS, sE, lS, lE] = theme;
+                if (numColors === 1) {
+                    let avgHue = (hS + hE) / 2;
+                    if (hS > hE && (selectedColorTheme === 'sunset' || selectedColorTheme === 'galactic' || selectedColorTheme === 'galactic_v2')) { 
+                         avgHue = (hS + (hE + 360)) / 2 % 360;
+                    }
+                    colorPalette.push(hslString(avgHue, (sS + sE) / 2, (lS + lE) / 2)); return;
+                }
+                for (let i = 0; i < numColors; i++) {
+                    const t = (numColors === 1) ? 0.5 : i / (numColors - 1); 
+                    let hue;
+                    if (hS > hE && (selectedColorTheme === 'sunset' || selectedColorTheme === 'galactic' || selectedColorTheme === 'galactic_v2')) { 
+                        hue = interpolateHue(hS, hE + 360, t); 
+                    } else { hue = hS + t * (hE - hS); } 
+                    colorPalette.push(hslString(hue, sS + t * (sE - sS), lS + t * (lE - lS)));
+                }
+                if (selectedColorTheme === 'galactic_v2' && colorPalette.length > 0) {
+                    if (numColors >= 3) {
+                        colorPalette[0] = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l); 
+                        colorPalette[numColors - 1] = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l); 
+                    }
+                }
+            }
+        }
+        
+        function updatePrimordiaColors() {
+            primordia.forEach(p => {
+                if (numberOfPaletteColors <= 0 || selectedColorTheme === 'continuous_spectrum') {
+                    const hue = (p.id * CONTINUOUS_HUE_STEP);
+                    p.color = hslString(hue, CONTINUOUS_SAT_BASE + (p.id % 10) * 2, CONTINUOUS_LGT_BASE + (p.id % 10));
+                } else if (colorPalette.length > 0) { 
+                    let effectiveIndex = p.id + paletteCycleOffset;
+                    while (effectiveIndex < 0) { effectiveIndex += colorPalette.length * 10000; }
+                    p.color = colorPalette[effectiveIndex % colorPalette.length];
+                } else { 
+                     const hue = (p.id * CONTINUOUS_HUE_STEP);
+                     p.color = hslString(hue, CONTINUOUS_SAT_BASE + (p.id % 10) * 2, CONTINUOUS_LGT_BASE + (p.id % 10));
+                }
+            });
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            if (primordia.length > 0) recalculateAllPrimordiaPositionsAndSizes();
+            drawPrimordia(); 
+        }
+        window.addEventListener('resize', resizeCanvas);
+        
+        controlsToggle.addEventListener('click', () => {
+            controlsPanel.classList.toggle('collapsed');
+            controlsToggle.textContent = controlsPanel.classList.contains('collapsed') ? '>' : '<';
+            resizeCanvas(); 
+        });
+
+        function recalculateAllPrimordiaPositionsAndSizes() {
+            const numElements = primordia.length;
+            if (numElements === 0) return;
+            primordia.forEach(p => {
+                const k_effective = (numElements - 1) - p.id;
+                const angle = p.id * goldenAngle; 
+                const radius = scaleConstant * Math.sqrt(k_effective);
+                p.x = radius * Math.cos(angle);
+                p.y = radius * Math.sin(angle);
+                p.size = primordiumBaseSize + growthFactor * Math.sqrt(k_effective);
+                p.size = Math.max(0.2, p.size); 
+            });
+        }
+
+        function drawPrimordia() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const centerX = canvas.width / 2; 
+            const centerY = canvas.height / 2;
+            primordia.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(centerX + p.x, centerY + p.y, p.size, 0, 2 * Math.PI);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+        }
+
+        function animate() {
+            if (!isAnimating) return;
+
+            if (isColorCycling && numberOfPaletteColors > 0 && colorPalette.length > 0) {
+                if (isCycleReversed) { paletteCycleOffset--; } 
+                else { paletteCycleOffset++; }
+                updatePrimordiaColors(); 
+            }
+
+            const currentId = nextPrimordiumId;
+            let color;
+
+            if (numberOfPaletteColors <= 0 || selectedColorTheme === 'continuous_spectrum') {
+                const hue = (currentId * CONTINUOUS_HUE_STEP); 
+                color = hslString(hue, CONTINUOUS_SAT_BASE + (currentId % 10) * 2, CONTINUOUS_LGT_BASE + (currentId % 10));
+            } else if (colorPalette.length > 0) { 
+                let effectiveIndex = currentId + paletteCycleOffset;
+                 while (effectiveIndex < 0) { effectiveIndex += colorPalette.length * 10000; }
+                color = colorPalette[effectiveIndex % colorPalette.length];
+            } else { 
+                const hue = (currentId * CONTINUOUS_HUE_STEP); 
+                color = hslString(hue, CONTINUOUS_SAT_BASE + (currentId % 10) * 2, CONTINUOUS_LGT_BASE + (currentId % 10));
+            }
+            
+            primordia.push({ id: currentId, color: color });
+            nextPrimordiumId++;
+            primordiaCountDisplay.textContent = primordia.length;
+            recalculateAllPrimordiaPositionsAndSizes();
+            drawPrimordia();
+
+            const speed = parseInt(speedSlider.value);
+            setTimeout(() => { animationFrameId = requestAnimationFrame(animate); }, 1000 / (speed * 2.5)); 
+        }
+
+        // Event Listeners
+        startButton.addEventListener('click', () => {
+            if (!isAnimating) {
+                isAnimating = true;
+                if (primordia.length === 0) resizeCanvas(); 
+                animate();
+                startButton.textContent = 'Pause';
+                startButton.classList.replace('btn-primary', 'btn-secondary');
+            } else {
+                isAnimating = false;
+                cancelAnimationFrame(animationFrameId);
+                startButton.textContent = 'Resume';
+                startButton.classList.replace('btn-secondary', 'btn-primary');
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            isAnimating = false;
+            cancelAnimationFrame(animationFrameId);
+            startButton.textContent = 'Start';
+            startButton.classList.replace('btn-secondary', 'btn-primary');
+        });
+
+        resetButton.addEventListener('click', () => {
+            isAnimating = false;
+            cancelAnimationFrame(animationFrameId);
+            primordia = []; 
+            nextPrimordiumId = 0; 
+            paletteCycleOffset = 0; 
+            primordiaCountDisplay.textContent = 0;
+            drawPrimordia(); 
+            startButton.textContent = 'Start';
+            startButton.classList.replace('btn-secondary', 'btn-primary');
+        });
+
+        speedSlider.addEventListener('input', () => {}); 
+        scaleSlider.addEventListener('input', () => {
+            scaleConstant = parseFloat(scaleSlider.value);
+            recalculateAllPrimordiaPositionsAndSizes(); 
+            drawPrimordia(); 
+        });
+        sizeSlider.addEventListener('input', () => {
+            primordiumBaseSize = parseFloat(sizeSlider.value);
+            recalculateAllPrimordiaPositionsAndSizes(); 
+            drawPrimordia(); 
+        });
+
+        function handleColorSettingsChange() {
+            numberOfPaletteColors = parseInt(paletteSizeInput.value);
+            if (isNaN(numberOfPaletteColors) || numberOfPaletteColors < 0) {
+                numberOfPaletteColors = 0; 
+                paletteSizeInput.value = 0; 
+            } else {
+                 const maxPalette = 64; 
+                numberOfPaletteColors = Math.min(numberOfPaletteColors, maxPalette); 
+                if (parseInt(paletteSizeInput.value) > maxPalette) paletteSizeInput.value = maxPalette;
+            }
+            selectedColorTheme = colorThemeSelect.value;
+            isColorCycling = cycleColorsCheckbox.checked; 
+            isCycleReversed = reverseCycleCheckbox.checked; 
+
+            if (!isColorCycling) { 
+                paletteCycleOffset = 0;
+            }
+
+            generateColorPalette(); 
+            updatePrimordiaColors(); 
+            if (!isAnimating) drawPrimordia();
+        }
+
+        paletteSizeInput.addEventListener('input', handleColorSettingsChange);
+        colorThemeSelect.addEventListener('change', handleColorSettingsChange);
+        cycleColorsCheckbox.addEventListener('change', handleColorSettingsChange);
+        reverseCycleCheckbox.addEventListener('change', handleColorSettingsChange); 
+        
+        // Keymap Handler
+        document.addEventListener('keydown', (event) => {
+            // Prevent shortcuts if an input field is focused, except for panel toggle
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'SELECT') {
+                if (event.key.toLowerCase() !== 't') { // Allow 't' for toggle even if input focused
+                    return;
+                }
+            }
+
+            let valueChanged = false;
+            switch (event.key.toLowerCase()) {
+                case ' ':
+                    event.preventDefault(); // Prevent page scroll
+                    startButton.click();
+                    break;
+                case 'r':
+                    resetButton.click();
+                    break;
+                case 't':
+                    controlsToggle.click();
+                    break;
+                case 'a':
+                    speedSlider.value = Math.min(parseInt(speedSlider.max), parseInt(speedSlider.value) + 1);
+                    break;
+                case 's':
+                    speedSlider.value = Math.max(parseInt(speedSlider.min), parseInt(speedSlider.value) - 1);
+                    break;
+                case 'arrowup':
+                    event.preventDefault();
+                    paletteSizeInput.value = Math.min(parseInt(paletteSizeInput.max), parseInt(paletteSizeInput.value) + 1);
+                    valueChanged = true;
+                    break;
+                case 'arrowdown':
+                    event.preventDefault();
+                    paletteSizeInput.value = Math.max(parseInt(paletteSizeInput.min), parseInt(paletteSizeInput.value) - 1);
+                    valueChanged = true;
+                    break;
+                case 'arrowright':
+                    event.preventDefault();
+                    colorThemeSelect.selectedIndex = (colorThemeSelect.selectedIndex + 1) % colorThemeSelect.options.length;
+                    valueChanged = true;
+                    break;
+                case 'arrowleft':
+                    event.preventDefault();
+                    colorThemeSelect.selectedIndex = (colorThemeSelect.selectedIndex - 1 + colorThemeSelect.options.length) % colorThemeSelect.options.length;
+                    valueChanged = true;
+                    break;
+                case 'c':
+                    cycleColorsCheckbox.checked = !cycleColorsCheckbox.checked;
+                    valueChanged = true;
+                    break;
+                case 'x':
+                    reverseCycleCheckbox.checked = !reverseCycleCheckbox.checked;
+                    valueChanged = true;
+                    break;
+            }
+            if (valueChanged) {
+                handleColorSettingsChange();
+            }
+        });
+        
+        // Initial setup
+        isColorCycling = cycleColorsCheckbox.checked; 
+        isCycleReversed = reverseCycleCheckbox.checked;
+        generateColorPalette(); 
+        resizeCanvas(); 
+        controlsToggle.textContent = controlsPanel.classList.contains('collapsed') ? '>' : '<'; 
+    </script>
+</body>
+</html>
+

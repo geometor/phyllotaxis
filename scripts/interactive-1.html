@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Phyllotaxis Visualization (Dark Mode with Color Themes & Cycling)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overscroll-behavior: none; 
+        }
+        canvas {
+            display: block;
+            background-color: #000000; /* Black background for canvas */
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+        }
+        .controls-container {
+            background-color: #1f2937; /* Gray-800 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .info-box {
+            background-color: #374151; /* Gray-700 */
+            border-left: 4px solid #3b82f6; /* Blue-500 accent */
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            color: #d1d5db; /* Gray-300 text */
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+            border: 1px solid transparent;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); 
+        }
+        .btn:active {
+            transform: scale(0.98);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .btn-primary {
+            background-color: #3b82f6; /* Blue-500 */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb; /* Blue-600 */
+        }
+        .btn-secondary {
+            background-color: #4b5563; /* Gray-600 */
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #374151; /* Gray-700 */
+        }
+        .input-label, .checkbox-label { 
+            font-size: 0.875rem;
+            color: #9ca3af; /* Gray-400 */
+            display: block; 
+            margin-bottom: 0.25rem; 
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-top: 0.5rem; /* Add some space above checkboxes */
+        }
+        input[type="checkbox"].dark-checkbox {
+            width: 1em;
+            height: 1em;
+            margin-right: 0.5em;
+            accent-color: #3b82f6; /* Blue-500 for checkbox color */
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #4b5563; /* Gray-600 for track */
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .15s ease-in-out;
+        }
+        input[type="range"]:hover {
+            opacity: 1;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #3b82f6; /* Blue-500 for thumb */
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #1f2937; 
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #3b82f6; 
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #1f2937;
+        }
+        .dark-input { /* Style for number input and select in dark mode */
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            background-color: #374151; /* Gray-700 */
+            color: #d1d5db; /* Gray-300 */
+            border: 1px solid #4b5563; /* Gray-600 */
+        }
+        .dark-input:focus {
+            outline: none;
+            border-color: #3b82f6; /* Blue-500 */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Focus ring */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 flex flex-col items-center justify-center min-h-screen p-4 selection:bg-blue-600 selection:text-white">
+
+    <div class="w-full max-w-3xl">
+        <h1 class="text-3xl font-bold text-center text-gray-100 mb-6">Interactive Phyllotaxis (Growth from Center)</h1>
+
+        <div class="info-box">
+            <p>New primordia emerge near the center at the Golden Angle (approx. 137.5°). Existing primordia are pushed outwards and grow larger. Use the controls to adjust speed, scale, size, and color palette.</p>
+        </div>
+
+        <div class="controls-container mb-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6 items-center">
+                <div class="flex space-x-2 sm:col-span-2"> 
+                    <button id="startButton" class="btn btn-primary flex-grow">Start</button>
+                    <button id="stopButton" class="btn btn-secondary flex-grow">Stop</button>
+                    <button id="resetButton" class="btn btn-secondary flex-grow">Reset</button>
+                </div>
+                <div>
+                    <label for="speedSlider" class="input-label">Animation Speed:</label>
+                    <input type="range" id="speedSlider" min="1" max="20" value="5" class="w-full">
+                </div>
+                <div>
+                    <label for="scaleSlider" class="input-label">Spread Scale (c):</label>
+                    <input type="range" id="scaleSlider" min="1" max="15" value="5" step="0.1" class="w-full">
+                </div>
+                 <div>
+                    <label for="sizeSlider" class="input-label">Base Primordium Size:</label>
+                    <input type="range" id="sizeSlider" min="0.5" max="10" value="1.5" step="0.1" class="w-full">
+                </div>
+                <div>
+                    <label for="paletteSizeInput" class="input-label">Palette Colors (0 for continuous):</label>
+                    <input type="number" id="paletteSizeInput" min="0" max="64" value="0" class="dark-input"> {/* Max updated to 64 */}
+                </div>
+                <div class="sm:col-span-2"> 
+                    <label for="colorThemeSelect" class="input-label">Color Theme:</label>
+                    <select id="colorThemeSelect" class="dark-input">
+                        <option value="continuous_spectrum">Continuous Spectrum</option>
+                        <option value="custom_palette">Custom Palette (Full Spectrum Hues)</option>
+                        <option value="greens">Greens (Dark to Light)</option>
+                        <option value="autumn">Autumn (Reds, Oranges, Yellows)</option>
+                        <option value="forest">Forest (Browns, Deep Greens)</option>
+                        <option value="sunset">Sunset (Pinks, Oranges, Reds)</option>
+                        <option value="ocean">Ocean (Teals, Blues)</option>
+                        <option value="galactic">Galactic (Blues, Purples, Pinks)</option>
+                        <option value="galactic_v2">Galactic #2 (Black-Pink-Blue-Black)</option>
+                        <option value="galactic_v3">Galactic #3 (Black-LightBlue-Black)</option>
+                        <option value="galactic_v4">Galactic #4 (Black-Blue~Magenta-Black)</option> {/* New Option */}
+                    </select>
+                </div>
+                <div class="sm:col-span-1"> {/* Checkbox for cycling */}
+                    <label for="cycleColorsCheckbox" class="checkbox-label">
+                        <input type="checkbox" id="cycleColorsCheckbox" class="dark-checkbox">
+                        Cycle Palette Colors
+                    </label>
+                </div>
+                <div class="sm:col-span-1"> {/* Checkbox for reverse cycling */}
+                    <label for="reverseCycleCheckbox" class="checkbox-label">
+                        <input type="checkbox" id="reverseCycleCheckbox" class="dark-checkbox">
+                        Reverse Cycle Direction
+                    </label>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-gray-300"> 
+                Primordia count: <span id="primordiaCount">0</span>
+            </div>
+             <div class="mt-1 text-xs text-gray-400"> 
+                Growth Factor: <span id="growthFactorDisplay">0.25</span> (fixed)
+            </div>
+        </div>
+
+        <canvas id="phyllotaxisCanvas"></canvas>
+    </div>
+
+    <script>
+        // Get canvas and context
+        const canvas = document.getElementById('phyllotaxisCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // DOM Elements for controls
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const resetButton = document.getElementById('resetButton');
+        const speedSlider = document.getElementById('speedSlider');
+        const scaleSlider = document.getElementById('scaleSlider');
+        const sizeSlider = document.getElementById('sizeSlider');
+        const primordiaCountDisplay = document.getElementById('primordiaCount');
+        const growthFactorDisplay = document.getElementById('growthFactorDisplay');
+        const paletteSizeInput = document.getElementById('paletteSizeInput'); 
+        const colorThemeSelect = document.getElementById('colorThemeSelect'); 
+        const cycleColorsCheckbox = document.getElementById('cycleColorsCheckbox'); 
+        const reverseCycleCheckbox = document.getElementById('reverseCycleCheckbox');
+
+        // Parameters
+        const goldenAngle = 137.50776 * (Math.PI / 180); 
+        let scaleConstant = parseFloat(scaleSlider.value); 
+        let primordiumBaseSize = parseFloat(sizeSlider.value); 
+        const growthFactor = 0.25; 
+        growthFactorDisplay.textContent = growthFactor;
+
+        let animationFrameId;
+        let isAnimating = false;
+        let primordia = []; 
+        let nextPrimordiumId = 0; 
+
+        // Color Palette variables
+        let numberOfPaletteColors = parseInt(paletteSizeInput.value);
+        let selectedColorTheme = colorThemeSelect.value;
+        let colorPalette = [];
+        let isColorCycling = cycleColorsCheckbox.checked; 
+        let isCycleReversed = reverseCycleCheckbox.checked; 
+        let paletteCycleOffset = 0; 
+
+        const CONTINUOUS_HUE_STEP = 13;
+        const CONTINUOUS_SAT_BASE = 70; 
+        const CONTINUOUS_LGT_BASE = 60; 
+
+        const NEAR_BLACK = { h: 270, s: 15, l: 10 }; 
+        const LIGHT_BLUE_CENTER = { h: 200, s: 80, l: 70 }; // For Galactic v3
+        const LIGHT_BLUE_PEAK = { h: 200, s: 85, l: 65 };   // For Galactic v4
+        const LIGHT_MAGENTA_PEAK = { h: 320, s: 85, l: 65 }; // For Galactic v4
+        const DARK_PURPLE_MID = { h: 270, s: 60, l: 30 };    // For Galactic v4
+
+        const colorThemes = {
+            'greens': [80, 140, 50, 75, 30, 70],    
+            'autumn': [0, 50, 60, 85, 40, 65],      
+            'forest': [25, 130, 30, 60, 25, 50],    
+            'sunset': [300, 30, 70, 90, 45, 70],    
+            'ocean': [180, 240, 50, 80, 30, 65],
+            'galactic': [230, 330, 60, 90, 35, 65],
+            'galactic_v2': [330, 240, 70, 90, 50, 65], 
+            'galactic_v3': [LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.l, LIGHT_BLUE_CENTER.l],
+            'galactic_v4': [] // Placeholder, logic is specific
+        };
+        
+        function hslString(h, s, l) {
+            return `hsl(${Math.round(h % 360)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+        }
+
+        function interpolateHue(h1, h2, t) {
+            const diff = h2 - h1;
+            let newHue;
+            if (Math.abs(diff) > 180) { 
+                if (diff > 0) { 
+                    newHue = h1 + t * (diff - 360);
+                } else { 
+                    newHue = h1 + t * (diff + 360);
+                }
+            } else {
+                newHue = h1 + t * diff;
+            }
+            return (newHue + 360); // Keep positive, modulo in hslString
+        }
+
+        function interpolateColorsSegment(targetPalette, startIndex, endIndex, startColorHSL, endColorHSL) {
+            const steps = endIndex - startIndex;
+            if (steps <= 0) return;
+
+            // The startColorHSL should correspond to targetPalette[startIndex]
+            // The endColorHSL should correspond to targetPalette[endIndex]
+            // We fill colors for indices > startIndex and < endIndex.
+
+            for (let i = 1; i < steps; i++) {
+                const t = i / steps;
+                const h = interpolateHue(startColorHSL.h, endColorHSL.h, t);
+                const s = startColorHSL.s + t * (endColorHSL.s - startColorHSL.s);
+                const l = startColorHSL.l + t * (endColorHSL.l - startColorHSL.l);
+                if (startIndex + i < targetPalette.length) { // Boundary check
+                    targetPalette[startIndex + i] = hslString(h, s, l);
+                }
+            }
+        }
+
+
+        function generateColorPalette() {
+            colorPalette = [];
+            const numColors = numberOfPaletteColors; 
+
+            if (numColors <= 0 || selectedColorTheme === 'continuous_spectrum') {
+                return; 
+            }
+
+            if (selectedColorTheme === 'custom_palette') {
+                const S = 75; 
+                const L = 65; 
+                if (numColors === 1) { colorPalette.push(hslString(220, S, L)); return; }
+                for (let i = 0; i < numColors; i++) {
+                    const hue = (i * (360 / numColors));
+                    colorPalette.push(hslString(hue, S, L));
+                }
+            } else if (selectedColorTheme === 'galactic_v3') {
+                const nearBlackStr = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+                const lightBlueStr = hslString(LIGHT_BLUE_CENTER.h, LIGHT_BLUE_CENTER.s, LIGHT_BLUE_CENTER.l);
+                if (numColors === 1) { colorPalette.push(lightBlueStr); } 
+                else if (numColors === 2) { colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); } 
+                else if (numColors === 3) { colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); colorPalette.push(nearBlackStr); } 
+                else { 
+                    const midPointIndex = Math.floor((numColors - 1) / 2);
+                    colorPalette[0] = nearBlackStr;
+                    colorPalette[midPointIndex] = lightBlueStr;
+                    colorPalette[numColors - 1] = nearBlackStr;
+                    interpolateColorsSegment(colorPalette, 0, midPointIndex, NEAR_BLACK, LIGHT_BLUE_CENTER);
+                    interpolateColorsSegment(colorPalette, midPointIndex, numColors - 1, LIGHT_BLUE_CENTER, NEAR_BLACK);
+                }
+            } else if (selectedColorTheme === 'galactic_v4') {
+                const nearBlackStr = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+                const lightBlueStr = hslString(LIGHT_BLUE_PEAK.h, LIGHT_BLUE_PEAK.s, LIGHT_BLUE_PEAK.l);
+                const darkPurpleStr = hslString(DARK_PURPLE_MID.h, DARK_PURPLE_MID.s, DARK_PURPLE_MID.l);
+                const lightMagentaStr = hslString(LIGHT_MAGENTA_PEAK.h, LIGHT_MAGENTA_PEAK.s, LIGHT_MAGENTA_PEAK.l);
+
+                if (numColors === 1) { colorPalette.push(lightBlueStr); }
+                else if (numColors === 2) { colorPalette.push(lightBlueStr); colorPalette.push(lightMagentaStr); }
+                else if (numColors === 3) { colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); colorPalette.push(nearBlackStr); }
+                else if (numColors === 4) { 
+                    colorPalette.push(nearBlackStr); colorPalette.push(lightBlueStr); 
+                    colorPalette.push(lightMagentaStr); colorPalette.push(nearBlackStr); 
+                } else { // numColors >= 5
+                    colorPalette = new Array(numColors); // Initialize array
+                    colorPalette[0] = nearBlackStr;
+                    colorPalette[numColors - 1] = nearBlackStr;
+
+                    // Define key points indices, ensuring they are distinct and ordered
+                    let idxP1 = Math.max(1, Math.floor((numColors - 1) * 0.25));
+                    let idxMid = Math.max(idxP1 + 1, Math.floor((numColors - 1) * 0.5));
+                    let idxP2 = Math.max(idxMid + 1, Math.floor((numColors - 1) * 0.75));
+                    
+                    // Ensure p2 is not the last element if numColors is small
+                    if (idxP2 >= numColors - 1) idxP2 = numColors - 2;
+                    if (idxMid >= idxP2) idxMid = idxP2 - 1;
+                    if (idxP1 >= idxMid) idxP1 = idxMid - 1;
+                    if (idxP1 < 1) idxP1 = 1; // Should not happen if numColors >=5
+
+                    colorPalette[idxP1] = lightBlueStr;
+                    colorPalette[idxMid] = darkPurpleStr;
+                    colorPalette[idxP2] = lightMagentaStr;
+
+                    interpolateColorsSegment(colorPalette, 0, idxP1, NEAR_BLACK, LIGHT_BLUE_PEAK);
+                    interpolateColorsSegment(colorPalette, idxP1, idxMid, LIGHT_BLUE_PEAK, DARK_PURPLE_MID);
+                    interpolateColorsSegment(colorPalette, idxMid, idxP2, DARK_PURPLE_MID, LIGHT_MAGENTA_PEAK);
+                    interpolateColorsSegment(colorPalette, idxP2, numColors - 1, LIGHT_MAGENTA_PEAK, NEAR_BLACK);
+                }
+
+            } else if (colorThemes[selectedColorTheme]) { 
+                const theme = colorThemes[selectedColorTheme];
+                const [hS, hE, sS, sE, lS, lE] = theme;
+                if (numColors === 1) {
+                    let avgHue = (hS + hE) / 2;
+                    if (hS > hE && (selectedColorTheme === 'sunset' || selectedColorTheme === 'galactic' || selectedColorTheme === 'galactic_v2')) { 
+                         avgHue = (hS + (hE + 360)) / 2 % 360;
+                    }
+                    const midSat = (sS + sE) / 2;
+                    const midLight = (lS + lE) / 2;
+                    colorPalette.push(hslString(avgHue, midSat, midLight));
+                    return;
+                }
+                for (let i = 0; i < numColors; i++) {
+                    const t = (numColors === 1) ? 0.5 : i / (numColors - 1); 
+                    let hue;
+                    if (hS > hE && (selectedColorTheme === 'sunset' || selectedColorTheme === 'galactic' || selectedColorTheme === 'galactic_v2')) { 
+                        hue = interpolateHue(hS, hE + 360, t); // Use interpolateHue for wrapping
+                    } else if (selectedColorTheme === 'forest') { 
+                        if (numColors <= 1) { hue = (hS+hE)/2; } 
+                        else if (numColors === 2) { hue = i === 0 ? 35 : 110; } 
+                        else { 
+                            const halfPoint = Math.ceil(numColors/2);
+                            if (i < halfPoint) { // Browns
+                                const t_segment = halfPoint === 1 ? 0.5 : i / (halfPoint -1);
+                                hue = 25 + t_segment * (45 - 25);
+                            } else { // Greens
+                                const t_segment = halfPoint === numColors ? 0.5 : (i - halfPoint) / (numColors - halfPoint -1);
+                                hue = 90 + t_segment * (130 - 90);
+                            }
+                        }
+                    } else {
+                        hue = hS + t * (hE - hS);
+                    }
+                    const sat = sS + t * (sE - sS);
+                    const light = lS + t * (lE - lS);
+                    colorPalette.push(hslString(hue, sat, light));
+                }
+                if (selectedColorTheme === 'galactic_v2' && colorPalette.length > 0) {
+                    const nearBlackStr = hslString(NEAR_BLACK.h, NEAR_BLACK.s, NEAR_BLACK.l);
+                    if (numColors >= 3) {
+                        colorPalette[0] = nearBlackStr; 
+                        colorPalette[numColors - 1] = nearBlackStr; 
+                    }
+                }
+            }
+        }
+        
+        function updatePrimordiaColors() {
+            primordia.forEach(p => {
+                if (numberOfPaletteColors <= 0 || selectedColorTheme === 'continuous_spectrum') {
+                    const hue = (p.id * CONTINUOUS_HUE_STEP);
+                    const saturation = CONTINUOUS_SAT_BASE + (p.id % 10) * 2;
+                    const lightness = CONTINUOUS_LGT_BASE + (p.id % 10);
+                    p.color = hslString(hue, saturation, lightness);
+                } else if (colorPalette.length > 0) { 
+                    let effectiveIndex = p.id + paletteCycleOffset;
+                    while (effectiveIndex < 0) {
+                        effectiveIndex += colorPalette.length * 10000; // Ensure positive for modulo
+                    }
+                    p.color = colorPalette[effectiveIndex % colorPalette.length];
+                } else { 
+                     const hue = (p.id * CONTINUOUS_HUE_STEP);
+                     const saturation = CONTINUOUS_SAT_BASE + (p.id % 10) * 2;
+                     const lightness = CONTINUOUS_LGT_BASE + (p.id % 10);
+                     p.color = hslString(hue, saturation, lightness);
+                }
+            });
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement; 
+            const canvasWidth = Math.min(container.clientWidth, 800); 
+            canvas.width = canvasWidth;
+            canvas.height = canvasWidth * 0.85; 
+            if (primordia.length > 0) recalculateAllPrimordiaPositionsAndSizes();
+            drawPrimordia(); 
+        }
+        window.addEventListener('resize', resizeCanvas);
+        
+        function recalculateAllPrimordiaPositionsAndSizes() {
+            const numElements = primordia.length;
+            if (numElements === 0) return;
+            primordia.forEach(p => {
+                const k_effective = (numElements - 1) - p.id;
+                const angle = p.id * goldenAngle; 
+                const radius = scaleConstant * Math.sqrt(k_effective);
+                p.x = radius * Math.cos(angle);
+                p.y = radius * Math.sin(angle);
+                p.size = primordiumBaseSize + growthFactor * Math.sqrt(k_effective);
+                p.size = Math.max(0.2, p.size); 
+            });
+        }
+
+        function drawPrimordia() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            primordia.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(centerX + p.x, centerY + p.y, p.size, 0, 2 * Math.PI);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+        }
+
+        function animate() {
+            if (!isAnimating) return;
+
+            if (isColorCycling && numberOfPaletteColors > 0 && colorPalette.length > 0) {
+                if (isCycleReversed) {
+                    paletteCycleOffset--;
+                } else {
+                    paletteCycleOffset++; 
+                }
+                updatePrimordiaColors(); 
+            }
+
+            const currentId = nextPrimordiumId;
+            let color;
+
+            if (numberOfPaletteColors <= 0 || selectedColorTheme === 'continuous_spectrum') {
+                const hue = (currentId * CONTINUOUS_HUE_STEP); 
+                const saturation = CONTINUOUS_SAT_BASE + (currentId % 10) * 2; 
+                const lightness = CONTINUOUS_LGT_BASE + (currentId % 10);   
+                color = hslString(hue, saturation, lightness);
+            } else if (colorPalette.length > 0) { 
+                let effectiveIndex = currentId + paletteCycleOffset;
+                 while (effectiveIndex < 0) {
+                    effectiveIndex += colorPalette.length * 10000; 
+                }
+                color = colorPalette[effectiveIndex % colorPalette.length];
+            } else { 
+                const hue = (currentId * CONTINUOUS_HUE_STEP); 
+                const saturation = CONTINUOUS_SAT_BASE + (currentId % 10) * 2; 
+                const lightness = CONTINUOUS_LGT_BASE + (currentId % 10);   
+                color = hslString(hue, saturation, lightness);
+            }
+            
+            primordia.push({ id: currentId, color: color });
+            nextPrimordiumId++;
+            primordiaCountDisplay.textContent = primordia.length;
+            recalculateAllPrimordiaPositionsAndSizes();
+            drawPrimordia();
+
+            const speed = parseInt(speedSlider.value);
+            setTimeout(() => { animationFrameId = requestAnimationFrame(animate); }, 1000 / (speed * 2.5)); 
+        }
+
+        // Event Listeners
+        startButton.addEventListener('click', () => {
+            if (!isAnimating) {
+                isAnimating = true;
+                if (primordia.length === 0) resizeCanvas(); 
+                animate();
+                startButton.textContent = 'Pause';
+                startButton.classList.replace('btn-primary', 'btn-secondary');
+            } else {
+                isAnimating = false;
+                cancelAnimationFrame(animationFrameId);
+                startButton.textContent = 'Resume';
+                startButton.classList.replace('btn-secondary', 'btn-primary');
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            isAnimating = false;
+            cancelAnimationFrame(animationFrameId);
+            startButton.textContent = 'Start';
+            startButton.classList.replace('btn-secondary', 'btn-primary');
+        });
+
+        resetButton.addEventListener('click', () => {
+            isAnimating = false;
+            cancelAnimationFrame(animationFrameId);
+            primordia = []; 
+            nextPrimordiumId = 0; 
+            paletteCycleOffset = 0; 
+            primordiaCountDisplay.textContent = 0;
+            drawPrimordia(); 
+            startButton.textContent = 'Start';
+            startButton.classList.replace('btn-secondary', 'btn-primary');
+        });
+
+        speedSlider.addEventListener('input', () => {}); 
+        scaleSlider.addEventListener('input', () => {
+            scaleConstant = parseFloat(scaleSlider.value);
+            recalculateAllPrimordiaPositionsAndSizes(); 
+            drawPrimordia(); 
+        });
+        sizeSlider.addEventListener('input', () => {
+            primordiumBaseSize = parseFloat(sizeSlider.value);
+            recalculateAllPrimordiaPositionsAndSizes(); 
+            drawPrimordia(); 
+        });
+
+        function handleColorSettingsChange() {
+            numberOfPaletteColors = parseInt(paletteSizeInput.value);
+            if (isNaN(numberOfPaletteColors) || numberOfPaletteColors < 0) {
+                numberOfPaletteColors = 0; 
+                paletteSizeInput.value = 0; 
+            } else {
+                 const maxPalette = 64; // Max palette size updated
+                numberOfPaletteColors = Math.min(numberOfPaletteColors, maxPalette); 
+                if (parseInt(paletteSizeInput.value) > maxPalette) paletteSizeInput.value = maxPalette;
+            }
+            selectedColorTheme = colorThemeSelect.value;
+            isColorCycling = cycleColorsCheckbox.checked; 
+            isCycleReversed = reverseCycleCheckbox.checked; 
+
+            if (!isColorCycling) { 
+                paletteCycleOffset = 0;
+            }
+
+            generateColorPalette(); 
+            updatePrimordiaColors(); 
+            if (!isAnimating) drawPrimordia();
+        }
+
+        paletteSizeInput.addEventListener('input', handleColorSettingsChange);
+        colorThemeSelect.addEventListener('change', handleColorSettingsChange);
+        cycleColorsCheckbox.addEventListener('change', handleColorSettingsChange);
+        reverseCycleCheckbox.addEventListener('change', handleColorSettingsChange); 
+        
+        // Initial setup
+        isColorCycling = cycleColorsCheckbox.checked; 
+        isCycleReversed = reverseCycleCheckbox.checked;
+        generateColorPalette(); 
+        resizeCanvas(); 
+    </script>
+</body>
+</html>
+
