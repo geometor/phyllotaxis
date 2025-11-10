@@ -1,0 +1,54 @@
+geometor.phyllotaxis
+====================
+
+.. py:module:: geometor.phyllotaxis
+
+.. autoapi-nested-parse::
+
+   phyllotaxis module for the GEOMETOR project
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.sweep_phi
+   geometor.phyllotaxis.sweep_rational
+   geometor.phyllotaxis.find_point_distances
+   geometor.phyllotaxis.grow
+   geometor.phyllotaxis.get_node_points
+   geometor.phyllotaxis.find_nearest_points
+
+
+Package Contents
+----------------
+
+.. py:function:: sweep_phi()
+
+   use algebraic phi value for fraction of circle
+
+
+.. py:function:: sweep_rational(n, m)
+
+   use two fibonacci numbers for fraction of circle
+
+
+.. py:function:: find_point_distances(pt, other_pts)
+
+.. py:function:: grow(steps, sweep)
+
+   grow each step to num_rings
+
+
+.. py:function:: get_node_points(num_nodes, sweep)
+
+   frame with n nodes
+
+
+.. py:function:: find_nearest_points(test_points, num_nearest=3)
+
+   for each point in list, find nearest points from remainder of list
+
+

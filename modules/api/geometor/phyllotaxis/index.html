@@ -1,0 +1,160 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>geometor.phyllotaxis &mdash; Project name not set  documentation</title>
+  <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=ea5fcf70" />
+  <link rel="stylesheet" type="text/css" href="../../../../_static/css/styles.css?v=85f2e26d" />
+  <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="../../../../index.html">
+        <img src="../../../../_static/logo.png" class="logo" alt="Logo"/>
+      </a>
+      <div class="org-repo">
+        <span class="org">GEOMETOR</span>
+        •
+        <span class="repo">phyllotaxis</span>
+      </div>
+    </div>
+    <nav aria-label="Header">
+      <input type="checkbox" id="nav-Header-toggle" >
+      <label for="nav-Header-toggle" >Header</label>
+      <ul>
+      </ul>
+    </nav>
+    <div class="motto"></div>
+  </header>
+  <main>
+
+    <article>
+      <nav class="context">
+        <div class="prev">
+           <a href="../index.html" class="prev" title="geometor" >Prev</a>
+        </div>
+        <div class="next">
+        </div>
+      </nav>
+      <nav class="breadcrumbs">
+        <span><a href="../../../../index.html">Home</a></span>
+          <span>/</span>
+        <span><a href="../../index.html">API Reference</a></span>
+          <span>/</span>
+        <span><a href="../index.html">geometor</a></span>
+        <span>/</span>
+        <span>geometor.phyllotaxis</span>
+      </nav>
+      <div class="content">
+          <section id="module-geometor.phyllotaxis">
+<span id="geometor-phyllotaxis"></span><h1>geometor.phyllotaxis<a class="headerlink" href="#module-geometor.phyllotaxis" title="Link to this heading">¶</a></h1>
+<p>phyllotaxis module for the GEOMETOR project</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_phi" title="geometor.phyllotaxis.sweep_phi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_phi</span></code></a>()</p></td>
+<td><p>use algebraic phi value for fraction of circle</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_rational" title="geometor.phyllotaxis.sweep_rational"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_rational</span></code></a>(n, m)</p></td>
+<td><p>use two fibonacci numbers for fraction of circle</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_point_distances" title="geometor.phyllotaxis.find_point_distances"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_point_distances</span></code></a>(pt, other_pts)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.grow" title="geometor.phyllotaxis.grow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grow</span></code></a>(steps, sweep)</p></td>
+<td><p>grow each step to num_rings</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.get_node_points" title="geometor.phyllotaxis.get_node_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_points</span></code></a>(num_nodes, sweep)</p></td>
+<td><p>frame with n nodes</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_nearest_points" title="geometor.phyllotaxis.find_nearest_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_nearest_points</span></code></a>(test_points[, num_nearest])</p></td>
+<td><p>for each point in list, find nearest points from remainder of list</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_phi">
+<span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_phi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/geometor/phyllotaxis.html#sweep_phi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#geometor.phyllotaxis.sweep_phi" title="Link to this definition">¶</a></dt>
+<dd><p>use algebraic phi value for fraction of circle</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_rational">
+<span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_rational</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/geometor/phyllotaxis.html#sweep_rational"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#geometor.phyllotaxis.sweep_rational" title="Link to this definition">¶</a></dt>
+<dd><p>use two fibonacci numbers for fraction of circle</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="geometor.phyllotaxis.find_point_distances">
+<span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">find_point_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_pts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/geometor/phyllotaxis.html#find_point_distances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#geometor.phyllotaxis.find_point_distances" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="geometor.phyllotaxis.grow">
+<span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">grow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/geometor/phyllotaxis.html#grow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#geometor.phyllotaxis.grow" title="Link to this definition">¶</a></dt>
+<dd><p>grow each step to num_rings</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="geometor.phyllotaxis.get_node_points">
+<span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">get_node_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/geometor/phyllotaxis.html#get_node_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#geometor.phyllotaxis.get_node_points" title="Link to this definition">¶</a></dt>
+<dd><p>frame with n nodes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="geometor.phyllotaxis.find_nearest_points">
+<span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">find_nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nearest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/geometor/phyllotaxis.html#find_nearest_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#geometor.phyllotaxis.find_nearest_points" title="Link to this definition">¶</a></dt>
+<dd><p>for each point in list, find nearest points from remainder of list</p>
+</dd></dl>
+
+</section>
+</section>
+
+      </div>
+      <footer></footer>
+    </article>
+
+  </main>
+
+<div class="asides">
+    <aside>
+        <h3>Search</h3>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+    </aside>
+    
+</div>
+<footer>
+      <div class="rst-footer-buttons" role="navigation" aria-label="Footer Nav">
+          <a href="../index.html" class="btn btn-neutral float-left" title="geometor" accesskey="p" rel="prev"> Previous</a>
+      </div>
+    <hr/>
+    <div role="contentinfo">
+        <p>
+                &copy; Copyright .
+        </p>
+    </div>
+</footer>
+
+  <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+  <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+  <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+  <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+  <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+
+
+</body>
+</html>
