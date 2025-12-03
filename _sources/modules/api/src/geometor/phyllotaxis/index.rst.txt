@@ -1,7 +1,7 @@
-geometor.phyllotaxis
-====================
+src.geometor.phyllotaxis
+========================
 
-.. py:module:: geometor.phyllotaxis
+.. py:module:: src.geometor.phyllotaxis
 
 .. autoapi-nested-parse::
 
@@ -14,12 +14,12 @@ Functions
 
 .. autoapisummary::
 
-   geometor.phyllotaxis.sweep_phi
-   geometor.phyllotaxis.sweep_rational
-   geometor.phyllotaxis.find_point_distances
-   geometor.phyllotaxis.grow
-   geometor.phyllotaxis.get_node_points
-   geometor.phyllotaxis.find_nearest_points
+   src.geometor.phyllotaxis.sweep_phi
+   src.geometor.phyllotaxis.sweep_rational
+   src.geometor.phyllotaxis.find_point_distances
+   src.geometor.phyllotaxis.grow
+   src.geometor.phyllotaxis.get_node_points
+   src.geometor.phyllotaxis.find_nearest_points
 
 
 Package Contents

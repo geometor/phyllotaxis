@@ -1,0 +1,15 @@
+src.geometor
+============
+
+.. py:module:: src.geometor
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /modules/api/src/geometor/phyllotaxis/index
+
+
