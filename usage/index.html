@@ -2,15 +2,18 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>usage &mdash; Project name not set  documentation</title>
   <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=ea5fcf70" />
-  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=b9bf8c56" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=38c7a96b" />
   <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
   <link rel="stylesheet" href="../_static/css/print.css" type="text/css" media="print" />
+  <link rel="icon" href="../_static/favicon.ico" />
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -32,104 +35,93 @@
     <div class="motto"></div>
   </header>
   <main>
-
     <article>
-      <div class="content">
+      <header>
       <nav class="breadcrumbs">
         <span><a href="../index.html">Home</a></span>
-        <span>/</span>
-        <span>usage</span>
       </nav>
         <nav class="context">
           <div class="prev">
-             <a href="../mission/index.html" class="btn btn-neutral float-left" title="Mission" >Prev</a>
+             <a href="../mission/index.html" title="Mission" >Prev</a>
           </div>
           <div class="next">
-            <a href="../modules/index.html" class="btn btn-neutral float-right" title="phyllotaxis" >Next</a>
+            <a href="../modules/index.html" title="phyllotaxis" >Next</a>
           </div>
         </nav>
-          <section id="usage">
-<h1>usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
-<p>In this simple example, we create the classic <em>vesica pisces</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geometor.model</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+      </header>
+      <div class="content">
+        <section id="usage">
+          <h1>usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
+          <p>In this simple example, we create the classic <em>vesica pisces</em></p>
+          <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geometor.model</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;vesica&quot;</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;given&quot;</span><span class="p">])</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;given&quot;</span><span class="p">])</span>
+          <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">"vesica"</span><span class="p">)</span>
+          <span class="n">A</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s2">"given"</span><span class="p">])</span>
+          <span class="n">B</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s2">"given"</span><span class="p">])</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">construct_line</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+          <span class="n">model</span><span class="o">.</span><span class="n">construct_line</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">construct_circle</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">construct_circle</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+          <span class="n">model</span><span class="o">.</span><span class="n">construct_circle</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+          <span class="n">model</span><span class="o">.</span><span class="n">construct_circle</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
 
-<span class="n">E</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_element_by_label</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">)</span>
-<span class="n">F</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_element_by_label</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">)</span>
+          <span class="n">E</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_element_by_label</span><span class="p">(</span><span class="s2">"E"</span><span class="p">)</span>
+          <span class="n">F</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_element_by_label</span><span class="p">(</span><span class="s2">"F"</span><span class="p">)</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">set_polygon</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">E</span><span class="p">])</span>
-<span class="n">model</span><span class="o">.</span><span class="n">set_polygon</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">F</span><span class="p">])</span>
+          <span class="n">model</span><span class="o">.</span><span class="n">set_polygon</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">E</span><span class="p">])</span>
+          <span class="n">model</span><span class="o">.</span><span class="n">set_polygon</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">F</span><span class="p">])</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">construct_line</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
+          <span class="n">model</span><span class="o">.</span><span class="n">construct_line</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
 
-<span class="n">report_summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="n">report_group_by_type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="n">report_sequence</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+          <span class="n">report_summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+          <span class="n">report_group_by_type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+          <span class="n">report_sequence</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;vesica.json&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
+          <span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"vesica.json"</span><span class="p">)</span>
+          </pre></div>
+          </div>
+          </section>
 
       </div>
       <footer>
 
-
         <nav class="context">
           <div class="prev">
-             <a href="../mission/index.html" class="btn btn-neutral float-left" title="Mission" >Prev</a>
+             <a href="../mission/index.html" title="Mission" >Prev</a>
           </div>
           <div class="next">
-            <a href="../modules/index.html" class="btn btn-neutral float-right" title="phyllotaxis" >Next</a>
+            <a href="../modules/index.html" title="phyllotaxis" >Next</a>
           </div>
-        </nav></footer>
+        </nav>
+      </footer>
     </article>
-
   </main>
-
-<div class="asides">
+  <div class="asides">
     <aside>
-        <h3>Search</h3>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
+      <h3>Search</h3>
+      <div role="search">
+        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+          <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+      </div>
     </aside>
-    
-    
-
-    
-
-    
-
-</div>
-<footer>
-    <hr/>
+  </div>
+  <footer>
+    <hr />
     <div role="contentinfo">
-        <p>
-                &copy; Copyright .
-        </p>
+      <p>
+        &copy; Copyright .
+      </p>
     </div>
-</footer>
+  </footer>
 
   <script src="../_static/jquery.js?v=5d32c60e"></script>
   <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
   <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-  <script src="../_static/doctools.js?v=9bcbadda"></script>
-  <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+  <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+  <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
   <script src="../_static/js/collection_controls.js?v=b6b5297a"></script>
-
 
 </body>
 </html>
