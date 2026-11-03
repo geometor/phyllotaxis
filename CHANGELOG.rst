@@ -1,6 +1,14 @@
 changelog
 =========
 
+0.2.1
+-----
+*2026-11-03*
+
+- Removed legacy `fastGrowthSteps` height slowdown on the 3D apical meristem so the primary shoot climbs continuously with basal internode elongation.
+- Scaled 3D lateral branch curvature (`pathArch`) with branch reach and normalized progress $u^2$ so lower branches do not overtake the apical meristem.
+- Added climbing camera orbit target tracking, `Center (0)` camera framing, and live `Meristem Height` HUD telemetry in the 3D studio.
+
 0.2.0
 -----
 *2026-11-03*
