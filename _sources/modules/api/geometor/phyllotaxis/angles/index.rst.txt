@@ -1,0 +1,99 @@
+geometor.phyllotaxis.angles
+===========================
+
+.. py:module:: geometor.phyllotaxis.angles
+
+.. autoapi-nested-parse::
+
+   Divergence angle calculations and Fibonacci rational approximations.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.angles.PHI
+   geometor.phyllotaxis.angles.GOLDEN_ANGLE_RAD
+   geometor.phyllotaxis.angles.GOLDEN_ANGLE_DEG
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.angles.AnglesMixin
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.angles.sweep_phi
+   geometor.phyllotaxis.angles.sweep_rational
+   geometor.phyllotaxis.angles.sweep_lucas
+   geometor.phyllotaxis.angles.fibonacci
+   geometor.phyllotaxis.angles.fibonacci_convergents
+
+
+Module Contents
+---------------
+
+.. py:data:: PHI
+   :type:  sympy.Expr
+
+.. py:data:: GOLDEN_ANGLE_RAD
+   :type:  float
+
+.. py:data:: GOLDEN_ANGLE_DEG
+   :type:  float
+
+.. py:function:: sweep_phi() -> sympy.Expr
+
+   Return the exact symbolic golden divergence angle $2\pi(1 - 1/\phi)$.
+
+
+.. py:function:: sweep_rational(n: int, m: int) -> sympy.Expr
+
+   Return a rational divergence angle $2\pi(1 - n/m)$ from two integers.
+
+
+.. py:function:: sweep_lucas() -> sympy.Expr
+
+   Return the exact symbolic Lucas divergence angle $2\pi / (3 + 1/\phi) \approx 99.5^\circ$.
+
+
+.. py:function:: fibonacci(n: int) -> int
+
+   Return the $n$-th Fibonacci number ($F_0 = 0, F_1 = 1$).
+
+
+.. py:function:: fibonacci_convergents(count: int = 8) -> list[tuple[int, int, float]]
+
+   Return consecutive Fibonacci rational approximations $(F_k, F_{k+2}, \text{degrees})$.
+
+   :param count: Number of convergent pairs to generate starting from $(1, 2)$.
+
+   :returns: List of tuples `(numerator, denominator, angle_degrees)`.
+
+
+.. py:class:: AnglesMixin
+
+   Mixin for Phyllotaxis class containing divergence angle functionality.
+
+
+   .. py:method:: get_sweep_phi() -> sympy.Expr
+
+
+   .. py:method:: get_sweep_rational(n: int, m: int) -> sympy.Expr
+
+
+   .. py:method:: get_sweep_lucas() -> sympy.Expr
+
+
+   .. py:method:: get_fibonacci_convergents(count: int = 8) -> list[tuple[int, int, float]]
+
+

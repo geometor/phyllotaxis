@@ -1,0 +1,49 @@
+geometor.phyllotaxis.builder
+============================
+
+.. py:module:: geometor.phyllotaxis.builder
+
+.. autoapi-nested-parse::
+
+   Integration with `geometor.model.Model` for exact symbolic constructions.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.builder.ModelBuilderMixin
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.builder.build_rings_model
+
+
+Module Contents
+---------------
+
+.. py:function:: build_rings_model(num_rings: int = 8, sweep: sympy.Expr | float | None = None, name: str = 'phyllotaxis_rings') -> geometor.model.Model
+
+   Construct a `geometor.model.Model` containing phyllotaxic node points and dot circles.
+
+   :param num_rings: Number of primordia rings to construct.
+   :param sweep: Symbolic or numeric divergence angle (defaults to `sweep_phi()`).
+   :param name: Name of the created `Model`.
+
+   :returns: Populated `geometor.model.Model` instance.
+
+
+.. py:class:: ModelBuilderMixin
+
+   Mixin for Phyllotaxis class containing `geometor.model.Model` construction helpers.
+
+
+   .. py:method:: build_rings_model(num_rings: int = 8, sweep: sympy.Expr | float | None = None, name: str = 'phyllotaxis_rings') -> geometor.model.Model
+
+

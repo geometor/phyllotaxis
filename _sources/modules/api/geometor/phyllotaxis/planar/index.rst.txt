@@ -1,0 +1,160 @@
+geometor.phyllotaxis.planar
+===========================
+
+.. py:module:: geometor.phyllotaxis.planar
+
+.. autoapi-nested-parse::
+
+   Planar 2D phyllotaxic growth, Vogel packing, and parastichy analysis.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.planar.PlanarMixin
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.planar.get_node_points
+   geometor.phyllotaxis.planar.grow
+   geometor.phyllotaxis.planar.find_point_distances
+   geometor.phyllotaxis.planar.find_nearest_points
+   geometor.phyllotaxis.planar.classify_meristem_phase
+   geometor.phyllotaxis.planar.vogel_points
+   geometor.phyllotaxis.planar.find_parastichies
+   geometor.phyllotaxis.planar.analyze_parastichy_curves
+
+
+Module Contents
+---------------
+
+.. py:function:: get_node_points(num_nodes: int, sweep: sympy.Expr | float | None = None) -> list[sympy.geometry.Point2D]
+
+   Generate a single planar growth frame with `num_nodes` symbolic points.
+
+   Each node $i \in [0, N-1]$ has radius $N - i$ and angle $i \cdot \text{sweep}$.
+
+   :param num_nodes: Number of primordia in the frame.
+   :param sweep: Divergence angle in radians (symbolic or float). Defaults to `sweep_phi()`.
+
+   :returns: List of SymPy `Point2D` instances.
+
+
+.. py:function:: grow(steps: int, sweep: sympy.Expr | float | None = None) -> list[list[sympy.geometry.Point2D]]
+
+   Grow planar frames from $0$ up to `steps - 1` nodes.
+
+
+.. py:function:: find_point_distances(pt: sympy.geometry.Point2D, other_pts: list[sympy.geometry.Point2D]) -> dict[float, sympy.geometry.Point2D]
+
+   Compute Euclidean distances from `pt` to each point in `other_pts`.
+
+
+.. py:function:: find_nearest_points(test_points: list[sympy.geometry.Point2D], num_nearest: int = 3) -> dict[sympy.geometry.Point2D, list[sympy.geometry.Point2D]]
+
+   For each point in `test_points`, find the `num_nearest` closest subsequent points.
+
+
+.. py:function:: classify_meristem_phase(node_id: int, total_nodes: int, leaf_span: int = 34) -> str
+
+   Classify a node's ontogenetic organ type in the meristem's production life cycle.
+
+   In a composite capitulum (such as a sunflower), the apical meristem transitions
+   through distinct organ-production phases as the sequence progresses:
+   1. `"leaf"`: Early vegetative/involucral bracts (`0 <= node_id < leaf_span`).
+   2. `"petal"`: Ray florets / corolla petals (`leaf_span <= node_id < leaf_span + round(leaf_span * φ)`).
+   3. `"floret"`: Mature tubular disc florets in the capitulum interior.
+   4. `"bud"`: Newly initiated unopened primordia at the apical center (`age < round(leaf_span / φ)`).
+
+
+.. py:function:: vogel_points(num_nodes: int, scale: float = 5.0, angle_rad: float = GOLDEN_ANGLE_RAD, base_size: float = 1.5, growth_factor: float = 0.25, radial_acceleration: float = 0.0, leaf_span: int = 34) -> list[dict[str, float | int | str]]
+
+   Compute 2D apical meristem coordinates with radial acceleration, node growth, and life-cycle phases.
+
+   New primordia emerge at the center ($k_{\text{eff}} = (N - 1) - i$) while older
+   primordia are displaced radially as
+   $r = c\sqrt{k_{\text{eff}}}\left(\frac{k_{\text{eff}} + 1}{K_0}\right)^{a}$,
+   and node size grows as
+   $s = s_0 + g\sqrt{k_{\text{eff}}}\left(\frac{k_{\text{eff}} + 1}{K_0}\right)^{1.15a}$.
+
+   :param num_nodes: Total number of primordia.
+   :param scale: Radial spread constant $c$.
+   :param angle_rad: Divergence angle in radians.
+   :param base_size: Initial radius of a newly emerged primordium ($s_0$).
+   :param growth_factor: Rate $g$ at which primordium size scales as it moves outward.
+   :param radial_acceleration: Acceleration exponent $a \ge 0$ controlling how much faster
+                               older outer nodes move and expand compared to young inner primordia.
+   :param leaf_span: Characteristic Fibonacci cohort span for meristem life-cycle phases.
+
+   :returns: List of dictionaries with keys `id`, `age`, `phase`, `x`, `y`, `r`, `theta`, `size`.
+
+
+.. py:function:: find_parastichies(num_nodes: int, families: tuple[int, ...] = (5, 8, 13, 21)) -> dict[int, list[list[int]]]
+
+   Group node indices into parastichy spiral chains for each modulo family $m \in \text{families}$.
+
+   :param num_nodes: Total number of nodes.
+   :param families: Parastichy numbers (typically consecutive Fibonacci numbers).
+
+   :returns: Mapping from family number $m$ to a list of $m$ index chains `[r, r+m, r+2m, ...]`.
+
+
+.. py:function:: analyze_parastichy_curves(nodes: list[dict[str, float | int | str]], num_nearest: int = 3) -> dict[str, object]
+
+   Count parastichy curves in each closest-neighbor rank and radial zone until they bend.
+
+   Demonstrates that the two primary closest-neighbor curve families wind in opposite
+   directions (CW vs CCW) and always form a consecutive pair of Fibonacci numbers
+   $(F_m, F_{m+1})$ within each radial zone between curve bends.
+
+   :param nodes: List of node dictionaries from :func:`vogel_points`.
+   :param num_nearest: Number of closest inner nodes connected per node ($1 \le k \le 4$).
+
+   :returns:
+
+             - ``outer_counts``: Curve count $\Delta$, winding direction (``"CW"`` or ``"CCW"``),
+               and Fibonacci status for each rank at the outer rim.
+             - ``opposing_pair``: Tuple ``(cw_count, ccw_count)`` of the two primary opposing
+               spiral families in the outer zone.
+             - ``is_fibonacci_pair``: ``True`` if ``opposing_pair`` consists of consecutive
+               Fibonacci numbers with opposite chirality.
+             - ``zones``: Radial zones from inner to outer separated by bend radii.
+   :rtype: Dictionary containing
+
+
+.. py:class:: PlanarMixin
+
+   Mixin for Phyllotaxis class containing 2D planar growth and parastichy methods.
+
+
+   .. py:method:: get_node_points(num_nodes: int, sweep: sympy.Expr | float | None = None) -> list[sympy.geometry.Point2D]
+
+
+   .. py:method:: grow(steps: int, sweep: sympy.Expr | float | None = None) -> list[list[sympy.geometry.Point2D]]
+
+
+   .. py:method:: classify_meristem_phase(node_id: int, total_nodes: int, leaf_span: int = 34) -> str
+
+
+   .. py:method:: vogel_points(num_nodes: int, scale: float = 5.0, angle_rad: float = GOLDEN_ANGLE_RAD, base_size: float = 1.5, growth_factor: float = 0.25, radial_acceleration: float = 0.0, leaf_span: int = 34) -> list[dict[str, float | int | str]]
+
+
+   .. py:method:: find_point_distances(pt: sympy.geometry.Point2D, other_pts: list[sympy.geometry.Point2D]) -> dict[float, sympy.geometry.Point2D]
+
+
+   .. py:method:: find_nearest_points(test_points: list[sympy.geometry.Point2D], num_nearest: int = 3) -> dict[sympy.geometry.Point2D, list[sympy.geometry.Point2D]]
+
+
+   .. py:method:: find_parastichies(num_nodes: int, families: tuple[int, ...] = (5, 8, 13, 21)) -> dict[int, list[list[int]]]
+
+
+   .. py:method:: analyze_parastichy_curves(nodes: list[dict[str, float | int | str]], num_nearest: int = 3) -> dict[str, object]
+
+

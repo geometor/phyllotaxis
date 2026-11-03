@@ -1,20 +1,27 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-content_root="../">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>usage &mdash; Project name not set  documentation</title>
+  <title>usage &mdash; GEOMETOR • phyllotaxis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=ea5fcf70" />
-  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=38c7a96b" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=69acf51f" />
   <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/phyllotaxis-demos.css?v=7cbca0bb" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <link rel="stylesheet" href="../_static/css/print.css" type="text/css" media="print" />
   <link rel="icon" href="../_static/favicon.ico" />
 </head>
 
-<body>
+<body class="book-theme-classical-serif">
   <header>
     <div class="logo">
       <a href="../index.html">
@@ -30,98 +37,182 @@
       <input type="checkbox" id="nav-Header-toggle" >
       <label for="nav-Header-toggle" >Header</label>
       <ul>
+        <li>
+          <a href="../mission/index.html"  >mission</a>
+        </li>
+        <li>
+          <a href="../demos/index.html"  >demos</a>
+        </li>
+        <li>
+          <a href="#" class="is-active" aria-selected="true" aria-current="page">usage</a>
+        </li>
+        <li>
+          <a href="../log/index.html"  >log</a>
+        </li>
+        <li>
+          <a href="../modules/index.html"  >modules</a>
+        </li>
       </ul>
     </nav>
     <div class="motto"></div>
   </header>
-  <main>
-    <article>
-      <header>
-      <nav class="breadcrumbs">
-        <span><a href="../index.html">Home</a></span>
-      </nav>
-        <nav class="context">
-          <div class="prev">
-             <a href="../mission/index.html" title="Mission" >Prev</a>
+  <main class="book-main">
+    <article class="book-layout book-reading-pane">
+      <header class="book-header">
+        <div class="book-header-bar">
+          <div class="book-header-identity">
+            <a class="book-portal-link" href="../index.html" title="Return to Project Portal">&larr; phyllotaxis</a>
+            <span class="book-header-sep">/</span>
+            <a class="book-title-link" href="../index.html">GEOMETOR • phyllotaxis</a>
           </div>
-          <div class="next">
-            <a href="../modules/index.html" title="phyllotaxis" >Next</a>
+        </div>
+        <div class="book-header-nav">
+          <div class="book-nav-prev">
+            <a class="book-nav-btn" href="../demos/propagation_3d.html" title="3D Node-as-Path &amp; Recursive Meristems">&larr; <span class="nav-label">Prev</span></a>
           </div>
-        </nav>
+          <div class="book-nav-center">
+          </div>
+          <div class="book-nav-next">
+            <a class="book-nav-btn" href="../log/index.html" title="log"><span class="nav-label">Next</span> &rarr;</a>
+          </div>
+        </div>
       </header>
-      <div class="content">
-        <section id="usage">
-          <h1>usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
-          <p>In this simple example, we create the classic <em>vesica pisces</em></p>
-          <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geometor.model</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+      <div class="content body book-content" role="main">
+        <section class="level-1" id="usage">
+        <h1>usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
+        <section class="level-2" id="d-node-as-path-recursive-meristem-propagation">
+        <h2>3D Node-as-Path &amp; Recursive Meristem Propagation<a class="headerlink" href="#d-node-as-path-recursive-meristem-propagation" title="Link to this heading">¶</a></h2>
+        <p>Use <a class="reference internal" href="../modules/index.html#geometor.phyllotaxis.propagate_3d" title="geometor.phyllotaxis.propagate_3d"><code class="xref py py-func docutils literal notranslate"><span class="pre">propagate_3d()</span></code></a> and <a class="reference internal" href="../modules/index.html#geometor.phyllotaxis.MeristemConfig" title="geometor.phyllotaxis.MeristemConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeristemConfig</span></code></a> to generate multi-generation 3D meristem trees in Python:</p>
+        <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geometor.phyllotaxis</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeristemConfig</span><span class="p">,</span> <span class="n">propagate_3d</span>
 
-          <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">"vesica"</span><span class="p">)</span>
-          <span class="n">A</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s2">"given"</span><span class="p">])</span>
-          <span class="n">B</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s2">"given"</span><span class="p">])</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">MeristemConfig</span><span class="p">(</span>
+            <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">maturation_age</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">spawn_cadence</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">meristem_stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">child_scale_decay</span><span class="o">=</span><span class="mf">0.6180339887</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="n">propagate_3d</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="mi">34</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
 
-          <span class="n">model</span><span class="o">.</span><span class="n">construct_line</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Node </span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> (Gen </span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">generation</span><span class="si">}</span><span class="s2">): "</span>
+                <span class="sa">f</span><span class="s2">"origin=</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">origin</span><span class="si">}</span><span class="s2"> -&gt; tip=</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">tip</span><span class="si">}</span><span class="s2">, "</span>
+                <span class="sa">f</span><span class="s2">"children=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+            <span class="p">)</span>
+        </pre></div>
+        </div>
+        </section>
+        <section class="level-2" id="symbolic-planar-constructions">
+        <h2>Symbolic &amp; Planar Constructions<a class="headerlink" href="#symbolic-planar-constructions" title="Link to this heading">¶</a></h2>
+        <p>Construct exact <code class="xref py py-class docutils literal notranslate"><span class="pre">geometor.model.Model</span></code> instances or analyze 2D parastichies:</p>
+        <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geometor.phyllotaxis</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+            <span class="n">build_rings_model</span><span class="p">,</span>
+            <span class="n">find_parastichies</span><span class="p">,</span>
+            <span class="n">sweep_phi</span><span class="p">,</span>
+            <span class="n">vogel_points</span><span class="p">,</span>
+        <span class="p">)</span>
 
-          <span class="n">model</span><span class="o">.</span><span class="n">construct_circle</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-          <span class="n">model</span><span class="o">.</span><span class="n">construct_circle</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
-
-          <span class="n">E</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_element_by_label</span><span class="p">(</span><span class="s2">"E"</span><span class="p">)</span>
-          <span class="n">F</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_element_by_label</span><span class="p">(</span><span class="s2">"F"</span><span class="p">)</span>
-
-          <span class="n">model</span><span class="o">.</span><span class="n">set_polygon</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">E</span><span class="p">])</span>
-          <span class="n">model</span><span class="o">.</span><span class="n">set_polygon</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">F</span><span class="p">])</span>
-
-          <span class="n">model</span><span class="o">.</span><span class="n">construct_line</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
-
-          <span class="n">report_summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-          <span class="n">report_group_by_type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-          <span class="n">report_sequence</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-
-          <span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"vesica.json"</span><span class="p">)</span>
-          </pre></div>
-          </div>
-          </section>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">build_rings_model</span><span class="p">(</span><span class="n">num_rings</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">sweep</span><span class="o">=</span><span class="n">sweep_phi</span><span class="p">())</span>
+        <span class="n">pts_2d</span> <span class="o">=</span> <span class="n">vogel_points</span><span class="p">(</span><span class="n">num_nodes</span><span class="o">=</span><span class="mi">89</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+        <span class="n">spirals</span> <span class="o">=</span> <span class="n">find_parastichies</span><span class="p">(</span><span class="n">num_nodes</span><span class="o">=</span><span class="mi">89</span><span class="p">,</span> <span class="n">families</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">21</span><span class="p">))</span>
+        </pre></div>
+        </div>
+        </section>
+        </section>
 
       </div>
-      <footer>
-
-        <nav class="context">
-          <div class="prev">
-             <a href="../mission/index.html" title="Mission" >Prev</a>
+      <footer class="book-footer">
+        <div class="book-footer-ornament">&#10086;</div>
+        <div class="book-footer-nav">
+          <div class="book-nav-prev">
+            <a class="book-nav-btn" href="../demos/propagation_3d.html" title="3D Node-as-Path &amp; Recursive Meristems">&larr; <span class="nav-label">3D Node-as-Path & Recursive Meristems</span></a>
           </div>
-          <div class="next">
-            <a href="../modules/index.html" title="phyllotaxis" >Next</a>
+          <div class="book-nav-center">
+            <a class="book-toc-link" href="../index.html">GEOMETOR • phyllotaxis</a>
           </div>
-        </nav>
+          <div class="book-nav-next">
+            <a class="book-nav-btn" href="../log/index.html" title="log"><span class="nav-label">log</span> &rarr;</a>
+          </div>
+        </div>
       </footer>
     </article>
   </main>
   <div class="asides">
-    <aside>
+    <aside class="aside-search">
       <h3>Search</h3>
-      <div role="search">
-        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-          <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+      <div id="searchbox" role="search">
+        <form id="rtd-search-form" class="wy-form search-form" action="../search.html" method="get">
+          <div class="search-field">
+            <input type="search" name="q" placeholder="Search docs..." aria-label="Search docs" autocomplete="off" />
+            <button type="submit" class="search-submit" aria-label="Search" title="Search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
       </div>
     </aside>
+    <aside class="aside-recent-logs">
+      <h3>Recent Logs</h3>
+      <ul>
+        <li><a href="../log/26.305-074000.html">Interactive 2D/3D Studios & Recursive Meristem Path Propagation</a></li>
+        <li><a href="../log/22.356-153850.html">Welcome to the GEOMETOR phyllotaxis project</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-tags">
+      <h3>Tags</h3>
+      <ul>
+        <li><a href="../tags/canvas.html">canvas</a></li>
+        <li><a href="../tags/meristem.html">meristem</a></li>
+        <li><a href="../tags/parastichy.html">parastichy</a></li>
+        <li><a href="../tags/phyllotaxis.html">phyllotaxis</a></li>
+        <li><a href="../tags/threejs.html">threejs</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-categories">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="../categories/3d.html">3d</a></li>
+        <li><a href="../categories/architecture.html">architecture</a></li>
+        <li><a href="../categories/interface.html">interface</a></li>
+        <li><a href="../categories/status.html">status</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-types">
+      <h3>Types</h3>
+      <ul>
+        <li><a href="../types/log.html">log</a></li>
+      </ul>
+    </aside>
   </div>
   <footer>
+    <div class="footer-nav">
+      <ul>
+        <li><a href="../todos/index.html"  >todos</a></li>
+        <li><a href="../changelog.html"  >changelog</a></li>
+      </ul>
+    </div>
     <hr />
     <div role="contentinfo">
       <p>
-        &copy; Copyright .
+        &copy; Copyright 2026, GEOMETOR.
       </p>
     </div>
   </footer>
 
   <script src="../_static/jquery.js?v=5d32c60e"></script>
   <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-  <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+  <script src="../_static/documentation_options.js?v=938c9ccc"></script>
   <script src="../_static/doctools.js?v=fd6eb6e6"></script>
   <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
   <script src="../_static/js/collection_controls.js?v=b6b5297a"></script>
+  <script src="../_static/js/geometor_interactive.js?v=4430a5d4"></script>
+  <script src="../_static/js/search_highlight.js"></script>
 
 </body>
 </html>

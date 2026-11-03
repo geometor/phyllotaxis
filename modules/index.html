@@ -1,20 +1,27 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-content_root="../">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>phyllotaxis &mdash; Project name not set  documentation</title>
+  <title>modules &mdash; GEOMETOR • phyllotaxis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=ea5fcf70" />
-  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=38c7a96b" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=69acf51f" />
   <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/phyllotaxis-demos.css?v=7cbca0bb" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <link rel="stylesheet" href="../_static/css/print.css" type="text/css" media="print" />
   <link rel="icon" href="../_static/favicon.ico" />
 </head>
 
-<body>
+<body class="book-theme-classical-serif">
   <header>
     <div class="logo">
       <a href="../index.html">
@@ -30,79 +37,811 @@
       <input type="checkbox" id="nav-Header-toggle" >
       <label for="nav-Header-toggle" >Header</label>
       <ul>
+        <li>
+          <a href="../mission/index.html"  >mission</a>
+        </li>
+        <li>
+          <a href="../demos/index.html"  >demos</a>
+        </li>
+        <li>
+          <a href="../usage/index.html"  >usage</a>
+        </li>
+        <li>
+          <a href="../log/index.html"  >log</a>
+        </li>
+        <li>
+          <a href="#" class="is-active" aria-selected="true" aria-current="page">modules</a>
+        </li>
       </ul>
     </nav>
     <div class="motto"></div>
   </header>
-  <main>
-    <article>
-      <header>
-      <nav class="breadcrumbs">
-        <span><a href="../index.html">Home</a></span>
-      </nav>
-        <nav class="context">
-          <div class="prev">
-             <a href="../usage/index.html" title="usage" >Prev</a>
+  <main class="book-main">
+    <article class="book-layout book-reading-pane">
+      <header class="book-header">
+        <div class="book-header-bar">
+          <div class="book-header-identity">
+            <a class="book-portal-link" href="../index.html" title="Return to Project Portal">&larr; phyllotaxis</a>
+            <span class="book-header-sep">/</span>
+            <a class="book-title-link" href="../index.html">GEOMETOR • phyllotaxis</a>
           </div>
-          <div class="next">
-            <a href="phyllotaxis.html" title="phyllotaxis package" >Next</a>
+        </div>
+        <div class="book-header-nav">
+          <div class="book-nav-prev">
+            <a class="book-nav-btn" href="../log/22.356-153850.html" title="Welcome to the GEOMETOR phyllotaxis project">&larr; <span class="nav-label">Prev</span></a>
           </div>
-        </nav>
+          <div class="book-nav-center">
+          </div>
+          <div class="book-nav-next">
+            <a class="book-nav-btn" href="api/geometor/phyllotaxis/__main__/index.html" title="geometor.phyllotaxis.__main__"><span class="nav-label">Next</span> &rarr;</a>
+          </div>
+        </div>
       </header>
-      <div class="content">
-        <section id="phyllotaxis">
-          <h1>phyllotaxis<a class="headerlink" href="#phyllotaxis" title="Link to this heading">¶</a></h1>
-          <div class="toctree-wrapper compound">
-          <ul>
-          <li class="toctree-l1"><a class="reference internal" href="phyllotaxis.html">phyllotaxis package</a><ul>
-          <li class="toctree-l2"><a class="reference internal" href="phyllotaxis.html#module-contents">Module contents</a></li>
-          </ul>
-          </li>
-          </ul>
-          </div>
-          </section>
+      <div class="content body book-content" role="main">
+        <section class="level-1" id="modules">
+        <h1>modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h1>
+        </section>
+        <section class="level-1" id="module-geometor.phyllotaxis">
+        <span id="geometor-phyllotaxis"></span><h1>geometor.phyllotaxis<a class="headerlink" href="#module-geometor.phyllotaxis" title="Link to this heading">¶</a></h1>
+        <p>Symbolic modeling, 2D planar analysis, and 3D recursive meristem path propagation.</p>
+        <p>Everything centers around <a class="reference internal" href="#geometor.phyllotaxis.Phyllotaxis" title="geometor.phyllotaxis.Phyllotaxis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Phyllotaxis</span></code></a>, <a class="reference internal" href="#geometor.phyllotaxis.MeristemNode" title="geometor.phyllotaxis.MeristemNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeristemNode</span></code></a>, and <a class="reference internal" href="#geometor.phyllotaxis.MeristemConfig" title="geometor.phyllotaxis.MeristemConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeristemConfig</span></code></a>.</p>
+        <section class="level-2" id="submodules">
+        <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+        <div class="toctree-wrapper compound">
+        <ul>
+        <li class="toctree-l1"><a class="reference internal" href="api/geometor/phyllotaxis/__main__/index.html">geometor.phyllotaxis.__main__</a></li>
+        <li class="toctree-l1"><a class="reference internal" href="api/geometor/phyllotaxis/angles/index.html">geometor.phyllotaxis.angles</a></li>
+        <li class="toctree-l1"><a class="reference internal" href="api/geometor/phyllotaxis/builder/index.html">geometor.phyllotaxis.builder</a></li>
+        <li class="toctree-l1"><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html">geometor.phyllotaxis.paths3d</a></li>
+        <li class="toctree-l1"><a class="reference internal" href="api/geometor/phyllotaxis/phyllotaxis/index.html">geometor.phyllotaxis.phyllotaxis</a></li>
+        <li class="toctree-l1"><a class="reference internal" href="api/geometor/phyllotaxis/planar/index.html">geometor.phyllotaxis.planar</a></li>
+        </ul>
+        </div>
+        </section>
+        <section class="level-2" id="attributes">
+        <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+        <table class="autosummary longtable docutils align-default">
+        <tbody>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.__version__" title="geometor.phyllotaxis.__version__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__version__</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.GOLDEN_ANGLE_DEG" title="geometor.phyllotaxis.GOLDEN_ANGLE_DEG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GOLDEN_ANGLE_DEG</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.GOLDEN_ANGLE_RAD" title="geometor.phyllotaxis.GOLDEN_ANGLE_RAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GOLDEN_ANGLE_RAD</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.PHI" title="geometor.phyllotaxis.PHI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PHI</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
+        </tbody>
+        </table>
+        </section>
+        <section class="level-2" id="classes">
+        <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+        <table class="autosummary longtable docutils align-default">
+        <tbody>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.AnglesMixin" title="geometor.phyllotaxis.AnglesMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnglesMixin</span></code></a></p></td>
+        <td><p>Mixin for Phyllotaxis class containing divergence angle functionality.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.ModelBuilderMixin" title="geometor.phyllotaxis.ModelBuilderMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModelBuilderMixin</span></code></a></p></td>
+        <td><p>Mixin for Phyllotaxis class containing <cite>geometor.model.Model</cite> construction helpers.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.MeristemConfig" title="geometor.phyllotaxis.MeristemConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeristemConfig</span></code></a></p></td>
+        <td><p>Configuration for 3D Node-as-Path and recursive meristem propagation.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.MeristemNode" title="geometor.phyllotaxis.MeristemNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeristemNode</span></code></a></p></td>
+        <td><p>A 3D phyllotaxic node that grows as a path from its origin and may act as a meristem.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.Propagation3DMixin" title="geometor.phyllotaxis.Propagation3DMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Propagation3DMixin</span></code></a></p></td>
+        <td><p>Mixin for Phyllotaxis class containing 3D path and meristem propagation methods.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.Phyllotaxis" title="geometor.phyllotaxis.Phyllotaxis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Phyllotaxis</span></code></a></p></td>
+        <td><p>Main class for symbolic and parametric 2D/3D phyllotaxis modeling.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.PlanarMixin" title="geometor.phyllotaxis.PlanarMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlanarMixin</span></code></a></p></td>
+        <td><p>Mixin for Phyllotaxis class containing 2D planar growth and parastichy methods.</p></td>
+        </tr>
+        </tbody>
+        </table>
+        </section>
+        <section class="level-2" id="functions">
+        <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+        <table class="autosummary longtable docutils align-default">
+        <tbody>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.fibonacci" title="geometor.phyllotaxis.fibonacci"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fibonacci</span></code></a>(n) → int</p></td>
+        <td><p>Return the $n$-th Fibonacci number ($F_0 = 0, F_1 = 1$).</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.fibonacci_convergents" title="geometor.phyllotaxis.fibonacci_convergents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fibonacci_convergents</span></code></a>([count]) → list[tuple[int, int, float]]</p></td>
+        <td><p>Return consecutive Fibonacci rational approximations $(F_k, F_{k+2}, text{degrees})$.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_lucas" title="geometor.phyllotaxis.sweep_lucas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_lucas</span></code></a>() → sympy.Expr</p></td>
+        <td><p>Return the exact symbolic Lucas divergence angle $2pi / (3 + 1/phi) approx 99.5^circ$.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_phi" title="geometor.phyllotaxis.sweep_phi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_phi</span></code></a>() → sympy.Expr</p></td>
+        <td><p>Return the exact symbolic golden divergence angle $2pi(1 - 1/phi)$.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_rational" title="geometor.phyllotaxis.sweep_rational"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_rational</span></code></a>(n, m) → sympy.Expr</p></td>
+        <td><p>Return a rational divergence angle $2pi(1 - n/m)$ from two integers.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.build_rings_model" title="geometor.phyllotaxis.build_rings_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_rings_model</span></code></a>([num_rings, sweep, name]) → geometor.model.Model</p></td>
+        <td><p>Construct a <cite>geometor.model.Model</cite> containing phyllotaxic node points and dot circles.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.compute_node_path" title="geometor.phyllotaxis.compute_node_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_node_path</span></code></a>(origin, parent_tangent, radial_dir, ...) → tuple[list[Vec3], Vec3, Vec3, Vec3]</p></td>
+        <td><p>Evaluate a node's 3D trajectory $gamma(s)$ for $s in [0, text{age}]$ from <cite>origin</cite>.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.propagate_3d" title="geometor.phyllotaxis.propagate_3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">propagate_3d</span></code></a>(steps[, config]) → list[MeristemNode]</p></td>
+        <td><p>Propagate a 3D phyllotaxic meristem system for <cite>steps</cite> plastochrons.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.analyze_parastichy_curves" title="geometor.phyllotaxis.analyze_parastichy_curves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">analyze_parastichy_curves</span></code></a>(nodes[, num_nearest]) → dict[str, object]</p></td>
+        <td><p>Count parastichy curves in each closest-neighbor rank and radial zone until they bend.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.classify_meristem_phase" title="geometor.phyllotaxis.classify_meristem_phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">classify_meristem_phase</span></code></a>(node_id, total_nodes[, leaf_span]) → str</p></td>
+        <td><p>Classify a node's ontogenetic organ type in the meristem's production life cycle.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_nearest_points" title="geometor.phyllotaxis.find_nearest_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_nearest_points</span></code></a>(test_points[, num_nearest]) → dict[sympy.geometry.Point2D, list[sympy.geometry.Point2D]]</p></td>
+        <td><p>For each point in <cite>test_points</cite>, find the <cite>num_nearest</cite> closest subsequent points.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_parastichies" title="geometor.phyllotaxis.find_parastichies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_parastichies</span></code></a>(num_nodes[, families]) → dict[int, list[list[int]]]</p></td>
+        <td><p>Group node indices into parastichy spiral chains for each modulo family $m in text{families}$.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_point_distances" title="geometor.phyllotaxis.find_point_distances"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_point_distances</span></code></a>(pt, other_pts) → dict[float, sympy.geometry.Point2D]</p></td>
+        <td><p>Compute Euclidean distances from <cite>pt</cite> to each point in <cite>other_pts</cite>.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.get_node_points" title="geometor.phyllotaxis.get_node_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_points</span></code></a>(num_nodes[, sweep]) → list[sympy.geometry.Point2D]</p></td>
+        <td><p>Generate a single planar growth frame with <cite>num_nodes</cite> symbolic points.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.grow" title="geometor.phyllotaxis.grow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grow</span></code></a>(steps[, sweep]) → list[list[sympy.geometry.Point2D]]</p></td>
+        <td><p>Grow planar frames from $0$ up to <cite>steps - 1</cite> nodes.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.vogel_points" title="geometor.phyllotaxis.vogel_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vogel_points</span></code></a>(num_nodes[, scale, angle_rad, base_size, ...]) → list[dict[str, float | int | str]]</p></td>
+        <td><p>Compute 2D apical meristem coordinates with radial acceleration, node growth, and life-cycle phases.</p></td>
+        </tr>
+        </tbody>
+        </table>
+        </section>
+        <section class="level-2" id="package-contents">
+        <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+        <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.__version__">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">__version__</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'0.2.0'</span></span><a class="headerlink" href="#geometor.phyllotaxis.__version__" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">AnglesMixin</span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin" title="Link to this definition">¶</a></dt>
+        <dd><p>Mixin for Phyllotaxis class containing divergence angle functionality.</p>
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_sweep_phi">
+        <span class="sig-name descname"><span class="pre">get_sweep_phi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_sweep_phi" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_sweep_rational">
+        <span class="sig-name descname"><span class="pre">get_sweep_rational</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_sweep_rational" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_sweep_lucas">
+        <span class="sig-name descname"><span class="pre">get_sweep_lucas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_sweep_lucas" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_fibonacci_convergents">
+        <span class="sig-name descname"><span class="pre">get_fibonacci_convergents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_fibonacci_convergents" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        </dd></dl>
+
+        <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.GOLDEN_ANGLE_DEG">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">GOLDEN_ANGLE_DEG</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.GOLDEN_ANGLE_DEG" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.GOLDEN_ANGLE_RAD">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">GOLDEN_ANGLE_RAD</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.GOLDEN_ANGLE_RAD" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PHI">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">PHI</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">sympy.Expr</span></span><a class="headerlink" href="#geometor.phyllotaxis.PHI" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.fibonacci">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">fibonacci</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#geometor.phyllotaxis.fibonacci" title="Link to this definition">¶</a></dt>
+        <dd><p>Return the $n$-th Fibonacci number ($F_0 = 0, F_1 = 1$).</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.fibonacci_convergents">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">fibonacci_convergents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.fibonacci_convergents" title="Link to this definition">¶</a></dt>
+        <dd><p>Return consecutive Fibonacci rational approximations $(F_k, F_{k+2}, text{degrees})$.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><p><strong>count</strong> – Number of convergent pairs to generate starting from $(1, 2)$.</p>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>List of tuples <cite>(numerator, denominator, angle_degrees)</cite>.</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_lucas">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_lucas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_lucas" title="Link to this definition">¶</a></dt>
+        <dd><p>Return the exact symbolic Lucas divergence angle $2pi / (3 + 1/phi) approx 99.5^circ$.</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_phi">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_phi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_phi" title="Link to this definition">¶</a></dt>
+        <dd><p>Return the exact symbolic golden divergence angle $2pi(1 - 1/phi)$.</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_rational">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_rational</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_rational" title="Link to this definition">¶</a></dt>
+        <dd><p>Return a rational divergence angle $2pi(1 - n/m)$ from two integers.</p>
+        </dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.ModelBuilderMixin">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">ModelBuilderMixin</span></span><a class="headerlink" href="#geometor.phyllotaxis.ModelBuilderMixin" title="Link to this definition">¶</a></dt>
+        <dd><p>Mixin for Phyllotaxis class containing <cite>geometor.model.Model</cite> construction helpers.</p>
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.ModelBuilderMixin.build_rings_model">
+        <span class="sig-name descname"><span class="pre">build_rings_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_rings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sympy.Expr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'phyllotaxis_rings'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">geometor.model.Model</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.ModelBuilderMixin.build_rings_model" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.build_rings_model">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">build_rings_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_rings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sympy.Expr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'phyllotaxis_rings'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">geometor.model.Model</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.build_rings_model" title="Link to this definition">¶</a></dt>
+        <dd><p>Construct a <cite>geometor.model.Model</cite> containing phyllotaxic node points and dot circles.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>num_rings</strong> – Number of primordia rings to construct.</p></li>
+        <li><p><strong>sweep</strong> – Symbolic or numeric divergence angle (defaults to <cite>sweep_phi()</cite>).</p></li>
+        <li><p><strong>name</strong> – Name of the created <cite>Model</cite>.</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>Populated <cite>geometor.model.Model</cite> instance.</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">MeristemConfig</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig" title="Link to this definition">¶</a></dt>
+        <dd><p>Configuration for 3D Node-as-Path and recursive meristem propagation.</p>
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.divergence_angle_deg">
+        <span class="sig-name descname"><span class="pre">divergence_angle_deg</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.divergence_angle_deg" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.branch_pitch_deg">
+        <span class="sig-name descname"><span class="pre">branch_pitch_deg</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">54.0</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.branch_pitch_deg" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.stem_step">
+        <span class="sig-name descname"><span class="pre">stem_step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.35</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.stem_step" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.fast_growth_steps">
+        <span class="sig-name descname"><span class="pre">fast_growth_steps</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.fast_growth_steps" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.slow_growth_factor">
+        <span class="sig-name descname"><span class="pre">slow_growth_factor</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.25</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.slow_growth_factor" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.radial_scale">
+        <span class="sig-name descname"><span class="pre">radial_scale</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.6</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.radial_scale" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.radial_exponent">
+        <span class="sig-name descname"><span class="pre">radial_exponent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.55</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.radial_exponent" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.path_arch">
+        <span class="sig-name descname"><span class="pre">path_arch</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.16</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.path_arch" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.path_twist_deg">
+        <span class="sig-name descname"><span class="pre">path_twist_deg</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.path_twist_deg" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.path_segments">
+        <span class="sig-name descname"><span class="pre">path_segments</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.path_segments" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.base_size">
+        <span class="sig-name descname"><span class="pre">base_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.18</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.base_size" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.size_growth">
+        <span class="sig-name descname"><span class="pre">size_growth</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.045</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.size_growth" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.max_depth">
+        <span class="sig-name descname"><span class="pre">max_depth</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.max_depth" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.maturation_age">
+        <span class="sig-name descname"><span class="pre">maturation_age</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.maturation_age" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.spawn_cadence">
+        <span class="sig-name descname"><span class="pre">spawn_cadence</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.spawn_cadence" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.meristem_stride">
+        <span class="sig-name descname"><span class="pre">meristem_stride</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.meristem_stride" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemConfig.child_scale_decay">
+        <span class="sig-name descname"><span class="pre">child_scale_decay</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.6180339887</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemConfig.child_scale_decay" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        </dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">MeristemNode</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode" title="Link to this definition">¶</a></dt>
+        <dd><p>A 3D phyllotaxic node that grows as a path from its origin and may act as a meristem.</p>
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.id">
+        <span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.id" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.generation">
+        <span class="sig-name descname"><span class="pre">generation</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.generation" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.parent_id">
+        <span class="sig-name descname"><span class="pre">parent_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.parent_id" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.index_on_parent">
+        <span class="sig-name descname"><span class="pre">index_on_parent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.index_on_parent" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.birth_step">
+        <span class="sig-name descname"><span class="pre">birth_step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.birth_step" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.age">
+        <span class="sig-name descname"><span class="pre">age</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.age" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.is_meristem">
+        <span class="sig-name descname"><span class="pre">is_meristem</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.is_meristem" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.origin">
+        <span class="sig-name descname"><span class="pre">origin</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.origin" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.tangent">
+        <span class="sig-name descname"><span class="pre">tangent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.tangent" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.normal">
+        <span class="sig-name descname"><span class="pre">normal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.normal" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.binormal">
+        <span class="sig-name descname"><span class="pre">binormal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.binormal" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.path">
+        <span class="sig-name descname"><span class="pre">path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.path" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.tip">
+        <span class="sig-name descname"><span class="pre">tip</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.tip" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.tip_tangent">
+        <span class="sig-name descname"><span class="pre">tip_tangent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">1.0)</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.tip_tangent" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.tip_normal">
+        <span class="sig-name descname"><span class="pre">tip_normal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(1.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.tip_normal" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.tip_binormal">
+        <span class="sig-name descname"><span class="pre">tip_binormal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0.0,</span> <span class="pre">1.0,</span> <span class="pre">0.0)</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.tip_binormal" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.tip_size">
+        <span class="sig-name descname"><span class="pre">tip_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.2</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.tip_size" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.children">
+        <span class="sig-name descname"><span class="pre">children</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.children" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.MeristemNode.to_dict">
+        <span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.MeristemNode.to_dict" title="Link to this definition">¶</a></dt>
+        <dd><p>Serialize the node, its 3D path from origin to tip, and child meristem IDs.</p>
+        </dd></dl>
+
+        </dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.Propagation3DMixin">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">Propagation3DMixin</span></span><a class="headerlink" href="#geometor.phyllotaxis.Propagation3DMixin" title="Link to this definition">¶</a></dt>
+        <dd><p>Mixin for Phyllotaxis class containing 3D path and meristem propagation methods.</p>
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.Propagation3DMixin.propagate_3d">
+        <span class="sig-name descname"><span class="pre">propagate_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.MeristemConfig" title="geometor.phyllotaxis.MeristemConfig"><span class="pre">MeristemConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#geometor.phyllotaxis.MeristemNode" title="geometor.phyllotaxis.MeristemNode"><span class="pre">MeristemNode</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.Propagation3DMixin.propagate_3d" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.compute_node_path">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">compute_node_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_tangent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">radial_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">binormal_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.MeristemConfig" title="geometor.phyllotaxis.MeristemConfig"><span class="pre">MeristemConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.compute_node_path" title="Link to this definition">¶</a></dt>
+        <dd><p>Evaluate a node’s 3D trajectory $gamma(s)$ for $s in [0, text{age}]$ from <cite>origin</cite>.</p>
+        <p>At $s = 0$, $gamma(0) = text{origin}$. As $s to text{age}$, the path advances
+        outward along <cite>radial_dir</cite> and lifts/curves along <cite>parent_tangent</cite> with optional
+        helical twist around <cite>binormal_dir</cite>.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>origin</strong> – 3D point on the parent meristem where this node originated.</p></li>
+        <li><p><strong>parent_tangent</strong> – Unit tangent of the parent meristem at <cite>origin</cite>.</p></li>
+        <li><p><strong>radial_dir</strong> – Unit radial outward vector at the node’s divergence angle.</p></li>
+        <li><p><strong>binormal_dir</strong> – Unit binormal vector perpendicular to <cite>parent_tangent</cite> and <cite>radial_dir</cite>.</p></li>
+        <li><p><strong>age</strong> – Plastochron age ($t - t_{text{birth}} ge 0$) of the node.</p></li>
+        <li><p><strong>generation</strong> – Branching depth ($1$ = primary lateral node, $2$ = secondary, etc.).</p></li>
+        <li><p><strong>config</strong> – Propagation parameters.</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>Tuple <cite>(path_points, tip_tangent, tip_normal, tip_binormal)</cite>.</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.propagate_3d">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">propagate_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.MeristemConfig" title="geometor.phyllotaxis.MeristemConfig"><span class="pre">MeristemConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#geometor.phyllotaxis.MeristemNode" title="geometor.phyllotaxis.MeristemNode"><span class="pre">MeristemNode</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.propagate_3d" title="Link to this definition">¶</a></dt>
+        <dd><p>Propagate a 3D phyllotaxic meristem system for <cite>steps</cite> plastochrons.</p>
+        <p>Node <cite>0</cite> is the primary apical meristem growing along $+Z$. At each step $t$,
+        active meristems grow along their paths and emit new lateral child nodes at
+        the divergence angle $Phi$ around their local tangent frame.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>steps</strong> – Number of plastochron steps to simulate.</p></li>
+        <li><p><strong>config</strong> – Optional <cite>MeristemConfig</cite> instance.</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>List of <cite>MeristemNode</cite> instances (including the root stem and all lateral/recursive paths).</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.Phyllotaxis">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">Phyllotaxis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'phyllotaxis'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#geometor.phyllotaxis.Phyllotaxis" title="Link to this definition">¶</a></dt>
+        <dd><p>Bases: <a class="reference internal" href="api/geometor/phyllotaxis/angles/index.html#geometor.phyllotaxis.angles.AnglesMixin" title="geometor.phyllotaxis.angles.AnglesMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometor.phyllotaxis.angles.AnglesMixin</span></code></a>, <a class="reference internal" href="api/geometor/phyllotaxis/planar/index.html#geometor.phyllotaxis.planar.PlanarMixin" title="geometor.phyllotaxis.planar.PlanarMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometor.phyllotaxis.planar.PlanarMixin</span></code></a>, <a class="reference internal" href="api/geometor/phyllotaxis/paths3d/index.html#geometor.phyllotaxis.paths3d.Propagation3DMixin" title="geometor.phyllotaxis.paths3d.Propagation3DMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometor.phyllotaxis.paths3d.Propagation3DMixin</span></code></a>, <a class="reference internal" href="api/geometor/phyllotaxis/builder/index.html#geometor.phyllotaxis.builder.ModelBuilderMixin" title="geometor.phyllotaxis.builder.ModelBuilderMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometor.phyllotaxis.builder.ModelBuilderMixin</span></code></a></p>
+        <p>Main class for symbolic and parametric 2D/3D phyllotaxis modeling.</p>
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.Phyllotaxis.name">
+        <span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'phyllotaxis'</span></span><a class="headerlink" href="#geometor.phyllotaxis.Phyllotaxis.name" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        </dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">PlanarMixin</span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin" title="Link to this definition">¶</a></dt>
+        <dd><p>Mixin for Phyllotaxis class containing 2D planar growth and parastichy methods.</p>
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin.get_node_points">
+        <span class="sig-name descname"><span class="pre">get_node_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sympy.Expr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin.get_node_points" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin.grow">
+        <span class="sig-name descname"><span class="pre">grow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sympy.Expr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin.grow" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin.classify_meristem_phase">
+        <span class="sig-name descname"><span class="pre">classify_meristem_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_span</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">34</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin.classify_meristem_phase" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin.vogel_points">
+        <span class="sig-name descname"><span class="pre">vogel_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GOLDEN_ANGLE_RAD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">growth_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radial_acceleration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_span</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">34</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin.vogel_points" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin.find_point_distances">
+        <span class="sig-name descname"><span class="pre">find_point_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sympy.geometry.Point2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_pts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin.find_point_distances" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin.find_nearest_points">
+        <span class="sig-name descname"><span class="pre">find_nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nearest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin.find_nearest_points" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin.find_parastichies">
+        <span class="sig-name descname"><span class="pre">find_parastichies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">families</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">21)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin.find_parastichies" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.PlanarMixin.analyze_parastichy_curves">
+        <span class="sig-name descname"><span class="pre">analyze_parastichy_curves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nearest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.PlanarMixin.analyze_parastichy_curves" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.analyze_parastichy_curves">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">analyze_parastichy_curves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nearest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.analyze_parastichy_curves" title="Link to this definition">¶</a></dt>
+        <dd><p>Count parastichy curves in each closest-neighbor rank and radial zone until they bend.</p>
+        <p>Demonstrates that the two primary closest-neighbor curve families wind in opposite
+        directions (CW vs CCW) and always form a consecutive pair of Fibonacci numbers
+        $(F_m, F_{m+1})$ within each radial zone between curve bends.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>nodes</strong> – List of node dictionaries from <a class="reference internal" href="#geometor.phyllotaxis.vogel_points" title="geometor.phyllotaxis.vogel_points"><code class="xref py py-func docutils literal notranslate"><span class="pre">vogel_points()</span></code></a>.</p></li>
+        <li><p><strong>num_nearest</strong> – Number of closest inner nodes connected per node ($1 le k le 4$).</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p><ul class="simple">
+        <li><p><code class="docutils literal notranslate"><span class="pre">outer_counts</span></code>: Curve count $Delta$, winding direction (<code class="docutils literal notranslate"><span class="pre">&quot;CW&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;CCW&quot;</span></code>),
+        and Fibonacci status for each rank at the outer rim.</p></li>
+        <li><p><code class="docutils literal notranslate"><span class="pre">opposing_pair</span></code>: Tuple <code class="docutils literal notranslate"><span class="pre">(cw_count,</span> <span class="pre">ccw_count)</span></code> of the two primary opposing
+        spiral families in the outer zone.</p></li>
+        <li><p><code class="docutils literal notranslate"><span class="pre">is_fibonacci_pair</span></code>: <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">opposing_pair</span></code> consists of consecutive
+        Fibonacci numbers with opposite chirality.</p></li>
+        <li><p><code class="docutils literal notranslate"><span class="pre">zones</span></code>: Radial zones from inner to outer separated by bend radii.</p></li>
+        </ul>
+        </p>
+        </dd>
+        <dt class="field-odd">Return type<span class="colon">:</span></dt>
+        <dd class="field-odd"><p>Dictionary containing</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.classify_meristem_phase">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">classify_meristem_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_span</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">34</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#geometor.phyllotaxis.classify_meristem_phase" title="Link to this definition">¶</a></dt>
+        <dd><p>Classify a node’s ontogenetic organ type in the meristem’s production life cycle.</p>
+        <p>In a composite capitulum (such as a sunflower), the apical meristem transitions
+        through distinct organ-production phases as the sequence progresses:
+        1. <cite>“leaf”</cite>: Early vegetative/involucral bracts (<cite>0 &lt;= node_id &lt; leaf_span</cite>).
+        2. <cite>“petal”</cite>: Ray florets / corolla petals (<cite>leaf_span &lt;= node_id &lt; leaf_span + round(leaf_span * φ)</cite>).
+        3. <cite>“floret”</cite>: Mature tubular disc florets in the capitulum interior.
+        4. <cite>“bud”</cite>: Newly initiated unopened primordia at the apical center (<cite>age &lt; round(leaf_span / φ)</cite>).</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.find_nearest_points">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">find_nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nearest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.find_nearest_points" title="Link to this definition">¶</a></dt>
+        <dd><p>For each point in <cite>test_points</cite>, find the <cite>num_nearest</cite> closest subsequent points.</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.find_parastichies">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">find_parastichies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">families</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">21)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.find_parastichies" title="Link to this definition">¶</a></dt>
+        <dd><p>Group node indices into parastichy spiral chains for each modulo family $m in text{families}$.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>num_nodes</strong> – Total number of nodes.</p></li>
+        <li><p><strong>families</strong> – Parastichy numbers (typically consecutive Fibonacci numbers).</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>Mapping from family number $m$ to a list of $m$ index chains <cite>[r, r+m, r+2m, …]</cite>.</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.find_point_distances">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">find_point_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sympy.geometry.Point2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_pts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.find_point_distances" title="Link to this definition">¶</a></dt>
+        <dd><p>Compute Euclidean distances from <cite>pt</cite> to each point in <cite>other_pts</cite>.</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.get_node_points">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">get_node_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sympy.Expr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.get_node_points" title="Link to this definition">¶</a></dt>
+        <dd><p>Generate a single planar growth frame with <cite>num_nodes</cite> symbolic points.</p>
+        <p>Each node $i in [0, N-1]$ has radius $N - i$ and angle $i cdot text{sweep}$.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>num_nodes</strong> – Number of primordia in the frame.</p></li>
+        <li><p><strong>sweep</strong> – Divergence angle in radians (symbolic or float). Defaults to <cite>sweep_phi()</cite>.</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>List of SymPy <cite>Point2D</cite> instances.</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.grow">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">grow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sweep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sympy.Expr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">sympy.geometry.Point2D</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.grow" title="Link to this definition">¶</a></dt>
+        <dd><p>Grow planar frames from $0$ up to <cite>steps - 1</cite> nodes.</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.vogel_points">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">vogel_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GOLDEN_ANGLE_RAD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">growth_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radial_acceleration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_span</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">34</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.vogel_points" title="Link to this definition">¶</a></dt>
+        <dd><p>Compute 2D apical meristem coordinates with radial acceleration, node growth, and life-cycle phases.</p>
+        <p>New primordia emerge at the center ($k_{text{eff}} = (N - 1) - i$) while older
+        primordia are displaced radially as
+        $r = csqrt{k_{text{eff}}}left(frac{k_{text{eff}} + 1}{K_0}right)^{a}$,
+        and node size grows as
+        $s = s_0 + gsqrt{k_{text{eff}}}left(frac{k_{text{eff}} + 1}{K_0}right)^{1.15a}$.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>num_nodes</strong> – Total number of primordia.</p></li>
+        <li><p><strong>scale</strong> – Radial spread constant $c$.</p></li>
+        <li><p><strong>angle_rad</strong> – Divergence angle in radians.</p></li>
+        <li><p><strong>base_size</strong> – Initial radius of a newly emerged primordium ($s_0$).</p></li>
+        <li><p><strong>growth_factor</strong> – Rate $g$ at which primordium size scales as it moves outward.</p></li>
+        <li><p><strong>radial_acceleration</strong> – Acceleration exponent $a ge 0$ controlling how much faster
+        older outer nodes move and expand compared to young inner primordia.</p></li>
+        <li><p><strong>leaf_span</strong> – Characteristic Fibonacci cohort span for meristem life-cycle phases.</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>List of dictionaries with keys <cite>id</cite>, <cite>age</cite>, <cite>phase</cite>, <cite>x</cite>, <cite>y</cite>, <cite>r</cite>, <cite>theta</cite>, <cite>size</cite>.</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        </section>
+        </section>
 
       </div>
-      <footer>
-
-        <nav class="context">
-          <div class="prev">
-             <a href="../usage/index.html" title="usage" >Prev</a>
+      <footer class="book-footer">
+        <div class="book-footer-ornament">&#10086;</div>
+        <div class="book-footer-nav">
+          <div class="book-nav-prev">
+            <a class="book-nav-btn" href="../log/22.356-153850.html" title="Welcome to the GEOMETOR phyllotaxis project">&larr; <span class="nav-label">Welcome to the GEOMETOR phyllotaxis project</span></a>
           </div>
-          <div class="next">
-            <a href="phyllotaxis.html" title="phyllotaxis package" >Next</a>
+          <div class="book-nav-center">
+            <a class="book-toc-link" href="../index.html">GEOMETOR • phyllotaxis</a>
           </div>
-        </nav>
+          <div class="book-nav-next">
+            <a class="book-nav-btn" href="api/geometor/phyllotaxis/__main__/index.html" title="geometor.phyllotaxis.__main__"><span class="nav-label">geometor.phyllotaxis.__main__</span> &rarr;</a>
+          </div>
+        </div>
       </footer>
     </article>
   </main>
   <div class="asides">
-    <aside>
+    <aside class="aside-search">
       <h3>Search</h3>
-      <div role="search">
-        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-          <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+      <div id="searchbox" role="search">
+        <form id="rtd-search-form" class="wy-form search-form" action="../search.html" method="get">
+          <div class="search-field">
+            <input type="search" name="q" placeholder="Search docs..." aria-label="Search docs" autocomplete="off" />
+            <button type="submit" class="search-submit" aria-label="Search" title="Search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
           <input type="hidden" name="check_keywords" value="yes" />
           <input type="hidden" name="area" value="default" />
         </form>
       </div>
     </aside>
+    <aside class="aside-recent-logs">
+      <h3>Recent Logs</h3>
+      <ul>
+        <li><a href="../log/26.305-074000.html">Interactive 2D/3D Studios & Recursive Meristem Path Propagation</a></li>
+        <li><a href="../log/22.356-153850.html">Welcome to the GEOMETOR phyllotaxis project</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-tags">
+      <h3>Tags</h3>
+      <ul>
+        <li><a href="../tags/canvas.html">canvas</a></li>
+        <li><a href="../tags/meristem.html">meristem</a></li>
+        <li><a href="../tags/parastichy.html">parastichy</a></li>
+        <li><a href="../tags/phyllotaxis.html">phyllotaxis</a></li>
+        <li><a href="../tags/threejs.html">threejs</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-categories">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="../categories/3d.html">3d</a></li>
+        <li><a href="../categories/architecture.html">architecture</a></li>
+        <li><a href="../categories/interface.html">interface</a></li>
+        <li><a href="../categories/status.html">status</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-types">
+      <h3>Types</h3>
+      <ul>
+        <li><a href="../types/log.html">log</a></li>
+      </ul>
+    </aside>
   </div>
   <footer>
+    <div class="footer-nav">
+      <ul>
+        <li><a href="../todos/index.html"  >todos</a></li>
+        <li><a href="../changelog.html"  >changelog</a></li>
+      </ul>
+    </div>
     <hr />
     <div role="contentinfo">
       <p>
-        &copy; Copyright .
+        &copy; Copyright 2026, GEOMETOR.
       </p>
     </div>
   </footer>
 
   <script src="../_static/jquery.js?v=5d32c60e"></script>
   <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-  <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+  <script src="../_static/documentation_options.js?v=938c9ccc"></script>
   <script src="../_static/doctools.js?v=fd6eb6e6"></script>
   <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
   <script src="../_static/js/collection_controls.js?v=b6b5297a"></script>
+  <script src="../_static/js/geometor_interactive.js?v=4430a5d4"></script>
+  <script src="../_static/js/search_highlight.js"></script>
 
 </body>
 </html>

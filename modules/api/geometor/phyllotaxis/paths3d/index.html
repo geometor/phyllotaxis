@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-content_root="../../../../../">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>geometor.phyllotaxis.paths3d &mdash; GEOMETOR • phyllotaxis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=ea5fcf70" />
+  <link rel="stylesheet" type="text/css" href="../../../../../_static/css/styles.css?v=69acf51f" />
+  <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+  <link rel="stylesheet" type="text/css" href="../../../../../_static/css/phyllotaxis-demos.css?v=7cbca0bb" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <link rel="stylesheet" href="../../../../../_static/css/print.css" type="text/css" media="print" />
+  <link rel="icon" href="../../../../../_static/favicon.ico" />
+</head>
+
+<body class="book-theme-classical-serif">
+  <header>
+    <div class="logo">
+      <a href="../../../../../index.html">
+        <img src="../../../../../_static/logo.png" class="logo" alt="Logo"/>
+      </a>
+      <div class="org-repo">
+        <span class="org">GEOMETOR</span>
+        •
+        <span class="repo">phyllotaxis</span>
+      </div>
+    </div>
+    <nav aria-label="Header">
+      <input type="checkbox" id="nav-Header-toggle" >
+      <label for="nav-Header-toggle" >Header</label>
+      <ul>
+        <li>
+          <a href="../../../../../mission/index.html"  >mission</a>
+        </li>
+        <li>
+          <a href="../../../../../demos/index.html"  >demos</a>
+        </li>
+        <li>
+          <a href="../../../../../usage/index.html"  >usage</a>
+        </li>
+        <li>
+          <a href="../../../../../log/index.html"  >log</a>
+        </li>
+        <li>
+          <a href="../../../../index.html" class="is-active" aria-selected="true" >modules</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="motto"></div>
+  </header>
+  <main class="book-main">
+    <article class="book-layout book-reading-pane">
+      <header class="book-header">
+        <div class="book-header-bar">
+          <div class="book-header-identity">
+            <a class="book-portal-link" href="../../../../../index.html" title="Return to Project Portal">&larr; phyllotaxis</a>
+            <span class="book-header-sep">/</span>
+            <a class="book-title-link" href="../../../../../index.html">GEOMETOR • phyllotaxis</a>
+          </div>
+          <div class="book-header-breadcrumbs book-header-badges" role="navigation" aria-label="Breadcrumbs">
+            <a class="book-crumb-link" href="../../../../index.html">modules</a>
+          </div>
+        </div>
+        <div class="book-header-nav">
+          <div class="book-nav-prev">
+            <a class="book-nav-btn" href="../builder/index.html" title="geometor.phyllotaxis.builder">&larr; <span class="nav-label">Prev</span></a>
+          </div>
+          <div class="book-nav-center">
+          </div>
+          <div class="book-nav-next">
+            <a class="book-nav-btn" href="../phyllotaxis/index.html" title="geometor.phyllotaxis.phyllotaxis"><span class="nav-label">Next</span> &rarr;</a>
+          </div>
+        </div>
+      </header>
+      <div class="content body book-content" role="main">
+        <section class="level-1" id="module-geometor.phyllotaxis.paths3d">
+        <span id="geometor-phyllotaxis-paths3d"></span><h1>geometor.phyllotaxis.paths3d<a class="headerlink" href="#module-geometor.phyllotaxis.paths3d" title="Link to this heading">¶</a></h1>
+        <p>3D phyllotaxic propagation where each node is a growing path and may be a meristem.</p>
+        <section class="level-2" id="attributes">
+        <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+        <table class="autosummary longtable docutils align-default">
+        <tbody>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vec3</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
+        </tbody>
+        </table>
+        </section>
+        <section class="level-2" id="classes">
+        <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+        <table class="autosummary longtable docutils align-default">
+        <tbody>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.paths3d.MeristemConfig" title="geometor.phyllotaxis.paths3d.MeristemConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeristemConfig</span></code></a></p></td>
+        <td><p>Configuration for 3D Node-as-Path and recursive meristem propagation.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.paths3d.MeristemNode" title="geometor.phyllotaxis.paths3d.MeristemNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeristemNode</span></code></a></p></td>
+        <td><p>A 3D phyllotaxic node that grows as a path from its origin and may act as a meristem.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Propagation3DMixin" title="geometor.phyllotaxis.paths3d.Propagation3DMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Propagation3DMixin</span></code></a></p></td>
+        <td><p>Mixin for Phyllotaxis class containing 3D path and meristem propagation methods.</p></td>
+        </tr>
+        </tbody>
+        </table>
+        </section>
+        <section class="level-2" id="functions">
+        <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+        <table class="autosummary longtable docutils align-default">
+        <tbody>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.paths3d.compute_node_path" title="geometor.phyllotaxis.paths3d.compute_node_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_node_path</span></code></a>(origin, parent_tangent, radial_dir, ...) → tuple[list[Vec3], Vec3, Vec3, Vec3]</p></td>
+        <td><p>Evaluate a node's 3D trajectory $gamma(s)$ for $s in [0, text{age}]$ from <cite>origin</cite>.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.paths3d.propagate_3d" title="geometor.phyllotaxis.paths3d.propagate_3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">propagate_3d</span></code></a>(steps[, config]) → list[MeristemNode]</p></td>
+        <td><p>Propagate a 3D phyllotaxic meristem system for <cite>steps</cite> plastochrons.</p></td>
+        </tr>
+        </tbody>
+        </table>
+        </section>
+        <section class="level-2" id="module-contents">
+        <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+        <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.Vec3">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.paths3d.</span></span><span class="sig-name descname"><span class="pre">Vec3</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.Vec3" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.paths3d.</span></span><span class="sig-name descname"><span class="pre">MeristemConfig</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig" title="Link to this definition">¶</a></dt>
+        <dd><p>Configuration for 3D Node-as-Path and recursive meristem propagation.</p>
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.divergence_angle_deg">
+        <span class="sig-name descname"><span class="pre">divergence_angle_deg</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.divergence_angle_deg" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.branch_pitch_deg">
+        <span class="sig-name descname"><span class="pre">branch_pitch_deg</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">54.0</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.branch_pitch_deg" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.stem_step">
+        <span class="sig-name descname"><span class="pre">stem_step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.35</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.stem_step" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.fast_growth_steps">
+        <span class="sig-name descname"><span class="pre">fast_growth_steps</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.fast_growth_steps" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.slow_growth_factor">
+        <span class="sig-name descname"><span class="pre">slow_growth_factor</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.25</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.slow_growth_factor" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.radial_scale">
+        <span class="sig-name descname"><span class="pre">radial_scale</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.6</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.radial_scale" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.radial_exponent">
+        <span class="sig-name descname"><span class="pre">radial_exponent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.55</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.radial_exponent" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.path_arch">
+        <span class="sig-name descname"><span class="pre">path_arch</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.16</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.path_arch" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.path_twist_deg">
+        <span class="sig-name descname"><span class="pre">path_twist_deg</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.path_twist_deg" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.path_segments">
+        <span class="sig-name descname"><span class="pre">path_segments</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.path_segments" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.base_size">
+        <span class="sig-name descname"><span class="pre">base_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.18</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.base_size" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.size_growth">
+        <span class="sig-name descname"><span class="pre">size_growth</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.045</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.size_growth" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.max_depth">
+        <span class="sig-name descname"><span class="pre">max_depth</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.max_depth" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.maturation_age">
+        <span class="sig-name descname"><span class="pre">maturation_age</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.maturation_age" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.spawn_cadence">
+        <span class="sig-name descname"><span class="pre">spawn_cadence</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.spawn_cadence" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.meristem_stride">
+        <span class="sig-name descname"><span class="pre">meristem_stride</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.meristem_stride" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemConfig.child_scale_decay">
+        <span class="sig-name descname"><span class="pre">child_scale_decay</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.6180339887</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemConfig.child_scale_decay" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        </dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.paths3d.</span></span><span class="sig-name descname"><span class="pre">MeristemNode</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode" title="Link to this definition">¶</a></dt>
+        <dd><p>A 3D phyllotaxic node that grows as a path from its origin and may act as a meristem.</p>
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.id">
+        <span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.id" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.generation">
+        <span class="sig-name descname"><span class="pre">generation</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.generation" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.parent_id">
+        <span class="sig-name descname"><span class="pre">parent_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.parent_id" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.index_on_parent">
+        <span class="sig-name descname"><span class="pre">index_on_parent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.index_on_parent" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.birth_step">
+        <span class="sig-name descname"><span class="pre">birth_step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.birth_step" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.age">
+        <span class="sig-name descname"><span class="pre">age</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.age" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.is_meristem">
+        <span class="sig-name descname"><span class="pre">is_meristem</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.is_meristem" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.origin">
+        <span class="sig-name descname"><span class="pre">origin</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.origin" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.tangent">
+        <span class="sig-name descname"><span class="pre">tangent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.tangent" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.normal">
+        <span class="sig-name descname"><span class="pre">normal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.normal" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.binormal">
+        <span class="sig-name descname"><span class="pre">binormal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.binormal" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.path">
+        <span class="sig-name descname"><span class="pre">path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.path" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.tip">
+        <span class="sig-name descname"><span class="pre">tip</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.tip" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.tip_tangent">
+        <span class="sig-name descname"><span class="pre">tip_tangent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">1.0)</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.tip_tangent" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.tip_normal">
+        <span class="sig-name descname"><span class="pre">tip_normal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(1.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.tip_normal" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.tip_binormal">
+        <span class="sig-name descname"><span class="pre">tip_binormal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0.0,</span> <span class="pre">1.0,</span> <span class="pre">0.0)</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.tip_binormal" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.tip_size">
+        <span class="sig-name descname"><span class="pre">tip_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.2</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.tip_size" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py attribute">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.children">
+        <span class="sig-name descname"><span class="pre">children</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.children" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.MeristemNode.to_dict">
+        <span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.MeristemNode.to_dict" title="Link to this definition">¶</a></dt>
+        <dd><p>Serialize the node, its 3D path from origin to tip, and child meristem IDs.</p>
+        </dd></dl>
+
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.compute_node_path">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.paths3d.</span></span><span class="sig-name descname"><span class="pre">compute_node_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_tangent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">radial_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">binormal_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.paths3d.MeristemConfig" title="geometor.phyllotaxis.paths3d.MeristemConfig"><span class="pre">MeristemConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.Vec3" title="geometor.phyllotaxis.paths3d.Vec3"><span class="pre">Vec3</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.compute_node_path" title="Link to this definition">¶</a></dt>
+        <dd><p>Evaluate a node’s 3D trajectory $\gamma(s)$ for $s \in [0, \text{age}]$ from <cite>origin</cite>.</p>
+        <p>At $s = 0$, $\gamma(0) = \text{origin}$. As $s \to \text{age}$, the path advances
+        outward along <cite>radial_dir</cite> and lifts/curves along <cite>parent_tangent</cite> with optional
+        helical twist around <cite>binormal_dir</cite>.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>origin</strong> – 3D point on the parent meristem where this node originated.</p></li>
+        <li><p><strong>parent_tangent</strong> – Unit tangent of the parent meristem at <cite>origin</cite>.</p></li>
+        <li><p><strong>radial_dir</strong> – Unit radial outward vector at the node’s divergence angle.</p></li>
+        <li><p><strong>binormal_dir</strong> – Unit binormal vector perpendicular to <cite>parent_tangent</cite> and <cite>radial_dir</cite>.</p></li>
+        <li><p><strong>age</strong> – Plastochron age ($t - t_{\text{birth}} \ge 0$) of the node.</p></li>
+        <li><p><strong>generation</strong> – Branching depth ($1$ = primary lateral node, $2$ = secondary, etc.).</p></li>
+        <li><p><strong>config</strong> – Propagation parameters.</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>Tuple <cite>(path_points, tip_tangent, tip_normal, tip_binormal)</cite>.</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.propagate_3d">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.paths3d.</span></span><span class="sig-name descname"><span class="pre">propagate_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.paths3d.MeristemConfig" title="geometor.phyllotaxis.paths3d.MeristemConfig"><span class="pre">MeristemConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.MeristemNode" title="geometor.phyllotaxis.paths3d.MeristemNode"><span class="pre">MeristemNode</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.propagate_3d" title="Link to this definition">¶</a></dt>
+        <dd><p>Propagate a 3D phyllotaxic meristem system for <cite>steps</cite> plastochrons.</p>
+        <p>Node <cite>0</cite> is the primary apical meristem growing along $+Z$. At each step $t$,
+        active meristems grow along their paths and emit new lateral child nodes at
+        the divergence angle $\Phi$ around their local tangent frame.</p>
+        <dl class="field-list simple">
+        <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+        <dd class="field-odd"><ul class="simple">
+        <li><p><strong>steps</strong> – Number of plastochron steps to simulate.</p></li>
+        <li><p><strong>config</strong> – Optional <cite>MeristemConfig</cite> instance.</p></li>
+        </ul>
+        </dd>
+        <dt class="field-even">Returns<span class="colon">:</span></dt>
+        <dd class="field-even"><p>List of <cite>MeristemNode</cite> instances (including the root stem and all lateral/recursive paths).</p>
+        </dd>
+        </dl>
+        </dd></dl>
+
+        <dl class="py class">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.Propagation3DMixin">
+        <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.paths3d.</span></span><span class="sig-name descname"><span class="pre">Propagation3DMixin</span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.Propagation3DMixin" title="Link to this definition">¶</a></dt>
+        <dd><p>Mixin for Phyllotaxis class containing 3D path and meristem propagation methods.</p>
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.paths3d.Propagation3DMixin.propagate_3d">
+        <span class="sig-name descname"><span class="pre">propagate_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#geometor.phyllotaxis.paths3d.MeristemConfig" title="geometor.phyllotaxis.paths3d.MeristemConfig"><span class="pre">MeristemConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#geometor.phyllotaxis.paths3d.MeristemNode" title="geometor.phyllotaxis.paths3d.MeristemNode"><span class="pre">MeristemNode</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.paths3d.Propagation3DMixin.propagate_3d" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        </dd></dl>
+
+        </section>
+        </section>
+
+      </div>
+      <footer class="book-footer">
+        <div class="book-footer-ornament">&#10086;</div>
+        <div class="book-footer-nav">
+          <div class="book-nav-prev">
+            <a class="book-nav-btn" href="../builder/index.html" title="geometor.phyllotaxis.builder">&larr; <span class="nav-label">geometor.phyllotaxis.builder</span></a>
+          </div>
+          <div class="book-nav-center">
+            <a class="book-toc-link" href="../../../../../index.html">GEOMETOR • phyllotaxis</a>
+          </div>
+          <div class="book-nav-next">
+            <a class="book-nav-btn" href="../phyllotaxis/index.html" title="geometor.phyllotaxis.phyllotaxis"><span class="nav-label">geometor.phyllotaxis.phyllotaxis</span> &rarr;</a>
+          </div>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <div class="asides">
+    <aside class="aside-search">
+      <h3>Search</h3>
+      <div id="searchbox" role="search">
+        <form id="rtd-search-form" class="wy-form search-form" action="../../../../../search.html" method="get">
+          <div class="search-field">
+            <input type="search" name="q" placeholder="Search docs..." aria-label="Search docs" autocomplete="off" />
+            <button type="submit" class="search-submit" aria-label="Search" title="Search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+      </div>
+    </aside>
+    <aside class="aside-recent-logs">
+      <h3>Recent Logs</h3>
+      <ul>
+        <li><a href="../../../../../log/26.305-074000.html">Interactive 2D/3D Studios & Recursive Meristem Path Propagation</a></li>
+        <li><a href="../../../../../log/22.356-153850.html">Welcome to the GEOMETOR phyllotaxis project</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-tags">
+      <h3>Tags</h3>
+      <ul>
+        <li><a href="../../../../../tags/canvas.html">canvas</a></li>
+        <li><a href="../../../../../tags/meristem.html">meristem</a></li>
+        <li><a href="../../../../../tags/parastichy.html">parastichy</a></li>
+        <li><a href="../../../../../tags/phyllotaxis.html">phyllotaxis</a></li>
+        <li><a href="../../../../../tags/threejs.html">threejs</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-categories">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="../../../../../categories/3d.html">3d</a></li>
+        <li><a href="../../../../../categories/architecture.html">architecture</a></li>
+        <li><a href="../../../../../categories/interface.html">interface</a></li>
+        <li><a href="../../../../../categories/status.html">status</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-types">
+      <h3>Types</h3>
+      <ul>
+        <li><a href="../../../../../types/log.html">log</a></li>
+      </ul>
+    </aside>
+  </div>
+  <footer>
+    <div class="footer-nav">
+      <ul>
+        <li><a href="../../../../../todos/index.html"  >todos</a></li>
+        <li><a href="../../../../../changelog.html"  >changelog</a></li>
+      </ul>
+    </div>
+    <hr />
+    <div role="contentinfo">
+      <p>
+        &copy; Copyright 2026, GEOMETOR.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+  <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+  <script src="../../../../../_static/documentation_options.js?v=938c9ccc"></script>
+  <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+  <script src="../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+  <script src="../../../../../_static/js/collection_controls.js?v=b6b5297a"></script>
+  <script src="../../../../../_static/js/geometor_interactive.js?v=4430a5d4"></script>
+  <script src="../../../../../_static/js/search_highlight.js"></script>
+
+</body>
+</html>

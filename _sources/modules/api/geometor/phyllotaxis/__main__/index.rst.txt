@@ -1,0 +1,27 @@
+geometor.phyllotaxis.__main__
+=============================
+
+.. py:module:: geometor.phyllotaxis.__main__
+
+.. autoapi-nested-parse::
+
+   CLI entry point for `geometor.phyllotaxis`.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.__main__.main
+
+
+Module Contents
+---------------
+
+.. py:function:: main(argv: list[str] | None = None) -> int
+
+   Run the `phyllotaxis` CLI.
+
+

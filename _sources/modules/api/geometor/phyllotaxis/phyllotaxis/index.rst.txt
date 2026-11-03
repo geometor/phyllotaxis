@@ -1,0 +1,35 @@
+geometor.phyllotaxis.phyllotaxis
+================================
+
+.. py:module:: geometor.phyllotaxis.phyllotaxis
+
+.. autoapi-nested-parse::
+
+   Main Phyllotaxis class composed from modular mixins.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.phyllotaxis.Phyllotaxis
+
+
+Module Contents
+---------------
+
+.. py:class:: Phyllotaxis(name: str = 'phyllotaxis')
+
+   Bases: :py:obj:`geometor.phyllotaxis.angles.AnglesMixin`, :py:obj:`geometor.phyllotaxis.planar.PlanarMixin`, :py:obj:`geometor.phyllotaxis.paths3d.Propagation3DMixin`, :py:obj:`geometor.phyllotaxis.builder.ModelBuilderMixin`
+
+
+   Main class for symbolic and parametric 2D/3D phyllotaxis modeling.
+
+
+   .. py:attribute:: name
+      :value: 'phyllotaxis'
+
+
+

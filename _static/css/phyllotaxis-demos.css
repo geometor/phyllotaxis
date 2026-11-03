@@ -1,0 +1,411 @@
+/* GEOMETOR • phyllotaxis — Interactive 2D & 3D Studio Styles */
+
+.phyllotaxis-studio-section {
+  margin: 1.25rem 0 2rem 0;
+  padding: 0;
+  background: transparent;
+}
+
+.phyllotaxis-preset-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: #141821;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 6px;
+}
+
+.phyllotaxis-preset-bar .preset-label {
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #d4af37;
+  margin-right: 0.35rem;
+  font-weight: 600;
+}
+
+.phyllotaxis-preset-btn {
+  margin: 0;
+  background: #222834;
+  color: #e5e7eb;
+  border: 1px solid #394150;
+  border-radius: 4px;
+  padding: 0.28rem 0.65rem;
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.phyllotaxis-preset-btn:hover,
+.phyllotaxis-preset-btn.active {
+  background: #00adb5;
+  color: #0b0e14;
+  border-color: #00d2dc;
+  font-weight: 600;
+}
+
+.phyllotaxis-stage-wrapper {
+  position: relative;
+  width: 100%;
+  height: 74vh;
+  min-height: 600px;
+  max-height: 860px;
+  background-color: #05070b;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  display: flex;
+  font-family: "Fira Sans Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #e0e0e0;
+}
+
+.phyllotaxis-stage-wrapper.theater-mode {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  max-height: none;
+  border-radius: 0;
+  border: none;
+  z-index: 9999;
+}
+
+.phyllotaxis-preset-bar.theater-mode,
+.phyllotaxis-studio-section:has(.phyllotaxis-stage-wrapper.theater-mode) .phyllotaxis-preset-bar {
+  position: fixed;
+  top: 12px;
+  left: 314px;
+  right: 220px;
+  width: fit-content;
+  max-width: calc(100vw - 540px);
+  margin: 0 auto;
+  z-index: 10005;
+  background: rgba(15, 19, 28, 0.88);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+  justify-content: center;
+}
+
+.phyllotaxis-studio-section:has(.phyllotaxis-stage-wrapper.theater-mode .phyllotaxis-controls-panel.collapsed) .phyllotaxis-preset-bar,
+.phyllotaxis-preset-bar.theater-mode.controls-collapsed {
+  left: 36px;
+  max-width: calc(100vw - 260px);
+}
+
+.phyllotaxis-viewport {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  display: block;
+  background: radial-gradient(circle at center, #0c1018 0%, #040508 100%);
+}
+
+canvas.phyllotaxis-viewport {
+  cursor: grab;
+  touch-action: none;
+}
+
+canvas.phyllotaxis-viewport.is-panning {
+  cursor: grabbing;
+}
+
+
+/* Collapsible Left Controls Drawer */
+.phyllotaxis-controls-panel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 300px;
+  background: rgba(20, 24, 33, 0.95);
+  backdrop-filter: blur(8px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 14px;
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.5);
+  transform: translateX(0);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 30;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.phyllotaxis-controls-panel.collapsed {
+  transform: translateX(-300px);
+}
+
+.phyllotaxis-controls-toggle {
+  position: absolute;
+  left: 300px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  width: 26px;
+  height: 56px;
+  background: rgba(42, 49, 62, 0.95);
+  color: #00adb5;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: none;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 54px;
+  text-align: center;
+  z-index: 31;
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s;
+}
+
+.phyllotaxis-controls-panel.collapsed + .phyllotaxis-controls-toggle {
+  left: 0;
+}
+
+.phyllotaxis-controls-toggle:hover {
+  background: #00adb5;
+  color: #090c10;
+}
+
+.controls-section-title {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #d4af37;
+  margin: 12px 0 6px 0;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+  font-weight: 600;
+}
+
+.control-group {
+  margin-bottom: 8px;
+}
+
+.phyllotaxis-controls-panel label.input-label,
+.input-label {
+  font-family: "Fira Sans Condensed", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.79rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.045);
+  border-left: 2px solid rgba(222, 131, 110, 0.45);
+  padding: 2px 7px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 3px 0;
+}
+
+.input-label .val-badge {
+  color: #38e1eb;
+  font-family: "Fira Code", monospace;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.dark-input,
+select.dark-input {
+  width: 100%;
+  padding: 4px 7px;
+  border-radius: 4px;
+  background-color: #262c3a;
+  color: #f8fafc;
+  border: 1px solid #3f495e;
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+}
+
+.dark-input:focus,
+select.dark-input:focus {
+  outline: none;
+  border-color: #00adb5;
+}
+
+input[type="range"].dark-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  background: #3b4454;
+  border-radius: 3px;
+  outline: none;
+  margin: 4px 0 2px 0;
+}
+
+input[type="range"].dark-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  background: #00adb5;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #0f172a;
+}
+
+input[type="range"].dark-slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  background: #00adb5;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #0f172a;
+}
+
+.button-group {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.phyl-btn {
+  flex: 1;
+  margin: 0;
+  padding: 5px 5px;
+  border-radius: 4px;
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.15;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.phyl-btn-primary {
+  background-color: #00adb5;
+  color: #080b11;
+  border-color: #00c4ce;
+}
+
+.phyl-btn-primary:hover {
+  background-color: #16c9d2;
+}
+
+.phyl-btn-secondary {
+  background-color: #2d3546;
+  color: #f1f5f9;
+  border-color: #455068;
+}
+
+.phyl-btn-secondary:hover {
+  background-color: #3d485e;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 8px;
+  margin-top: 6px;
+}
+
+.phyllotaxis-controls-panel label.checkbox-container,
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 2px 4px;
+  background: transparent;
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+input[type="checkbox"].dark-checkbox {
+  width: 13px;
+  height: 13px;
+  accent-color: #00adb5;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Floating Top-Right Telemetry HUD */
+.phyllotaxis-hud {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(15, 19, 28, 0.84);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  z-index: 25;
+  min-width: 185px;
+  pointer-events: none;
+}
+
+.phyllotaxis-hud .hud-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d4af37;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.phyllotaxis-hud .hud-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 2px 0;
+}
+
+.phyllotaxis-hud .hud-val {
+  color: #00adb5;
+  font-family: monospace;
+  font-weight: 600;
+}
+
+/* Keymap Footer inside Drawer */
+.keymap-info {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.keymap-info h4 {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #00adb5;
+  margin: 0 0 5px 0;
+}
+
+.keymap-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 6px;
+}
+
+.keymap-info li {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.keymap-info kbd {
+  background-color: #2b3240;
+  color: #e2e8f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid #475569;
+  font-family: monospace;
+  font-size: 0.68rem;
+}

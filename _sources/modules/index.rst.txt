@@ -1,7 +1,7 @@
-phyllotaxis
-===========
+:navigation: header
+:order: 40
 
-.. toctree::
-   :maxdepth: 4
+modules
+=======
 
-   phyllotaxis
+.. include:: api/geometor/phyllotaxis/index.rst

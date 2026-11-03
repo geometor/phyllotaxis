@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-content_root="../">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Node-as-Path &amp; Recursive Meristems &mdash; GEOMETOR • phyllotaxis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=ea5fcf70" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=69acf51f" />
+  <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/phyllotaxis-demos.css?v=7cbca0bb" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <link rel="stylesheet" href="../_static/css/print.css" type="text/css" media="print" />
+  <link rel="icon" href="../_static/favicon.ico" />
+</head>
+
+<body class="book-theme-classical-serif">
+  <header>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../_static/logo.png" class="logo" alt="Logo"/>
+      </a>
+      <div class="org-repo">
+        <span class="org">GEOMETOR</span>
+        •
+        <span class="repo">phyllotaxis</span>
+      </div>
+    </div>
+    <nav aria-label="Header">
+      <input type="checkbox" id="nav-Header-toggle" >
+      <label for="nav-Header-toggle" >Header</label>
+      <ul>
+        <li>
+          <a href="../mission/index.html"  >mission</a>
+        </li>
+        <li>
+          <a href="index.html" class="is-active" aria-selected="true" >demos</a>
+        </li>
+        <li>
+          <a href="../usage/index.html"  >usage</a>
+        </li>
+        <li>
+          <a href="../log/index.html"  >log</a>
+        </li>
+        <li>
+          <a href="../modules/index.html"  >modules</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="motto"></div>
+  </header>
+  <main class="book-main">
+    <article class="book-layout book-reading-pane">
+      <header class="book-header">
+        <div class="book-header-bar">
+          <div class="book-header-identity">
+            <a class="book-portal-link" href="../index.html" title="Return to Project Portal">&larr; phyllotaxis</a>
+            <span class="book-header-sep">/</span>
+            <a class="book-title-link" href="../index.html">GEOMETOR • phyllotaxis</a>
+          </div>
+          <div class="book-header-breadcrumbs book-header-badges" role="navigation" aria-label="Breadcrumbs">
+            <a class="book-crumb-link" href="index.html">demos</a>
+          </div>
+        </div>
+        <div class="book-header-nav">
+          <div class="book-nav-prev">
+            <a class="book-nav-btn" href="meristem_2d.html" title="2D Apical Meristem &amp; Zoetrope Studio">&larr; <span class="nav-label">Prev</span></a>
+          </div>
+          <div class="book-nav-center">
+          </div>
+          <div class="book-nav-next">
+            <a class="book-nav-btn" href="../usage/index.html" title="usage"><span class="nav-label">Next</span> &rarr;</a>
+          </div>
+        </div>
+      </header>
+      <div class="content body book-content" role="main">
+        <div class="phyllotaxis-doc-header">
+          <section class="level-1" id="d-node-as-path-recursive-meristems">
+        <h1>3D Node-as-Path &amp; Recursive Meristems<a class="headerlink" href="#d-node-as-path-recursive-meristems" title="Link to this heading">¶</a></h1>
+        <p>In 3D phyllotaxic propagation, <strong>every node is a growing trajectory from its origin on the parent stem—and may itself act as a child meristem</strong>:</p>
+        <div class="math notranslate nohighlight">
+        \[\gamma_i(s) = \mathbf{O}_i + \bigl(c\,\lambda^{g-1} s^\rho \sin\beta\bigr)\,\hat{\mathbf{u}}_i(\theta_i) + \bigl(c\,\lambda^{g-1} s^\rho \cos\beta + \kappa\,\lambda^{g-1} s^{1.15}\bigr)\,\hat{\mathbf{T}}_{\text{parent}}, \qquad s \in [0, \tau_i]\]</div>
+        <ul class="simple">
+        <li><p><strong>Origin ($\mathbf{O}_i$)</strong>: Each node is anchored at the exact coordinates on its parent meristem where it was initiated at plastochron $t_i$.</p></li>
+        <li><p><strong>Path ($\gamma_i(s)$)</strong>: As age $\tau_i = t - t_i$ advances, the node grows outward along a 3D curve controlled by <strong>Radial Reach ($c$)</strong>, <strong>Branch Pitch ($\beta$)</strong>, and <strong>Gravitropic Curvature ($\kappa$)</strong>.</p></li>
+        <li><p><strong>Recursive Meristem ($D \ge 2$)</strong>: Once a node reaches <strong>Maturation Age</strong>, its advancing tip frame $(\hat{\mathbf{T}}_i, \hat{\mathbf{N}}_i, \hat{\mathbf{B}}_i)$ spawns child node paths at the golden angle $\Phi \approx 137.5078^\circ$ scaled by $\lambda \approx 1/\phi$.</p></li>
+        </ul>
+        </section>
+
+        </div>
+
+        <section class="phyllotaxis-studio-section" aria-label="3D Node-as-Path and Recursive Meristem Studio">
+          <div class="phyllotaxis-preset-bar">
+            <span class="preset-label">3D Presets:</span>
+            <button type="button" class="phyllotaxis-preset-btn active" data-preset-3d="recursive_tree">Recursive Golden Tree (Depth 2)</button>
+            <button type="button" class="phyllotaxis-preset-btn" data-preset-3d="pinecone_strobilus">Pinecone Strobilus (Accel)</button>
+            <button type="button" class="phyllotaxis-preset-btn" data-preset-3d="romanesco_depth3">Romanesco Shoot (Depth 3)</button>
+            <button type="button" class="phyllotaxis-preset-btn" data-preset-3d="classic_meristem">Apical Stem &amp; Rays (Depth 1)</button>
+            <button type="button" class="phyllotaxis-preset-btn" data-preset-3d="candelabra_shoot">Candelabra Inflorescence</button>
+            <button type="button" class="phyllotaxis-preset-btn" data-preset-3d="weeping_canopy">Weeping Canopy</button>
+          </div>
+
+          <div id="phyllotaxisStage3D" class="phyllotaxis-stage-wrapper">
+            <div id="controlsPanel3D" class="phyllotaxis-controls-panel">
+              <div class="button-group">
+                <button type="button" id="startButton3D" class="phyl-btn phyl-btn-primary">Start</button>
+                <button type="button" id="stepButton3D" class="phyl-btn phyl-btn-secondary">+1 Step</button>
+                <button type="button" id="resetButton3D" class="phyl-btn phyl-btn-secondary">Reset</button>
+                <button type="button" id="theaterButton3D" class="phyl-btn phyl-btn-secondary">Theater (F)</button>
+              </div>
+
+              <div class="controls-section-title">Node Path Geometry &amp; Growth</div>
+              <div class="control-group">
+                <label for="speedSlider3D" class="input-label">
+                  <span>Propagation Speed</span>
+                  <span id="speedValBadge3D" class="val-badge">6</span>
+                </label>
+                <input type="range" id="speedSlider3D" min="1" max="20" value="6" class="dark-slider" />
+              </div>
+
+              <div class="control-group">
+                <label for="angleSlider3D" class="input-label">
+                  <span>Divergence Angle (α)</span>
+                  <span id="angleValBadge3D" class="val-badge">137.51°</span>
+                </label>
+                <input type="range" id="angleSlider3D" min="90" max="180" value="137.507764" step="0.01" class="dark-slider" />
+              </div>
+
+              <div class="control-group">
+                <label for="scaleSlider3D" class="input-label">
+                  <span>Path Radial Reach (c)</span>
+                  <span id="scaleValBadge3D" class="val-badge">1.75</span>
+                </label>
+                <input type="range" id="scaleSlider3D" min="0.4" max="5" value="1.75" step="0.05" class="dark-slider" />
+              </div>
+
+              <div class="control-group">
+                <label for="accelSlider3D" class="input-label">
+                  <span>Path Acceleration (a)</span>
+                  <span id="accelValBadge3D" class="val-badge">0.00</span>
+                </label>
+                <input type="range" id="accelSlider3D" min="0" max="1.2" value="0.00" step="0.02" class="dark-slider" />
+              </div>
+
+              <div class="control-group">
+                <label for="pitchSlider3D" class="input-label">
+                  <span>Branch Pitch Angle (β)</span>
+                  <span id="pitchValBadge3D" class="val-badge">56°</span>
+                </label>
+                <input type="range" id="pitchSlider3D" min="15" max="115" value="56" step="1" class="dark-slider" />
+              </div>
+
+              <div class="control-group">
+                <label for="archSlider3D" class="input-label">
+                  <span>Path Curvature / Arch (κ)</span>
+                  <span id="archValBadge3D" class="val-badge">0.16</span>
+                </label>
+                <input type="range" id="archSlider3D" min="-0.45" max="0.55" value="0.16" step="0.02" class="dark-slider" />
+              </div>
+
+              <div class="control-group">
+                <label for="stemStepSlider3D" class="input-label">
+                  <span>Meristem Internode Step</span>
+                  <span id="stemStepValBadge3D" class="val-badge">0.36</span>
+                </label>
+                <input type="range" id="stemStepSlider3D" min="0.05" max="1.0" value="0.36" step="0.02" class="dark-slider" />
+              </div>
+
+              <div class="control-group">
+                <label for="sizeSlider3D" class="input-label">
+                  <span>Terminal Bud Base Size (s₀)</span>
+                  <span id="sizeValBadge3D" class="val-badge">0.22</span>
+                </label>
+                <input type="range" id="sizeSlider3D" min="0.05" max="0.8" value="0.22" step="0.01" class="dark-slider" />
+              </div>
+
+              <div class="control-group">
+                <label for="growthSlider3D" class="input-label">
+                  <span>Node Growth Factor (g)</span>
+                  <span id="growthValBadge3D" class="val-badge">0.05</span>
+                </label>
+                <input type="range" id="growthSlider3D" min="0" max="0.35" value="0.05" step="0.01" class="dark-slider" />
+              </div>
+
+              <div class="controls-section-title">Recursive Meristems</div>
+              <div class="control-group">
+                <label for="maxDepthSelect3D" class="input-label">Max Meristem Depth (D)</label>
+                <select id="maxDepthSelect3D" class="dark-input">
+                  <option value="1">Depth 1 — Primary Shoot + Node Paths</option>
+                  <option value="2" selected>Depth 2 — Nodes Become Secondary Meristems</option>
+                  <option value="3">Depth 3 — Tertiary Fractal Meristems</option>
+                </select>
+              </div>
+
+              <div class="control-group" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+                <div>
+                  <label for="maturationInput3D" class="input-label">Maturation</label>
+                  <input type="number" id="maturationInput3D" min="2" max="30" value="6" class="dark-input" title="Plastochrons before a node tip spawns child nodes" />
+                </div>
+                <div>
+                  <label for="cadenceInput3D" class="input-label">Cadence</label>
+                  <input type="number" id="cadenceInput3D" min="1" max="12" value="3" class="dark-input" title="Steps between child node emissions" />
+                </div>
+                <div>
+                  <label for="strideInput3D" class="input-label">Stride</label>
+                  <input type="number" id="strideInput3D" min="1" max="8" value="2" class="dark-input" title="Every k-th node acts as a child meristem" />
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label for="decaySlider3D" class="input-label">
+                  <span>Child Scale Decay (λ ≈ 1/φ)</span>
+                  <span id="decayValBadge3D" class="val-badge">0.618</span>
+                </label>
+                <input type="range" id="decaySlider3D" min="0.3" max="0.85" value="0.618" step="0.01" class="dark-slider" />
+              </div>
+
+              <div class="controls-section-title">Colors &amp; Visibility</div>
+              <div class="control-group" style="display: grid; grid-template-columns: 90px 1fr; gap: 6px;">
+                <div>
+                  <label for="paletteSizeInput3D" class="input-label">Colors</label>
+                  <input type="number" id="paletteSizeInput3D" min="0" max="64" value="13" class="dark-input" />
+                </div>
+                <div>
+                  <label for="colorThemeSelect3D" class="input-label">Theme (←/→)</label>
+                  <select id="colorThemeSelect3D" class="dark-input">
+                    <option value="galactic_v4">Galactic #4</option>
+                    <option value="golden_amber">Golden Amber</option>
+                    <option value="greens">Greens</option>
+                    <option value="forest">Forest</option>
+                    <option value="autumn">Autumn</option>
+                    <option value="sunset">Sunset</option>
+                    <option value="ocean">Ocean</option>
+                    <option value="continuous_spectrum">Continuous</option>
+                    <option value="custom_palette">Full Spectrum</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="checkbox-grid">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="showPathsCheckbox3D" class="dark-checkbox" checked />
+                  <span>Node Paths</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="showTipsCheckbox3D" class="dark-checkbox" checked />
+                  <span>Tip Buds</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="showOriginsCheckbox3D" class="dark-checkbox" checked />
+                  <span>Path Origins</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="autoOrbitCheckbox3D" class="dark-checkbox" checked />
+                  <span>Auto-Orbit (O)</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="cycleColorsCheckbox3D" class="dark-checkbox" />
+                  <span>Cycle (C)</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="reverseCycleCheckbox3D" class="dark-checkbox" />
+                  <span>Reverse (X)</span>
+                </label>
+              </div>
+
+              <div class="keymap-info">
+                <h4>Keyboard Shortcuts</h4>
+                <ul>
+                  <li><kbd>Space</kbd> Play/Pause</li>
+                  <li><kbd>R</kbd> Reset</li>
+                  <li><kbd>T</kbd> Toggle Panel</li>
+                  <li><kbd>F</kbd> Theater Mode</li>
+                  <li><kbd>O</kbd> Auto-Orbit</li>
+                  <li><kbd>C</kbd>/<kbd>X</kbd> Cycle/Rev</li>
+                </ul>
+              </div>
+            </div>
+            <button type="button" id="controlsToggle3D" class="phyllotaxis-controls-toggle" title="Toggle Controls (T)">‹</button>
+
+            <div class="phyllotaxis-hud">
+              <div class="hud-title">3D Meristem Telemetry</div>
+              <div class="hud-row"><span>Plastochron Step:</span><span id="hudStep3D" class="hud-val">34</span></div>
+              <div class="hud-row"><span>Total Node Paths:</span><span id="hudTotalPaths3D" class="hud-val">0</span></div>
+              <div class="hud-row"><span>Active Meristems:</span><span id="hudMeristems3D" class="hud-val">1</span></div>
+              <div class="hud-row"><span>Gen 1 / 2 / 3:</span><span id="hudGenerations3D" class="hud-val">0 / 0 / 0</span></div>
+            </div>
+
+            <div id="rendererContainer3D" class="phyllotaxis-viewport"></div>
+          </div>
+        </section>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+        <script src="../_static/js/palettes.js"></script>
+        <script src="../_static/js/phyllotaxis-3d.js"></script>
+      </div>
+      <footer class="book-footer">
+        <div class="book-footer-ornament">&#10086;</div>
+        <div class="book-footer-nav">
+          <div class="book-nav-prev">
+            <a class="book-nav-btn" href="meristem_2d.html" title="2D Apical Meristem &amp; Zoetrope Studio">&larr; <span class="nav-label">2D Apical Meristem & Zoetrope Studio</span></a>
+          </div>
+          <div class="book-nav-center">
+            <a class="book-toc-link" href="../index.html">GEOMETOR • phyllotaxis</a>
+          </div>
+          <div class="book-nav-next">
+            <a class="book-nav-btn" href="../usage/index.html" title="usage"><span class="nav-label">usage</span> &rarr;</a>
+          </div>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <div class="asides">
+    <aside class="aside-search">
+      <h3>Search</h3>
+      <div id="searchbox" role="search">
+        <form id="rtd-search-form" class="wy-form search-form" action="../search.html" method="get">
+          <div class="search-field">
+            <input type="search" name="q" placeholder="Search docs..." aria-label="Search docs" autocomplete="off" />
+            <button type="submit" class="search-submit" aria-label="Search" title="Search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+      </div>
+    </aside>
+    <aside class="aside-recent-logs">
+      <h3>Recent Logs</h3>
+      <ul>
+        <li><a href="../log/26.305-074000.html">Interactive 2D/3D Studios & Recursive Meristem Path Propagation</a></li>
+        <li><a href="../log/22.356-153850.html">Welcome to the GEOMETOR phyllotaxis project</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-tags">
+      <h3>Tags</h3>
+      <ul>
+        <li><a href="../tags/canvas.html">canvas</a></li>
+        <li><a href="../tags/meristem.html">meristem</a></li>
+        <li><a href="../tags/parastichy.html">parastichy</a></li>
+        <li><a href="../tags/phyllotaxis.html">phyllotaxis</a></li>
+        <li><a href="../tags/threejs.html">threejs</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-categories">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="../categories/3d.html">3d</a></li>
+        <li><a href="../categories/architecture.html">architecture</a></li>
+        <li><a href="../categories/interface.html">interface</a></li>
+        <li><a href="../categories/status.html">status</a></li>
+      </ul>
+    </aside>
+    <aside class="aside-types">
+      <h3>Types</h3>
+      <ul>
+        <li><a href="../types/log.html">log</a></li>
+      </ul>
+    </aside>
+  </div>
+  <footer>
+    <div class="footer-nav">
+      <ul>
+        <li><a href="../todos/index.html"  >todos</a></li>
+        <li><a href="../changelog.html"  >changelog</a></li>
+      </ul>
+    </div>
+    <hr />
+    <div role="contentinfo">
+      <p>
+        &copy; Copyright 2026, GEOMETOR.
+      </p>
+    </div>
+  </footer>
+
+  <script src="../_static/jquery.js?v=5d32c60e"></script>
+  <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+  <script src="../_static/documentation_options.js?v=938c9ccc"></script>
+  <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+  <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+  <script src="../_static/js/collection_controls.js?v=b6b5297a"></script>
+  <script src="../_static/js/geometor_interactive.js?v=4430a5d4"></script>
+  <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <script src="../_static/js/search_highlight.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+geometor.phyllotaxis.paths3d
+============================
+
+.. py:module:: geometor.phyllotaxis.paths3d
+
+.. autoapi-nested-parse::
+
+   3D phyllotaxic propagation where each node is a growing path and may be a meristem.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.paths3d.Vec3
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.paths3d.MeristemConfig
+   geometor.phyllotaxis.paths3d.MeristemNode
+   geometor.phyllotaxis.paths3d.Propagation3DMixin
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   geometor.phyllotaxis.paths3d.compute_node_path
+   geometor.phyllotaxis.paths3d.propagate_3d
+
+
+Module Contents
+---------------
+
+.. py:data:: Vec3
+
+.. py:class:: MeristemConfig
+
+   Configuration for 3D Node-as-Path and recursive meristem propagation.
+
+
+   .. py:attribute:: divergence_angle_deg
+      :type:  float
+
+
+   .. py:attribute:: branch_pitch_deg
+      :type:  float
+      :value: 54.0
+
+
+
+   .. py:attribute:: stem_step
+      :type:  float
+      :value: 0.35
+
+
+
+   .. py:attribute:: fast_growth_steps
+      :type:  int
+      :value: 50
+
+
+
+   .. py:attribute:: slow_growth_factor
+      :type:  float
+      :value: 0.25
+
+
+
+   .. py:attribute:: radial_scale
+      :type:  float
+      :value: 1.6
+
+
+
+   .. py:attribute:: radial_exponent
+      :type:  float
+      :value: 0.55
+
+
+
+   .. py:attribute:: path_arch
+      :type:  float
+      :value: 0.16
+
+
+
+   .. py:attribute:: path_twist_deg
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:attribute:: path_segments
+      :type:  int
+      :value: 12
+
+
+
+   .. py:attribute:: base_size
+      :type:  float
+      :value: 0.18
+
+
+
+   .. py:attribute:: size_growth
+      :type:  float
+      :value: 0.045
+
+
+
+   .. py:attribute:: max_depth
+      :type:  int
+      :value: 2
+
+
+
+   .. py:attribute:: maturation_age
+      :type:  int
+      :value: 6
+
+
+
+   .. py:attribute:: spawn_cadence
+      :type:  int
+      :value: 3
+
+
+
+   .. py:attribute:: meristem_stride
+      :type:  int
+      :value: 2
+
+
+
+   .. py:attribute:: child_scale_decay
+      :type:  float
+      :value: 0.6180339887
+
+
+
+.. py:class:: MeristemNode
+
+   A 3D phyllotaxic node that grows as a path from its origin and may act as a meristem.
+
+
+   .. py:attribute:: id
+      :type:  int
+
+
+   .. py:attribute:: generation
+      :type:  int
+
+
+   .. py:attribute:: parent_id
+      :type:  int | None
+
+
+   .. py:attribute:: index_on_parent
+      :type:  int
+
+
+   .. py:attribute:: birth_step
+      :type:  int
+
+
+   .. py:attribute:: age
+      :type:  int
+
+
+   .. py:attribute:: is_meristem
+      :type:  bool
+
+
+   .. py:attribute:: origin
+      :type:  Vec3
+
+
+   .. py:attribute:: tangent
+      :type:  Vec3
+
+
+   .. py:attribute:: normal
+      :type:  Vec3
+
+
+   .. py:attribute:: binormal
+      :type:  Vec3
+
+
+   .. py:attribute:: path
+      :type:  list[Vec3]
+      :value: []
+
+
+
+   .. py:attribute:: tip
+      :type:  Vec3
+      :value: (0.0, 0.0, 0.0)
+
+
+
+   .. py:attribute:: tip_tangent
+      :type:  Vec3
+      :value: (0.0, 0.0, 1.0)
+
+
+
+   .. py:attribute:: tip_normal
+      :type:  Vec3
+      :value: (1.0, 0.0, 0.0)
+
+
+
+   .. py:attribute:: tip_binormal
+      :type:  Vec3
+      :value: (0.0, 1.0, 0.0)
+
+
+
+   .. py:attribute:: tip_size
+      :type:  float
+      :value: 0.2
+
+
+
+   .. py:attribute:: children
+      :type:  list[int]
+      :value: []
+
+
+
+   .. py:method:: to_dict() -> dict[str, Any]
+
+      Serialize the node, its 3D path from origin to tip, and child meristem IDs.
+
+
+
+.. py:function:: compute_node_path(origin: Vec3, parent_tangent: Vec3, radial_dir: Vec3, binormal_dir: Vec3, age: int, generation: int, config: MeristemConfig) -> tuple[list[Vec3], Vec3, Vec3, Vec3]
+
+   Evaluate a node's 3D trajectory $\gamma(s)$ for $s \in [0, \text{age}]$ from `origin`.
+
+   At $s = 0$, $\gamma(0) = \text{origin}$. As $s \to \text{age}$, the path advances
+   outward along `radial_dir` and lifts/curves along `parent_tangent` with optional
+   helical twist around `binormal_dir`.
+
+   :param origin: 3D point on the parent meristem where this node originated.
+   :param parent_tangent: Unit tangent of the parent meristem at `origin`.
+   :param radial_dir: Unit radial outward vector at the node's divergence angle.
+   :param binormal_dir: Unit binormal vector perpendicular to `parent_tangent` and `radial_dir`.
+   :param age: Plastochron age ($t - t_{\text{birth}} \ge 0$) of the node.
+   :param generation: Branching depth ($1$ = primary lateral node, $2$ = secondary, etc.).
+   :param config: Propagation parameters.
+
+   :returns: Tuple `(path_points, tip_tangent, tip_normal, tip_binormal)`.
+
+
+.. py:function:: propagate_3d(steps: int, config: MeristemConfig | None = None) -> list[MeristemNode]
+
+   Propagate a 3D phyllotaxic meristem system for `steps` plastochrons.
+
+   Node `0` is the primary apical meristem growing along $+Z$. At each step $t$,
+   active meristems grow along their paths and emit new lateral child nodes at
+   the divergence angle $\Phi$ around their local tangent frame.
+
+   :param steps: Number of plastochron steps to simulate.
+   :param config: Optional `MeristemConfig` instance.
+
+   :returns: List of `MeristemNode` instances (including the root stem and all lateral/recursive paths).
+
+
+.. py:class:: Propagation3DMixin
+
+   Mixin for Phyllotaxis class containing 3D path and meristem propagation methods.
+
+
+   .. py:method:: propagate_3d(steps: int, config: MeristemConfig | None = None) -> list[MeristemNode]
+
+
