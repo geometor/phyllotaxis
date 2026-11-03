@@ -1,64 +1,70 @@
-'''
-phyllotaxis module for the GEOMETOR project
-'''
+"""Symbolic modeling, 2D planar analysis, and 3D recursive meristem path propagation.
 
-from geometor.utils import *
-from geometor.model import *
-from geometor.render import *
+Everything centers around :class:`Phyllotaxis`, :class:`MeristemNode`, and :class:`MeristemConfig`.
+"""
 
-from itertools import permutations
+from __future__ import annotations
 
-sp.init_printing()
+__version__ = "0.2.0"
 
+from .angles import (
+    AnglesMixin,
+    GOLDEN_ANGLE_DEG,
+    GOLDEN_ANGLE_RAD,
+    PHI,
+    fibonacci,
+    fibonacci_convergents,
+    sweep_lucas,
+    sweep_phi,
+    sweep_rational,
+)
+from .builder import ModelBuilderMixin, build_rings_model
+from .paths3d import (
+    MeristemConfig,
+    MeristemNode,
+    Propagation3DMixin,
+    compute_node_path,
+    propagate_3d,
+)
+from .phyllotaxis import Phyllotaxis
+from .planar import (
+    PlanarMixin,
+    analyze_parastichy_curves,
+    classify_meristem_phase,
+    find_nearest_points,
+    find_parastichies,
+    find_point_distances,
+    get_node_points,
+    grow,
+    vogel_points,
+)
 
-def sweep_phi():
-    '''use algebraic phi value for fraction of circle'''
-    return 2 * sp.pi - (2 * sp.pi / phi)
-
-
-def sweep_rational(n, m):
-    '''use two fibonacci numbers for fraction of circle'''
-    return 2 * sp.pi - (2 * sp.pi * sp.Rational(n, m))
-
-
-def find_point_distances(pt, other_pts):
-    distances = {}
-    for test_pt in other_pts:
-        d = float(pt.distance(test_pt))
-        distances[d] = test_pt
-    #  nearest_pt_id = distances.index(min(distances)) + i + 1
-    #  nearest_pt = pts[nearest_pt_id]
-    return distances
-
-
-def grow(steps, sweep):
-    '''grow each step to num_rings'''
-    result = []
-    for n in range(steps):
-        result.append(get_node_points(n, sweep))
-    return result
-
-
-def get_node_points(num_nodes, sweep):
-    '''frame with n nodes'''
-    result = []
-    for i in range(0, num_nodes):
-        rad = num_nodes - i
-        pt = point(rad, 0)
-        pt = pt.rotate(i*sweep)
-        result.append(pt)
-    return result
-    
-
-def find_nearest_points(test_points, num_nearest=3):
-    '''for each point in list, find nearest points from remainder of list'''
-    result = {}
-    for i, pt in enumerate(test_points):
-        distances = find_point_distances(pt, test_points[i+1:])
-        keys = sorted(distances.keys())
-        nearest_points = []
-        for j, key in enumerate(keys[0:num_nearest]):
-            nearest_points.append(distances[key])
-        result[pt] = nearest_points
-    return result
-
+__all__ = [
+    "__version__",
+    "PHI",
+    "GOLDEN_ANGLE_RAD",
+    "GOLDEN_ANGLE_DEG",
+    "Phyllotaxis",
+    "AnglesMixin",
+    "PlanarMixin",
+    "Propagation3DMixin",
+    "ModelBuilderMixin",
+    "MeristemConfig",
+    "MeristemNode",
+    "sweep_phi",
+    "sweep_rational",
+    "sweep_lucas",
+    "fibonacci",
+    "fibonacci_convergents",
+    "get_node_points",
+    "grow",
+    "vogel_points",
+    "classify_meristem_phase",
+    "find_point_distances",
+    "find_nearest_points",
+    "find_parastichies",
+    "analyze_parastichy_curves",
+    "compute_node_path",
+    "propagate_3d",
+    "build_rings_model",
+]

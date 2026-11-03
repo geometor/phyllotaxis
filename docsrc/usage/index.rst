@@ -1,33 +1,48 @@
+:navigation: header
+:order: 30
+
 usage
 =====
 
-In this simple example, we create the classic *vesica pisces*
+3D Node-as-Path & Recursive Meristem Propagation
+------------------------------------------------
+
+Use :func:`~geometor.phyllotaxis.propagate_3d` and :class:`~geometor.phyllotaxis.MeristemConfig` to generate multi-generation 3D meristem trees in Python:
 
 .. code-block:: python
 
-     from geometor.model import *
+   from geometor.phyllotaxis import MeristemConfig, propagate_3d
 
-     model = Model("vesica")
-     A = model.set_point(0, 0, classes=["given"])
-     B = model.set_point(1, 0, classes=["given"])
+   config = MeristemConfig(
+       max_depth=2,
+       maturation_age=6,
+       spawn_cadence=3,
+       meristem_stride=2,
+       child_scale_decay=0.6180339887,
+   )
+   nodes = propagate_3d(steps=34, config=config)
 
-     model.construct_line(A, B)
+   for node in nodes[:5]:
+       print(
+           f"Node {node.id} (Gen {node.generation}): "
+           f"origin={node.origin} -> tip={node.tip}, "
+           f"children={len(node.children)}"
+       )
 
-     model.construct_circle(A, B)
-     model.construct_circle(B, A)
+Symbolic & Planar Constructions
+-------------------------------
 
-     E = model.get_element_by_label("E")
-     F = model.get_element_by_label("F")
+Construct exact :class:`geometor.model.Model` instances or analyze 2D parastichies:
 
-     model.set_polygon([A, B, E])
-     model.set_polygon([A, B, F])
+.. code-block:: python
 
-     model.construct_line(E, F)
+   from geometor.phyllotaxis import (
+       build_rings_model,
+       find_parastichies,
+       sweep_phi,
+       vogel_points,
+   )
 
-     report_summary(model)
-     report_group_by_type(model)
-     report_sequence(model)
-
-     model.save("vesica.json")
-
-
+   model = build_rings_model(num_rings=13, sweep=sweep_phi())
+   pts_2d = vogel_points(num_nodes=89, scale=5.0)
+   spirals = find_parastichies(num_nodes=89, families=(5, 8, 13, 21))

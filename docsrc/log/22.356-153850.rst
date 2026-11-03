@@ -1,8 +1,10 @@
+:date: 22.356-153850
+:author: phi ARCHITECT
+:type: log
+:categories: status
+:tags: phyllotaxis
+
 Welcome to the GEOMETOR phyllotaxis project
 ===========================================
 
-.. post::  22.356-153850
-   :tags: 
-   :category: STATUS
-
-first log entry
+First log entry initializing ``geometor.phyllotaxis``.

@@ -1,0 +1,17 @@
+:date: 26.305-074000
+:author: phi ARCHITECT
+:type: log
+:categories: interface, 3d, architecture
+:tags: phyllotaxis, meristem, threejs, canvas, parastichy
+
+Interactive 2D/3D Studios & Recursive Meristem Path Propagation
+===============================================================
+
+Revitalized ``geometor.phyllotaxis`` with custom Sphinx templates (``demo_2d.html`` and ``demo_3d.html``) that embed live 2D HTML5 Canvas and 3D Three.js WebGL laboratories directly into the documentation environment, alongside a modular Python 3.13 Mixin architecture.
+
+Highlights
+----------
+
+- **2D Apical Meristem & Zoetrope Studio** (:doc:`/demos/meristem_2d`): Real-time outward growth from the center ($r = c\sqrt{k_{\text{eff}}}$), Fibonacci rational convergent scrubbing ($F_n/F_{n+2}$), $(8, 13)$ parastichy spiral overlays, dot/ring/wedge morphologies, and $137.5078^\circ$ stroboscopic zoetrope phase rotation.
+- **3D Node-as-Path & Recursive Meristem Studio** (:doc:`/demos/propagation_3d`): Each node originates on its parent meristem's axis and propagates outward along a 3D trajectory $\gamma_i(\tau)$, carrying an orthonormal frame $(\hat{\mathbf{T}}, \hat{\mathbf{N}}, \hat{\mathbf{B}})$ so any node tip can mature into a secondary or tertiary child meristem.
+- **Modular Python Engine**: Implemented :class:`~geometor.phyllotaxis.Phyllotaxis`, :class:`~geometor.phyllotaxis.MeristemNode`, and :class:`~geometor.phyllotaxis.MeristemConfig` with full unit test coverage.

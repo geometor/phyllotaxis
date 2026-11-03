@@ -1,0 +1,41 @@
+[project]
+name = "geometor-phyllotaxis"
+dynamic = ["version"]
+authors = [
+  { name="geometor", email="github@geometor.com" },
+]
+description = "Symbolic modeling, interactive 2D/3D web visualizations, and recursive meristem propagation of phyllotaxic patterns."
+readme = "README.rst"
+requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "geometor-model",
+    "geometor-divine",
+    "sympy",
+    "matplotlib",
+    "rich",
+]
+
+[project.scripts]
+phyllotaxis = "geometor.phyllotaxis.__main__:main"
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["geometor"]
+namespaces = true
+
+[tool.setuptools.dynamic]
+version = {attr = "geometor.phyllotaxis.__version__"}
+
+[project.urls]
+"Website" = "https://geometor.github.io/phyllotaxis"
+"Repository" = "https://github.com/geometor/phyllotaxis"
+"Issues" = "https://github.com/geometor/phyllotaxis/issues"
