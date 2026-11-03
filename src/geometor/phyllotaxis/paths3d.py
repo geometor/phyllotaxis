@@ -54,7 +54,7 @@ class MeristemConfig:
     branch_pitch_deg: float = 54.0
     stem_step: float = 0.35
     fast_growth_steps: int = 50
-    slow_growth_factor: float = 0.25
+    slow_growth_factor: float = 1.0
     radial_scale: float = 1.6
     radial_exponent: float = 0.55
     path_arch: float = 0.16
@@ -159,7 +159,8 @@ def compute_node_path(
     cos_pitch = math.cos(pitch_rad)
 
     for idx in range(num_seg + 1):
-        s = (age * idx) / num_seg
+        u = idx / num_seg
+        s = age * u
         reach = config.radial_scale * decay * (s ** config.radial_exponent)
         twist_angle = twist_rate * s
         lateral_vec = _add(
@@ -167,7 +168,7 @@ def compute_node_path(
             _scale(binormal_dir, math.sin(twist_angle)),
         )
         radial_disp = reach * sin_pitch
-        axial_disp = reach * cos_pitch + (config.path_arch * decay * (s ** 1.15))
+        axial_disp = reach * cos_pitch + (config.path_arch * reach * (u ** 2))
 
         pt = _add(
             origin,
