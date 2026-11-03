@@ -70,7 +70,7 @@ Module Contents
 
    .. py:attribute:: slow_growth_factor
       :type:  float
-      :value: 0.25
+      :value: 1.0
 
 
 

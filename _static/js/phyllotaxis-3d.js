@@ -66,6 +66,7 @@
     const startButton = document.getElementById('startButton3D');
     const stepButton = document.getElementById('stepButton3D');
     const resetButton = document.getElementById('resetButton3D');
+    const resetViewButton = document.getElementById('resetViewButton3D');
     const theaterButton = document.getElementById('theaterButton3D');
 
     const speedSlider = document.getElementById('speedSlider3D');
@@ -108,15 +109,18 @@
 
     // HUD
     const hudStep = document.getElementById('hudStep3D');
+    const hudHeight = document.getElementById('hudHeight3D');
     const hudTotalPaths = document.getElementById('hudTotalPaths3D');
     const hudMeristems = document.getElementById('hudMeristems3D');
     const hudGenerations = document.getElementById('hudGenerations3D');
 
     // --- Simulation State ---
     let currentStep = 0;
-    const maxPlastochrons = 160;
+    const maxPlastochrons = 360;
     let isAnimating = false;
     let logicTimeoutId = null;
+    let currentShootHeight = 0;
+    let lastTrackedTargetY = 9;
 
     let numberOfPaletteColors = parseInt(paletteSizeInput.value, 10) || 13;
     let selectedColorTheme = colorThemeSelect.value || 'galactic_v4';
@@ -136,11 +140,9 @@
         branchPitchDeg: parseFloat(pitchSlider.value) || 56,
         pathArch: parseFloat(archSlider.value) || 0.16,
         stemStep: parseFloat(stemStepSlider.value) || 0.34,
-        fastGrowthSteps: 45,
-        slowGrowthFactor: 0.25,
         baseSize: parseFloat(sizeSlider.value) || 0.22,
         sizeGrowth: growthSlider ? parseFloat(growthSlider.value) || 0.0 : 0.05,
-        radialExponent: 0.56,
+        radialExponent: 0.54,
         pathSegments: 10,
         maxDepth: parseInt(maxDepthSelect.value, 10) || 2,
         maturationAge: Math.max(2, parseInt(maturationInput.value, 10) || 6),
@@ -150,7 +152,7 @@
       };
     }
 
-    function updateBadges(cfg, genCounts, meristemCount) {
+    function updateBadges(cfg, genCounts, meristemCount, shootHeight) {
       if (speedValBadge) speedValBadge.textContent = speedSlider.value;
       if (angleValBadge) angleValBadge.textContent = `${cfg.divergenceDeg.toFixed(2)}°`;
       if (scaleValBadge) scaleValBadge.textContent = cfg.xySpreadScale.toFixed(2);
@@ -163,6 +165,7 @@
       if (decayValBadge) decayValBadge.textContent = cfg.childScaleDecay.toFixed(3);
 
       if (hudStep) hudStep.textContent = String(currentStep);
+      if (hudHeight) hudHeight.textContent = (shootHeight || 0).toFixed(1);
       if (hudTotalPaths) hudTotalPaths.textContent = String(nodeObjects.length);
       if (hudMeristems) hudMeristems.textContent = String(meristemCount);
       if (hudGenerations && genCounts) {
@@ -198,14 +201,15 @@
       const pts = [];
 
       for (let k = 0; k <= numSeg; k++) {
-        const s = (age * k) / numSeg;
+        const u = k / numSeg;
+        const s = age * u;
         const accelFactor =
           cfg.pathAcceleration !== 0 && s > 0
-            ? Math.pow((s + 1) / 18.0, cfg.pathAcceleration)
+            ? Math.pow((s + 1) / 18.0, cfg.pathAcceleration * 0.65)
             : 1.0;
         const reach = cfg.xySpreadScale * decay * Math.pow(s, cfg.radialExponent) * accelFactor;
         const radialDisp = reach * sinPitch;
-        const axialDisp = reach * cosPitch + cfg.pathArch * decay * Math.pow(s, 1.15) * accelFactor;
+        const axialDisp = reach * cosPitch + cfg.pathArch * reach * u * u;
 
         const pt = origin
           .clone()
@@ -246,15 +250,21 @@
       const showTips = showTipsCheckbox.checked;
       const showOrigins = showOriginsCheckbox.checked;
 
-      // 1. Primary Apical Shoot (Generation 0 Meristem growing along +Y)
+      // 1. Primary Apical Shoot (Generation 0 Meristem growing continuously along +Y)
       const stemPoints = [new THREE.Vector3(0, 0, 0)];
       let curY = 0;
-      for (let s = 1; s <= Math.max(1, steps); s++) {
-        let dy = cfg.stemStep;
-        if (s > cfg.fastGrowthSteps) dy *= cfg.slowGrowthFactor;
+      const totalSteps = Math.max(1, steps);
+      for (let s = 1; s <= totalSteps; s++) {
+        const internodeAge = Math.max(0, totalSteps - s);
+        const internodeElongation =
+          cfg.pathAcceleration !== 0 && internodeAge > 0
+            ? 1.0 + 0.35 * cfg.pathAcceleration * Math.pow((internodeAge + 1) / 24.0, 0.45)
+            : 1.0;
+        const dy = cfg.stemStep * internodeElongation;
         curY += dy;
         stemPoints.push(new THREE.Vector3(0, curY, 0));
       }
+      currentShootHeight = curY;
 
       if (showPaths) {
         const stemGeo = new THREE.BufferGeometry().setFromPoints(stemPoints);
@@ -303,9 +313,10 @@
         if (parent.generation === 0) {
           for (let t = 0; t < steps; t++) spawnSteps.push(t);
         } else {
+          const maxLateralChildren = childGen === 2 ? 21 : 13;
           for (
             let t = parent.birthStep + cfg.maturationAge;
-            t < steps;
+            t < steps && spawnSteps.length < maxLateralChildren;
             t += cfg.spawnCadence
           ) {
             spawnSteps.push(t);
@@ -314,7 +325,8 @@
 
         for (let idx = 0; idx < spawnSteps.length; idx++) {
           const birthT = spawnSteps[idx];
-          const childAge = Math.max(0, steps - 1 - birthT);
+          const rawAge = Math.max(0, steps - 1 - birthT);
+          const childAge = childGen === 1 ? rawAge : Math.min(rawAge, 42);
           const theta = idx * divRad;
 
           let childOrigin;
@@ -408,7 +420,7 @@
             tipMesh.position.copy(tipPos);
             const sizeAccel =
               cfg.pathAcceleration !== 0 && childAge > 0
-                ? Math.pow((childAge + 1) / 18.0, cfg.pathAcceleration * 1.15)
+                ? Math.pow((childAge + 1) / 18.0, cfg.pathAcceleration * 0.85)
                 : 1.0;
             const tipScale = Math.max(
               0.03,
@@ -430,13 +442,37 @@
           };
           nodeObjects.push(nodeRecord);
 
-          if (isChildMeristem && nodeObjects.length < 1200) {
+          if (isChildMeristem && nodeObjects.length < 4500) {
             queue.push(nodeRecord);
           }
         }
       }
 
-      updateBadges(cfg, genCounts, activeMeristemCount);
+      // Smoothly elevate camera orbit target and distance as the meristem climbs higher
+      const desiredTargetY = Math.max(6, curY * 0.52);
+      const dyTarget = desiredTargetY - lastTrackedTargetY;
+      if (Math.abs(dyTarget) > 1e-4) {
+        controls.target.y += dyTarget;
+        camera.position.y += dyTarget;
+        lastTrackedTargetY = desiredTargetY;
+      }
+      const offsetVec = new THREE.Vector3().subVectors(camera.position, controls.target);
+      const minRequiredDist = Math.max(26, curY * 1.08);
+      if (offsetVec.length() < minRequiredDist) {
+        offsetVec.setLength(minRequiredDist);
+        camera.position.copy(controls.target).add(offsetVec);
+      }
+
+      updateBadges(cfg, genCounts, activeMeristemCount, curY);
+    }
+
+    function recenterCameraOnMeristem() {
+      const targetY = Math.max(6, currentShootHeight * 0.52);
+      const dist = Math.max(32, currentShootHeight * 1.18);
+      lastTrackedTargetY = targetY;
+      controls.target.set(0, targetY, 0);
+      camera.position.set(0, targetY + dist * 0.26, dist);
+      controls.update();
     }
 
     function stepForward() {
@@ -490,6 +526,7 @@
       startButton.textContent = 'Start';
       startButton.classList.replace('phyl-btn-secondary', 'phyl-btn-primary');
       rebuildMeristemTree(0);
+      recenterCameraOnMeristem();
     }
 
     function resizeRenderer() {
@@ -516,6 +553,9 @@
       stepForward();
     });
     resetButton.addEventListener('click', resetSimulation);
+    if (resetViewButton) {
+      resetViewButton.addEventListener('click', recenterCameraOnMeristem);
+    }
 
     const presetBar = stageWrapper.parentElement
       ? stageWrapper.parentElement.querySelector('.phyllotaxis-preset-bar')
@@ -735,6 +775,7 @@
 
         colorPalette = Palettes.generatePalette(selectedColorTheme, numberOfPaletteColors);
         rebuildMeristemTree(currentStep);
+        recenterCameraOnMeristem();
       });
     });
 
@@ -751,6 +792,9 @@
         case 'r':
         case 'R':
           resetSimulation();
+          break;
+        case '0':
+          recenterCameraOnMeristem();
           break;
         case 't':
         case 'T':
