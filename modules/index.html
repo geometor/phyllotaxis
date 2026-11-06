@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=ea5fcf70" />
-  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=69acf51f" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/styles.css?v=66998e95" />
   <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
   <link rel="stylesheet" type="text/css" href="../_static/css/phyllotaxis-demos.css?v=7cbca0bb" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
@@ -111,6 +111,18 @@
         <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.GOLDEN_ANGLE_RAD" title="geometor.phyllotaxis.GOLDEN_ANGLE_RAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GOLDEN_ANGLE_RAD</span></code></a></p></td>
         <td><p></p></td>
         </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.GOLDEN_SWEEP_LONG_DEG" title="geometor.phyllotaxis.GOLDEN_SWEEP_LONG_DEG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GOLDEN_SWEEP_LONG_DEG</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.GOLDEN_SWEEP_LONG_RAD" title="geometor.phyllotaxis.GOLDEN_SWEEP_LONG_RAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GOLDEN_SWEEP_LONG_RAD</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.GOLDEN_SWEEP_SHORT_DEG" title="geometor.phyllotaxis.GOLDEN_SWEEP_SHORT_DEG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GOLDEN_SWEEP_SHORT_DEG</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.GOLDEN_SWEEP_SHORT_RAD" title="geometor.phyllotaxis.GOLDEN_SWEEP_SHORT_RAD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GOLDEN_SWEEP_SHORT_RAD</span></code></a></p></td>
+        <td><p></p></td>
+        </tr>
         <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.PHI" title="geometor.phyllotaxis.PHI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PHI</span></code></a></p></td>
         <td><p></p></td>
         </tr>
@@ -155,46 +167,61 @@
         <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.fibonacci_convergents" title="geometor.phyllotaxis.fibonacci_convergents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fibonacci_convergents</span></code></a>([count]) → list[tuple[int, int, float]]</p></td>
         <td><p>Return consecutive Fibonacci rational approximations $(F_k, F_{k+2}, text{degrees})$.</p></td>
         </tr>
-        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_lucas" title="geometor.phyllotaxis.sweep_lucas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_lucas</span></code></a>() → sympy.Expr</p></td>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.golden_sweep_presets" title="geometor.phyllotaxis.golden_sweep_presets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">golden_sweep_presets</span></code></a>() → list[dict[str, str | float]]</p></td>
+        <td><p>Return a catalog of short/long golden sweeps, $phi^{-k}$ powers, and rational sweep factors.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_lucas" title="geometor.phyllotaxis.sweep_lucas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_lucas</span></code></a>() → sympy.Expr</p></td>
         <td><p>Return the exact symbolic Lucas divergence angle $2pi / (3 + 1/phi) approx 99.5^circ$.</p></td>
         </tr>
-        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_phi" title="geometor.phyllotaxis.sweep_phi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_phi</span></code></a>() → sympy.Expr</p></td>
-        <td><p>Return the exact symbolic golden divergence angle $2pi(1 - 1/phi)$.</p></td>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_phi" title="geometor.phyllotaxis.sweep_phi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_phi</span></code></a>() → sympy.Expr</p></td>
+        <td><p>Return the exact symbolic short golden sweep $2pi(1 - 1/phi) = 2pi / phi^2$.</p></td>
         </tr>
-        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_rational" title="geometor.phyllotaxis.sweep_rational"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_rational</span></code></a>(n, m) → sympy.Expr</p></td>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_phi_factor" title="geometor.phyllotaxis.sweep_phi_factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_phi_factor</span></code></a>([numerator, denominator, long_sweep]) → sympy.Expr</p></td>
+        <td><p>Return a rational factor $(text{numerator}/text{denominator})$ of the short or long golden sweep.</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_phi_long" title="geometor.phyllotaxis.sweep_phi_long"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_phi_long</span></code></a>() → sympy.Expr</p></td>
+        <td><p>Return the exact symbolic long golden sweep $2pi / phi approx 222.492236^circ$.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_phi_power" title="geometor.phyllotaxis.sweep_phi_power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_phi_power</span></code></a>([k]) → sympy.Expr</p></td>
+        <td><p>Return the $k$-th golden section sweep $2pi / phi^k$ ($k=1$: Long, $k=2$: Short).</p></td>
+        </tr>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_phi_short" title="geometor.phyllotaxis.sweep_phi_short"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_phi_short</span></code></a>() → sympy.Expr</p></td>
+        <td><p>Return the exact symbolic short golden sweep $2pi / phi^2 approx 137.507764^circ$.</p></td>
+        </tr>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.sweep_rational" title="geometor.phyllotaxis.sweep_rational"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sweep_rational</span></code></a>(n, m) → sympy.Expr</p></td>
         <td><p>Return a rational divergence angle $2pi(1 - n/m)$ from two integers.</p></td>
         </tr>
-        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.build_rings_model" title="geometor.phyllotaxis.build_rings_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_rings_model</span></code></a>([num_rings, sweep, name]) → geometor.model.Model</p></td>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.build_rings_model" title="geometor.phyllotaxis.build_rings_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_rings_model</span></code></a>([num_rings, sweep, name]) → geometor.model.Model</p></td>
         <td><p>Construct a <cite>geometor.model.Model</cite> containing phyllotaxic node points and dot circles.</p></td>
         </tr>
-        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.compute_node_path" title="geometor.phyllotaxis.compute_node_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_node_path</span></code></a>(origin, parent_tangent, radial_dir, ...) → tuple[list[Vec3], Vec3, Vec3, Vec3]</p></td>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.compute_node_path" title="geometor.phyllotaxis.compute_node_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_node_path</span></code></a>(origin, parent_tangent, radial_dir, ...) → tuple[list[Vec3], Vec3, Vec3, Vec3]</p></td>
         <td><p>Evaluate a node's 3D trajectory $gamma(s)$ for $s in [0, text{age}]$ from <cite>origin</cite>.</p></td>
         </tr>
-        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.propagate_3d" title="geometor.phyllotaxis.propagate_3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">propagate_3d</span></code></a>(steps[, config]) → list[MeristemNode]</p></td>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.propagate_3d" title="geometor.phyllotaxis.propagate_3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">propagate_3d</span></code></a>(steps[, config]) → list[MeristemNode]</p></td>
         <td><p>Propagate a 3D phyllotaxic meristem system for <cite>steps</cite> plastochrons.</p></td>
         </tr>
-        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.analyze_parastichy_curves" title="geometor.phyllotaxis.analyze_parastichy_curves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">analyze_parastichy_curves</span></code></a>(nodes[, num_nearest]) → dict[str, object]</p></td>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.analyze_parastichy_curves" title="geometor.phyllotaxis.analyze_parastichy_curves"><code class="xref py py-obj docutils literal notranslate"><span class="pre">analyze_parastichy_curves</span></code></a>(nodes[, num_nearest]) → dict[str, object]</p></td>
         <td><p>Count parastichy curves in each closest-neighbor rank and radial zone until they bend.</p></td>
         </tr>
-        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.classify_meristem_phase" title="geometor.phyllotaxis.classify_meristem_phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">classify_meristem_phase</span></code></a>(node_id, total_nodes[, leaf_span]) → str</p></td>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.classify_meristem_phase" title="geometor.phyllotaxis.classify_meristem_phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">classify_meristem_phase</span></code></a>(node_id, total_nodes[, leaf_span]) → str</p></td>
         <td><p>Classify a node's ontogenetic organ type in the meristem's production life cycle.</p></td>
         </tr>
-        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_nearest_points" title="geometor.phyllotaxis.find_nearest_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_nearest_points</span></code></a>(test_points[, num_nearest]) → dict[sympy.geometry.Point2D, list[sympy.geometry.Point2D]]</p></td>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_nearest_points" title="geometor.phyllotaxis.find_nearest_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_nearest_points</span></code></a>(test_points[, num_nearest]) → dict[sympy.geometry.Point2D, list[sympy.geometry.Point2D]]</p></td>
         <td><p>For each point in <cite>test_points</cite>, find the <cite>num_nearest</cite> closest subsequent points.</p></td>
         </tr>
-        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_parastichies" title="geometor.phyllotaxis.find_parastichies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_parastichies</span></code></a>(num_nodes[, families]) → dict[int, list[list[int]]]</p></td>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_parastichies" title="geometor.phyllotaxis.find_parastichies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_parastichies</span></code></a>(num_nodes[, families]) → dict[int, list[list[int]]]</p></td>
         <td><p>Group node indices into parastichy spiral chains for each modulo family $m in text{families}$.</p></td>
         </tr>
-        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_point_distances" title="geometor.phyllotaxis.find_point_distances"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_point_distances</span></code></a>(pt, other_pts) → dict[float, sympy.geometry.Point2D]</p></td>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.find_point_distances" title="geometor.phyllotaxis.find_point_distances"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_point_distances</span></code></a>(pt, other_pts) → dict[float, sympy.geometry.Point2D]</p></td>
         <td><p>Compute Euclidean distances from <cite>pt</cite> to each point in <cite>other_pts</cite>.</p></td>
         </tr>
-        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.get_node_points" title="geometor.phyllotaxis.get_node_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_points</span></code></a>(num_nodes[, sweep]) → list[sympy.geometry.Point2D]</p></td>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.get_node_points" title="geometor.phyllotaxis.get_node_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_points</span></code></a>(num_nodes[, sweep]) → list[sympy.geometry.Point2D]</p></td>
         <td><p>Generate a single planar growth frame with <cite>num_nodes</cite> symbolic points.</p></td>
         </tr>
-        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.grow" title="geometor.phyllotaxis.grow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grow</span></code></a>(steps[, sweep]) → list[list[sympy.geometry.Point2D]]</p></td>
+        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.grow" title="geometor.phyllotaxis.grow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grow</span></code></a>(steps[, sweep]) → list[list[sympy.geometry.Point2D]]</p></td>
         <td><p>Grow planar frames from $0$ up to <cite>steps - 1</cite> nodes.</p></td>
         </tr>
-        <tr class="row-even"><td><p><a class="reference internal" href="#geometor.phyllotaxis.vogel_points" title="geometor.phyllotaxis.vogel_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vogel_points</span></code></a>(num_nodes[, scale, angle_rad, base_size, ...]) → list[dict[str, float | int | str]]</p></td>
+        <tr class="row-odd"><td><p><a class="reference internal" href="#geometor.phyllotaxis.vogel_points" title="geometor.phyllotaxis.vogel_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vogel_points</span></code></a>(num_nodes[, scale, angle_rad, base_size, ...]) → list[dict[str, float | int | str]]</p></td>
         <td><p>Compute 2D apical meristem coordinates with radial acceleration, node growth, and life-cycle phases.</p></td>
         </tr>
         </tbody>
@@ -214,6 +241,31 @@
         <dl class="py method">
         <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_sweep_phi">
         <span class="sig-name descname"><span class="pre">get_sweep_phi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_sweep_phi" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_sweep_phi_short">
+        <span class="sig-name descname"><span class="pre">get_sweep_phi_short</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_sweep_phi_short" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_sweep_phi_long">
+        <span class="sig-name descname"><span class="pre">get_sweep_phi_long</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_sweep_phi_long" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_sweep_phi_power">
+        <span class="sig-name descname"><span class="pre">get_sweep_phi_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_sweep_phi_power" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_sweep_phi_factor">
+        <span class="sig-name descname"><span class="pre">get_sweep_phi_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numerator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">denominator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_sweep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_sweep_phi_factor" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py method">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.AnglesMixin.get_golden_sweep_presets">
+        <span class="sig-name descname"><span class="pre">get_golden_sweep_presets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.AnglesMixin.get_golden_sweep_presets" title="Link to this definition">¶</a></dt>
         <dd></dd></dl>
 
         <dl class="py method">
@@ -244,6 +296,26 @@
         <dd></dd></dl>
 
         <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.GOLDEN_SWEEP_LONG_DEG">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">GOLDEN_SWEEP_LONG_DEG</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.GOLDEN_SWEEP_LONG_DEG" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.GOLDEN_SWEEP_LONG_RAD">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">GOLDEN_SWEEP_LONG_RAD</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.GOLDEN_SWEEP_LONG_RAD" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.GOLDEN_SWEEP_SHORT_DEG">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">GOLDEN_SWEEP_SHORT_DEG</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.GOLDEN_SWEEP_SHORT_DEG" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py data">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.GOLDEN_SWEEP_SHORT_RAD">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">GOLDEN_SWEEP_SHORT_RAD</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><a class="headerlink" href="#geometor.phyllotaxis.GOLDEN_SWEEP_SHORT_RAD" title="Link to this definition">¶</a></dt>
+        <dd></dd></dl>
+
+        <dl class="py data">
         <dt class="sig sig-object py" id="geometor.phyllotaxis.PHI">
         <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">PHI</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">sympy.Expr</span></span><a class="headerlink" href="#geometor.phyllotaxis.PHI" title="Link to this definition">¶</a></dt>
         <dd></dd></dl>
@@ -269,6 +341,12 @@
         </dd></dl>
 
         <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.golden_sweep_presets">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">golden_sweep_presets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#geometor.phyllotaxis.golden_sweep_presets" title="Link to this definition">¶</a></dt>
+        <dd><p>Return a catalog of short/long golden sweeps, $phi^{-k}$ powers, and rational sweep factors.</p>
+        </dd></dl>
+
+        <dl class="py function">
         <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_lucas">
         <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_lucas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_lucas" title="Link to this definition">¶</a></dt>
         <dd><p>Return the exact symbolic Lucas divergence angle $2pi / (3 + 1/phi) approx 99.5^circ$.</p>
@@ -277,7 +355,31 @@
         <dl class="py function">
         <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_phi">
         <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_phi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_phi" title="Link to this definition">¶</a></dt>
-        <dd><p>Return the exact symbolic golden divergence angle $2pi(1 - 1/phi)$.</p>
+        <dd><p>Return the exact symbolic short golden sweep $2pi(1 - 1/phi) = 2pi / phi^2$.</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_phi_factor">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_phi_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numerator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">denominator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_sweep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_phi_factor" title="Link to this definition">¶</a></dt>
+        <dd><p>Return a rational factor $(text{numerator}/text{denominator})$ of the short or long golden sweep.</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_phi_long">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_phi_long</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_phi_long" title="Link to this definition">¶</a></dt>
+        <dd><p>Return the exact symbolic long golden sweep $2pi / phi approx 222.492236^circ$.</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_phi_power">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_phi_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.13/builtins/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_phi_power" title="Link to this definition">¶</a></dt>
+        <dd><p>Return the $k$-th golden section sweep $2pi / phi^k$ ($k=1$: Long, $k=2$: Short).</p>
+        </dd></dl>
+
+        <dl class="py function">
+        <dt class="sig sig-object py" id="geometor.phyllotaxis.sweep_phi_short">
+        <span class="sig-prename descclassname"><span class="pre">geometor.phyllotaxis.</span></span><span class="sig-name descname"><span class="pre">sweep_phi_short</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sympy.Expr</span></span></span><a class="headerlink" href="#geometor.phyllotaxis.sweep_phi_short" title="Link to this definition">¶</a></dt>
+        <dd><p>Return the exact symbolic short golden sweep $2pi / phi^2 approx 137.507764^circ$.</p>
         </dd></dl>
 
         <dl class="py function">
@@ -840,7 +942,7 @@
   <script src="../_static/doctools.js?v=fd6eb6e6"></script>
   <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
   <script src="../_static/js/collection_controls.js?v=b6b5297a"></script>
-  <script src="../_static/js/geometor_interactive.js?v=4430a5d4"></script>
+  <script src="../_static/js/geometor_interactive.js?v=b2892320"></script>
   <script src="../_static/js/search_highlight.js"></script>
 
 </body>

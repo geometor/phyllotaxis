@@ -15,6 +15,10 @@ Attributes
 .. autoapisummary::
 
    geometor.phyllotaxis.angles.PHI
+   geometor.phyllotaxis.angles.GOLDEN_SWEEP_SHORT_RAD
+   geometor.phyllotaxis.angles.GOLDEN_SWEEP_SHORT_DEG
+   geometor.phyllotaxis.angles.GOLDEN_SWEEP_LONG_RAD
+   geometor.phyllotaxis.angles.GOLDEN_SWEEP_LONG_DEG
    geometor.phyllotaxis.angles.GOLDEN_ANGLE_RAD
    geometor.phyllotaxis.angles.GOLDEN_ANGLE_DEG
 
@@ -33,6 +37,11 @@ Functions
 .. autoapisummary::
 
    geometor.phyllotaxis.angles.sweep_phi
+   geometor.phyllotaxis.angles.sweep_phi_short
+   geometor.phyllotaxis.angles.sweep_phi_long
+   geometor.phyllotaxis.angles.sweep_phi_power
+   geometor.phyllotaxis.angles.sweep_phi_factor
+   geometor.phyllotaxis.angles.golden_sweep_presets
    geometor.phyllotaxis.angles.sweep_rational
    geometor.phyllotaxis.angles.sweep_lucas
    geometor.phyllotaxis.angles.fibonacci
@@ -45,6 +54,18 @@ Module Contents
 .. py:data:: PHI
    :type:  sympy.Expr
 
+.. py:data:: GOLDEN_SWEEP_SHORT_RAD
+   :type:  float
+
+.. py:data:: GOLDEN_SWEEP_SHORT_DEG
+   :type:  float
+
+.. py:data:: GOLDEN_SWEEP_LONG_RAD
+   :type:  float
+
+.. py:data:: GOLDEN_SWEEP_LONG_DEG
+   :type:  float
+
 .. py:data:: GOLDEN_ANGLE_RAD
    :type:  float
 
@@ -53,7 +74,32 @@ Module Contents
 
 .. py:function:: sweep_phi() -> sympy.Expr
 
-   Return the exact symbolic golden divergence angle $2\pi(1 - 1/\phi)$.
+   Return the exact symbolic short golden sweep $2\pi(1 - 1/\phi) = 2\pi / \phi^2$.
+
+
+.. py:function:: sweep_phi_short() -> sympy.Expr
+
+   Return the exact symbolic short golden sweep $2\pi / \phi^2 \approx 137.507764^\circ$.
+
+
+.. py:function:: sweep_phi_long() -> sympy.Expr
+
+   Return the exact symbolic long golden sweep $2\pi / \phi \approx 222.492236^\circ$.
+
+
+.. py:function:: sweep_phi_power(k: int = 2) -> sympy.Expr
+
+   Return the $k$-th golden section sweep $2\pi / \phi^k$ ($k=1$: Long, $k=2$: Short).
+
+
+.. py:function:: sweep_phi_factor(numerator: int = 1, denominator: int = 1, *, long_sweep: bool = False) -> sympy.Expr
+
+   Return a rational factor $(\text{numerator}/\text{denominator})$ of the short or long golden sweep.
+
+
+.. py:function:: golden_sweep_presets() -> list[dict[str, str | float]]
+
+   Return a catalog of short/long golden sweeps, $\phi^{-k}$ powers, and rational sweep factors.
 
 
 .. py:function:: sweep_rational(n: int, m: int) -> sympy.Expr
@@ -86,6 +132,21 @@ Module Contents
 
 
    .. py:method:: get_sweep_phi() -> sympy.Expr
+
+
+   .. py:method:: get_sweep_phi_short() -> sympy.Expr
+
+
+   .. py:method:: get_sweep_phi_long() -> sympy.Expr
+
+
+   .. py:method:: get_sweep_phi_power(k: int = 2) -> sympy.Expr
+
+
+   .. py:method:: get_sweep_phi_factor(numerator: int = 1, denominator: int = 1, *, long_sweep: bool = False) -> sympy.Expr
+
+
+   .. py:method:: get_golden_sweep_presets() -> list[dict[str, str | float]]
 
 
    .. py:method:: get_sweep_rational(n: int, m: int) -> sympy.Expr
