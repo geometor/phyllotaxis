@@ -11,3 +11,18 @@ docs/
 docsrc/modules/api/
 .ruff*
 scratch/
+# PHOTON Studio — Tier 2 Master Media & Tier 3 Build Scratch (excluded from Git)
+*.mp4
+*.mov
+*.wav
+*.mp3
+resources/videos/**/*_stage.html
+resources/videos/**/*_thumb.png
+resources/videos/**/*_thumb.jpg
+resources/videos/**/*_16x9_*.png
+resources/videos/**/*_9x16_*.png
+resources/videos/**/slides_16x9/
+resources/videos/**/slides_9x16/
+resources/videos/**/*_work/
+resources/videos/**/_*_concat.txt
+

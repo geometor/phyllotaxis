@@ -7,6 +7,8 @@ import sympy as sp
 
 from geometor.phyllotaxis import (
     GOLDEN_ANGLE_DEG,
+    GOLDEN_SWEEP_LONG_DEG,
+    GOLDEN_SWEEP_SHORT_DEG,
     MeristemConfig,
     Phyllotaxis,
     analyze_parastichy_curves,
@@ -17,10 +19,15 @@ from geometor.phyllotaxis import (
     find_nearest_points,
     find_parastichies,
     get_node_points,
+    golden_sweep_presets,
     grow,
     propagate_3d,
     sweep_lucas,
     sweep_phi,
+    sweep_phi_factor,
+    sweep_phi_long,
+    sweep_phi_power,
+    sweep_phi_short,
     sweep_rational,
     vogel_points,
 )
@@ -30,6 +37,23 @@ def test_symbolic_angles() -> None:
     phi_angle = sweep_phi()
     assert math.isclose(math.degrees(float(phi_angle)), GOLDEN_ANGLE_DEG, rel_tol=1e-7)
     assert math.isclose(GOLDEN_ANGLE_DEG, 137.50776405, rel_tol=1e-6)
+
+    short_sweep = sweep_phi_short()
+    long_sweep = sweep_phi_long()
+    assert math.isclose(math.degrees(float(short_sweep)), GOLDEN_SWEEP_SHORT_DEG, rel_tol=1e-7)
+    assert math.isclose(math.degrees(float(long_sweep)), GOLDEN_SWEEP_LONG_DEG, rel_tol=1e-7)
+    assert math.isclose(GOLDEN_SWEEP_SHORT_DEG + GOLDEN_SWEEP_LONG_DEG, 360.0, rel_tol=1e-7)
+
+    pow3 = math.degrees(float(sweep_phi_power(3)))
+    assert math.isclose(pow3, GOLDEN_SWEEP_LONG_DEG - GOLDEN_SWEEP_SHORT_DEG, rel_tol=1e-7)
+    assert math.isclose(math.degrees(float(sweep_phi_factor(1, 2))), GOLDEN_SWEEP_SHORT_DEG / 2.0, rel_tol=1e-7)
+    assert math.isclose(
+        math.degrees(float(sweep_phi_factor(1, 2, long_sweep=True))),
+        GOLDEN_SWEEP_LONG_DEG / 2.0,
+        rel_tol=1e-7,
+    )
+    presets = golden_sweep_presets()
+    assert len(presets) >= 12
 
     rat_angle = sweep_rational(89, 144)
     assert isinstance(rat_angle, sp.Expr)

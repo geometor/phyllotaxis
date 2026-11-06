@@ -33,11 +33,49 @@
       </div>
 
       <div class="control-group">
+        <label for="anglePresetSelect3D" class="input-label">Golden Sweep Preset</label>
+        <select id="anglePresetSelect3D" class="dark-input">
+          <optgroup label="Golden Sweeps (Short &amp; Long)">
+            <option value="137.507764" selected>Short Sweep • 360°/φ² (137.5078°)</option>
+            <option value="222.492236">Long Sweep • 360°/φ (222.4922°)</option>
+          </optgroup>
+          <optgroup label="Successive φ⁻ᵏ Sweeps (Long − Short)">
+            <option value="84.984472">φ⁻³ Sweep • 360°/φ³ (84.9845°)</option>
+            <option value="52.523292">φ⁻⁴ Sweep • 360°/φ⁴ (52.5233°)</option>
+            <option value="32.461180">φ⁻⁵ Sweep • 360°/φ⁵ (32.4612°)</option>
+          </optgroup>
+          <optgroup label="Short Sweep Factors (k · 137.5078°)">
+            <option value="275.015528">2× Short Sweep (275.0155°)</option>
+            <option value="68.753882">1/2 Short Sweep (68.7539°)</option>
+            <option value="45.835921">1/3 Short Sweep (45.8359°)</option>
+            <option value="34.376941">1/4 Short Sweep (34.3769°)</option>
+            <option value="27.501553">1/5 Short Sweep (27.5016°)</option>
+          </optgroup>
+          <optgroup label="Long Sweep Factors (k · 222.4922°)">
+            <option value="111.246118">1/2 Long Sweep (111.2461°)</option>
+            <option value="74.164079">1/3 Long Sweep (74.1641°)</option>
+            <option value="55.623059">1/4 Long Sweep (55.6231°)</option>
+            <option value="44.498447">1/5 Long Sweep (44.4984°)</option>
+          </optgroup>
+          <optgroup label="Noble &amp; Fibonacci Rational Sweeps">
+            <option value="99.501553">Lucas Sweep • 360°/(3+1/φ) (99.5016°)</option>
+            <option value="120.000000">Rational 1/3 (120.0000°)</option>
+            <option value="144.000000">Rational 2/5 (144.0000°)</option>
+            <option value="135.000000">Rational 3/8 (135.0000°)</option>
+            <option value="138.461538">Rational 5/13 (138.4615°)</option>
+            <option value="137.142857">Rational 8/21 (137.1429°)</option>
+            <option value="137.647059">Rational 13/34 (137.6471°)</option>
+          </optgroup>
+          <option value="custom">Custom Sweep Angle</option>
+        </select>
+      </div>
+
+      <div class="control-group">
         <label for="angleSlider3D" class="input-label">
-          <span>Divergence Angle (α)</span>
+          <span>Sweep Angle (α)</span>
           <span id="angleValBadge3D" class="val-badge">137.51°</span>
         </label>
-        <input type="range" id="angleSlider3D" min="90" max="180" value="137.507764" step="0.01" class="dark-slider" />
+        <input type="range" id="angleSlider3D" min="15" max="345" value="137.507764" step="0.01" class="dark-slider" />
       </div>
 
       <div class="control-group">

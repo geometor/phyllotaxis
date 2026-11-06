@@ -71,6 +71,7 @@
 
     const speedSlider = document.getElementById('speedSlider3D');
     const speedValBadge = document.getElementById('speedValBadge3D');
+    const anglePresetSelect = document.getElementById('anglePresetSelect3D');
     const angleSlider = document.getElementById('angleSlider3D');
     const angleValBadge = document.getElementById('angleValBadge3D');
     const scaleSlider = document.getElementById('scaleSlider3D');
@@ -602,6 +603,19 @@
       if (!el) return;
       el.addEventListener('input', () => rebuildMeristemTree(currentStep));
       el.addEventListener('change', () => rebuildMeristemTree(currentStep));
+    });
+
+    if (anglePresetSelect) {
+      anglePresetSelect.addEventListener('change', () => {
+        const val = parseFloat(anglePresetSelect.value);
+        if (!isNaN(val)) {
+          angleSlider.value = val;
+          rebuildMeristemTree(currentStep);
+        }
+      });
+    }
+    angleSlider.addEventListener('input', () => {
+      if (anglePresetSelect) anglePresetSelect.value = 'custom';
     });
 
     speedSlider.addEventListener('input', () => {

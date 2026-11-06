@@ -29,6 +29,11 @@
     233: 13,
     377: 14,
     610: 15,
+    987: 16,
+    1597: 17,
+    2584: 18,
+    4181: 19,
+    6765: 20,
   };
 
   const FIB_FAMILY_COLORS = {
@@ -41,6 +46,9 @@
     55: 'rgba(224, 102, 255, 0.78)',
     89: 'rgba(124, 77, 255, 0.76)',
     144: 'rgba(174, 234, 0, 0.76)',
+    233: 'rgba(255, 64, 129, 0.76)',
+    377: 'rgba(0, 229, 255, 0.76)',
+    610: 'rgba(255, 215, 64, 0.76)',
   };
 
   function init2DStudio() {
@@ -57,8 +65,10 @@
     const startButton = document.getElementById('startButton2D');
     const stepButton = document.getElementById('stepButton2D');
     const resetButton = document.getElementById('resetButton2D');
+    const soundButton = document.getElementById('soundButton2D');
     const resetViewButton = document.getElementById('resetViewButton2D');
     const theaterButton = document.getElementById('theaterButton2D');
+    const examplesSelect = document.getElementById('examplesSelect2D');
 
     const anglePresetSelect = document.getElementById('anglePresetSelect2D');
     const angleSlider = document.getElementById('angleSlider2D');
@@ -121,6 +131,9 @@
     let paletteCycleOffset = 0;
 
     let isAnimating = false;
+    let isSoundEnabled = false;
+    let audioCtx = null;
+    let masterGain = null;
     let timeoutId = null;
     let primordia = [];
     let nextPrimordiumId = 0;
@@ -275,6 +288,10 @@
 
           for (let j = i + 1; j < n; j++) {
             const p2 = primordia[j];
+            const dr = p1.radius - p2.radius;
+            if (dr * dr >= bestDist[k - 1]) {
+              break;
+            }
             const dx = p1.x - p2.x;
             const dy = p1.y - p2.y;
             const d2 = dx * dx + dy * dy;
@@ -452,22 +469,21 @@
           }
         }
 
-        const segCount = candidateSegments.length;
+        const sortedSegs = candidateSegments.slice().sort((a, b) => a.minX - b.minX);
+        const segCount = sortedSegs.length;
         for (let a = 0; a < segCount; a++) {
-          const s1 = candidateSegments[a];
+          const s1 = sortedSegs[a];
           for (let b = a + 1; b < segCount; b++) {
-            const s2 = candidateSegments[b];
+            const s2 = sortedSegs[b];
+            if (s2.minX > s1.maxX) {
+              break;
+            }
             // Skip segments that share a node endpoint
             if (s1.i === s2.i || s1.i === s2.j || s1.j === s2.i || s1.j === s2.j) {
               continue;
             }
-            // Fast bounding-box rejection
-            if (
-              s1.maxX < s2.minX ||
-              s2.maxX < s1.minX ||
-              s1.maxY < s2.minY ||
-              s2.maxY < s1.minY
-            ) {
+            // Fast Y bounding-box rejection
+            if (s1.maxY < s2.minY || s2.maxY < s1.minY) {
               continue;
             }
 
@@ -1236,13 +1252,167 @@
       draw();
     }
 
+    // Golden Just-Intonation / Fibonacci Harmonic Ratios across 3 octaves
+    const GOLDEN_HARMONIC_RATIOS = [
+      1.0, 9 / 8, 5 / 4, 4 / 3, 3 / 2, 8 / 5, 13 / 8,
+      2.0, 9 / 4, 5 / 2, 8 / 3, 3.0, 16 / 5, 13 / 4,
+      4.0, 9 / 2, 5.0, 16 / 3, 6.0, 32 / 5, 13 / 2,
+    ];
+
+    function ensureAudioContext() {
+      if (!audioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return null;
+        audioCtx = new AudioCtx();
+        const comp = audioCtx.createDynamicsCompressor();
+        comp.threshold.setValueAtTime(-16, audioCtx.currentTime);
+        comp.knee.setValueAtTime(18, audioCtx.currentTime);
+        comp.ratio.setValueAtTime(6, audioCtx.currentTime);
+        comp.attack.setValueAtTime(0.005, audioCtx.currentTime);
+        comp.release.setValueAtTime(0.18, audioCtx.currentTime);
+        masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.32, audioCtx.currentTime);
+        masterGain.connect(comp);
+        comp.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function toggleSound() {
+      isSoundEnabled = !isSoundEnabled;
+      if (isSoundEnabled) {
+        ensureAudioContext();
+      }
+      if (soundButton) {
+        soundButton.textContent = isSoundEnabled ? 'Sound: On (M)' : 'Sound: Off (M)';
+        soundButton.classList.toggle('phyl-btn-primary', isSoundEnabled);
+        soundButton.classList.toggle('phyl-btn-secondary', !isSoundEnabled);
+      }
+    }
+
+    let lastSoundTime = 0;
+
+    function playPrimordiumSound(nodeId, phase) {
+      if (!isSoundEnabled) return;
+      const ac = ensureAudioContext();
+      if (!ac || !masterGain) return;
+
+      const now = ac.currentTime;
+      // Keep the pulse spacious and unhurried (~3.5 notes/sec max)
+      if (now - lastSoundTime < 0.26) return;
+      lastSoundTime = now;
+
+      const divRad = (divergenceDeg * Math.PI) / 180;
+      const theta = nodeId * divRad + zoetropeAngleRad;
+
+      // 1. Direction -> Gentle Stereo Pan (cos θ) & Compass Elevation Brightness (sin θ)
+      const panVal = Math.max(-0.78, Math.min(0.78, 0.78 * Math.cos(theta)));
+      const elev = 0.5 + 0.5 * Math.sin(theta);
+
+      // 2. Color / Palette Index -> Harmonic Scale Degree
+      const palSize = Math.max(1, numberOfPaletteColors || 21);
+      const palIdx = ((nodeId + paletteCycleOffset) % palSize + palSize) % palSize;
+      const scaleIdx = palIdx % GOLDEN_HARMONIC_RATIOS.length;
+      const morph = morphologySelect ? morphologySelect.value : 'dots';
+      const activeOrgan = morph === 'lifecycle' ? (phase || 'floret') : morph;
+
+      // Warm lower-register fundamental anchored at G2 (98.0 Hz)
+      let baseFreq = 98.0 * GOLDEN_HARMONIC_RATIOS[scaleIdx];
+      let osc1Type = 'sine';
+      let osc2Type = 'triangle';
+      let overtoneRatio = 1.5;
+      let attack = 0.035;
+      let decay = 1.15;
+
+      if (activeOrgan === 'points' || activeOrgan === 'bud') {
+        baseFreq *= 1.25;
+        osc1Type = 'sine';
+        osc2Type = 'sine';
+        overtoneRatio = 2.0;
+        attack = 0.025;
+        decay = 0.95;
+      } else if (activeOrgan === 'rings' || activeOrgan === 'wedges') {
+        osc1Type = 'triangle';
+        osc2Type = 'sine';
+        overtoneRatio = 1.5;
+        attack = 0.055;
+        decay = 1.45;
+      } else if (activeOrgan === 'petals' || activeOrgan === 'petal') {
+        osc1Type = 'triangle';
+        osc2Type = 'sine';
+        overtoneRatio = 2.0;
+        attack = 0.030;
+        decay = 1.20;
+      } else if (activeOrgan === 'leaves' || activeOrgan === 'leaf') {
+        baseFreq *= 0.5;
+        osc1Type = 'triangle';
+        osc2Type = 'sine';
+        overtoneRatio = 1.5;
+        attack = 0.065;
+        decay = 1.65;
+      } else {
+        osc1Type = 'sine';
+        osc2Type = 'triangle';
+        overtoneRatio = 2.0;
+        attack = 0.032;
+        decay = 1.10;
+      }
+
+      const dur = decay;
+      const peakGain = 0.12;
+
+      const osc1 = ac.createOscillator();
+      const osc2 = ac.createOscillator();
+      osc1.type = osc1Type;
+      osc2.type = osc2Type;
+      osc1.frequency.setValueAtTime(baseFreq, now);
+      osc2.frequency.setValueAtTime(baseFreq * overtoneRatio, now);
+
+      const filter = ac.createBiquadFilter();
+      filter.type = 'lowpass';
+      const cutoff = Math.min(3600, baseFreq * (1.8 + 2.4 * elev));
+      filter.frequency.setValueAtTime(cutoff, now);
+      filter.frequency.exponentialRampToValueAtTime(Math.max(140, baseFreq * 1.05), now + dur);
+
+      const env = ac.createGain();
+      env.gain.setValueAtTime(0.0001, now);
+      env.gain.linearRampToValueAtTime(peakGain, now + attack);
+      env.gain.exponentialRampToValueAtTime(0.0001, now + attack + dur);
+
+      const overtoneGain = ac.createGain();
+      overtoneGain.gain.setValueAtTime(0.22 * (0.4 + 0.6 * elev), now);
+
+      osc1.connect(filter);
+      osc2.connect(overtoneGain);
+      overtoneGain.connect(filter);
+
+      if (ac.createStereoPanner) {
+        const panner = ac.createStereoPanner();
+        panner.pan.setValueAtTime(panVal, now);
+        filter.connect(env);
+        env.connect(panner);
+        panner.connect(masterGain);
+      } else {
+        filter.connect(env);
+        env.connect(masterGain);
+      }
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + attack + dur + 0.04);
+      osc2.stop(now + attack + dur + 0.04);
+    }
+
     function spawnOneStep() {
       if (isColorCycling && numberOfPaletteColors > 0 && colorPalette.length > 0) {
         paletteCycleOffset += isCycleReversed ? -1 : 1;
         updateColors();
       }
       if (zoetropeCheckbox.checked) {
-        zoetropeAngleRad += (137.507764 * Math.PI) / 180;
+        zoetropeAngleRad += (divergenceDeg * Math.PI) / 180;
       }
 
       if (primordia.length < maxNodes) {
@@ -1258,6 +1428,9 @@
           size: primordiumBaseSize,
         });
         nextPrimordiumId++;
+        playPrimordiumSound(currentId, phase);
+      } else if (isColorCycling || zoetropeCheckbox.checked) {
+        playPrimordiumSound(Math.abs(paletteCycleOffset), 'floret');
       }
 
       recalculatePositions();
@@ -1287,10 +1460,10 @@
     function loop() {
       if (!isAnimating) return;
       spawnOneStep();
-      const speed = parseInt(speedSlider.value, 10) || 8;
+      const speed = parseInt(speedSlider.value, 10) || 4;
       timeoutId = window.setTimeout(() => {
         window.requestAnimationFrame(loop);
-      }, 1000 / (speed * 2.8));
+      }, 1000 / (speed * 1.4));
     }
 
     function togglePlay() {
@@ -1527,7 +1700,7 @@
       });
     }
     maxNodesInput.addEventListener('change', () => {
-      maxNodes = Math.max(10, Math.min(2500, parseInt(maxNodesInput.value, 10) || 610));
+      maxNodes = Math.max(10, Math.min(6765, parseInt(maxNodesInput.value, 10) || 610));
       maxNodesInput.value = maxNodes;
       updateBadges();
     });
@@ -1553,21 +1726,26 @@
     parastichy13Checkbox.addEventListener('change', handleNearestChange);
     zoetropeCheckbox.addEventListener('change', updateBadges);
 
-    // Curated Preset Buttons
+    if (soundButton) {
+      soundButton.addEventListener('click', toggleSound);
+    }
+
+    // Curated Preset Buttons & Examples Gallery
     const presetButtons = document.querySelectorAll('[data-preset-2d]');
     const PRESETS_2D = {
       golden_capitulum: {
-        nodes: 377,
+        seed: 13,
+        nodes: 987,
         angle: 137.507764,
         morph: 'dots',
         span: 34,
         scale: 5.5,
         accel: 0.0,
         size: 1.8,
-        growth: 0.25,
+        growth: 0.22,
         palette: 21,
         theme: 'galactic_v4',
-        cycle: false,
+        cycle: true,
         nearest: 0,
         nearestColor: 'rank',
         intersections: false,
@@ -1577,14 +1755,15 @@
         zoetrope: false,
       },
       sunflower_lifecycle: {
-        nodes: 377,
+        seed: 21,
+        nodes: 987,
         angle: 137.507764,
         morph: 'lifecycle',
-        span: 34,
+        span: 55,
         scale: 5.0,
-        accel: 0.34,
+        accel: 0.28,
         size: 1.4,
-        growth: 0.32,
+        growth: 0.26,
         palette: 13,
         theme: 'sunflower',
         cycle: false,
@@ -1597,13 +1776,14 @@
         zoetrope: false,
       },
       closest_nodes: {
-        nodes: 233,
+        seed: 34,
+        nodes: 610,
         angle: 137.507764,
         morph: 'points',
         span: 34,
         scale: 7.4,
         accel: 0.0,
-        size: 2.3,
+        size: 2.2,
         growth: 0.04,
         palette: 21,
         theme: 'golden_amber',
@@ -1616,15 +1796,58 @@
         paths: false,
         zoetrope: false,
       },
+      deep_lattice_k4: {
+        seed: 2584,
+        nodes: 2584,
+        angle: 137.507764,
+        morph: 'points',
+        span: 89,
+        scale: 9.8,
+        accel: 0.08,
+        size: 1.5,
+        growth: 0.015,
+        palette: 21,
+        theme: 'galactic_v4',
+        cycle: true,
+        nearest: 4,
+        nearestColor: 'fibonacci',
+        intersections: true,
+        p8: false,
+        p13: false,
+        paths: false,
+        zoetrope: false,
+      },
+      winding_chirality: {
+        seed: 55,
+        nodes: 1597,
+        angle: 137.507764,
+        morph: 'points',
+        span: 55,
+        scale: 8.5,
+        accel: 0.16,
+        size: 1.8,
+        growth: 0.03,
+        palette: 21,
+        theme: 'golden_amber',
+        cycle: false,
+        nearest: 2,
+        nearestColor: 'winding',
+        intersections: true,
+        p8: false,
+        p13: false,
+        paths: false,
+        zoetrope: false,
+      },
       pinecone_flare: {
-        nodes: 144,
+        seed: 13,
+        nodes: 377,
         angle: 137.507764,
         morph: 'wedges',
         span: 21,
         scale: 5.2,
-        accel: 0.86,
+        accel: 0.65,
         size: 1.1,
-        growth: 0.56,
+        growth: 0.42,
         palette: 13,
         theme: 'forest',
         cycle: false,
@@ -1637,17 +1860,18 @@
         zoetrope: false,
       },
       parastichy_web: {
-        nodes: 233,
+        seed: 21,
+        nodes: 610,
         angle: 137.507764,
         morph: 'rings',
         span: 34,
         scale: 7.2,
         accel: 0.0,
         size: 1.5,
-        growth: 0.25,
+        growth: 0.22,
         palette: 13,
         theme: 'golden_amber',
-        cycle: false,
+        cycle: true,
         nearest: 2,
         nearestColor: 'rank',
         intersections: true,
@@ -1657,14 +1881,15 @@
         zoetrope: false,
       },
       golden_wedges: {
-        nodes: 144,
+        seed: 13,
+        nodes: 377,
         angle: 137.507764,
         morph: 'leaves',
         span: 34,
         scale: 6.2,
-        accel: 0.52,
-        size: 1.5,
-        growth: 0.46,
+        accel: 0.42,
+        size: 1.4,
+        growth: 0.36,
         palette: 8,
         theme: 'greens',
         cycle: false,
@@ -1676,18 +1901,103 @@
         paths: true,
         zoetrope: false,
       },
+      half_short_sweep: {
+        seed: 21,
+        nodes: 1597,
+        angle: 68.753882,
+        morph: 'rings',
+        span: 55,
+        scale: 8.2,
+        accel: 0.08,
+        size: 1.4,
+        growth: 0.08,
+        palette: 13,
+        theme: 'golden_amber',
+        cycle: true,
+        nearest: 2,
+        nearestColor: 'palette',
+        intersections: true,
+        p8: false,
+        p13: false,
+        paths: false,
+        zoetrope: false,
+      },
+      phi_cubed_sweep: {
+        seed: 21,
+        nodes: 1597,
+        angle: 84.984472,
+        morph: 'dots',
+        span: 55,
+        scale: 8.4,
+        accel: 0.06,
+        size: 1.5,
+        growth: 0.09,
+        palette: 21,
+        theme: 'ocean',
+        cycle: true,
+        nearest: 3,
+        nearestColor: 'rank',
+        intersections: true,
+        p8: false,
+        p13: false,
+        paths: false,
+        zoetrope: false,
+      },
+      half_long_sweep: {
+        seed: 21,
+        nodes: 987,
+        angle: 111.246118,
+        morph: 'petals',
+        span: 34,
+        scale: 7.4,
+        accel: 0.12,
+        size: 1.35,
+        growth: 0.14,
+        palette: 13,
+        theme: 'sunset',
+        cycle: true,
+        nearest: 2,
+        nearestColor: 'palette',
+        intersections: false,
+        p8: false,
+        p13: false,
+        paths: false,
+        zoetrope: false,
+      },
+      lucas_noble_sweep: {
+        seed: 34,
+        nodes: 987,
+        angle: 99.501553,
+        morph: 'points',
+        span: 34,
+        scale: 7.8,
+        accel: 0.0,
+        size: 2.0,
+        growth: 0.04,
+        palette: 21,
+        theme: 'galactic_v4',
+        cycle: false,
+        nearest: 2,
+        nearestColor: 'rank',
+        intersections: true,
+        p8: false,
+        p13: false,
+        paths: false,
+        zoetrope: false,
+      },
       rational_8_21: {
-        nodes: 233,
+        seed: 21,
+        nodes: 610,
         angle: 137.142857,
         morph: 'points',
         span: 34,
-        scale: 6.2,
+        scale: 6.4,
         accel: 0.0,
-        size: 2.1,
-        growth: 0.08,
+        size: 2.0,
+        growth: 0.06,
         palette: 21,
         theme: 'ocean',
-        cycle: false,
+        cycle: true,
         nearest: 2,
         nearestColor: 'palette',
         intersections: false,
@@ -1697,19 +2007,20 @@
         zoetrope: false,
       },
       zoetrope_strobe: {
-        nodes: 377,
+        seed: 987,
+        nodes: 1597,
         angle: 137.507764,
         morph: 'dots',
-        span: 34,
-        scale: 5.8,
-        accel: 0.0,
-        size: 1.9,
-        growth: 0.25,
-        palette: 13,
-        theme: 'greens',
-        cycle: false,
-        nearest: 0,
-        nearestColor: 'rank',
+        span: 55,
+        scale: 7.2,
+        accel: 0.06,
+        size: 1.6,
+        growth: 0.12,
+        palette: 21,
+        theme: 'galactic_v4',
+        cycle: true,
+        nearest: 1,
+        nearestColor: 'palette',
         intersections: false,
         p8: false,
         p13: false,
@@ -1718,45 +2029,64 @@
       },
     };
 
+    function applyPreset(key) {
+      const cfg = PRESETS_2D[key];
+      if (!cfg) return;
+
+      presetButtons.forEach((b) => {
+        b.classList.toggle('active', b.getAttribute('data-preset-2d') === key);
+      });
+      if (examplesSelect && examplesSelect.value !== key) {
+        examplesSelect.value = key;
+      }
+
+      divergenceDeg = cfg.angle;
+      angleSlider.value = cfg.angle;
+      morphologySelect.value = cfg.morph;
+      lifecycleSpan = cfg.span !== undefined ? cfg.span : 34;
+      if (lifecycleSpanSlider) lifecycleSpanSlider.value = lifecycleSpan;
+      scaleConstant = cfg.scale;
+      scaleSlider.value = cfg.scale;
+      radialAcceleration = cfg.accel !== undefined ? cfg.accel : 0.0;
+      if (accelSlider) accelSlider.value = radialAcceleration;
+      primordiumBaseSize = cfg.size;
+      sizeSlider.value = cfg.size;
+      nodeGrowthFactor = cfg.growth !== undefined ? cfg.growth : 0.25;
+      if (growthSlider) growthSlider.value = nodeGrowthFactor;
+      maxNodes = cfg.nodes || 610;
+      maxNodesInput.value = maxNodes;
+      numberOfPaletteColors = cfg.palette;
+      paletteSizeInput.value = cfg.palette;
+      selectedColorTheme = cfg.theme;
+      colorThemeSelect.value = cfg.theme;
+      cycleColorsCheckbox.checked = cfg.cycle;
+      isColorCycling = cfg.cycle;
+      if (nearestCountSelect) nearestCountSelect.value = String(cfg.nearest || 0);
+      if (nearestColorModeSelect) nearestColorModeSelect.value = cfg.nearestColor || 'rank';
+      if (showIntersectionsCheckbox) showIntersectionsCheckbox.checked = Boolean(cfg.intersections);
+      parastichy8Checkbox.checked = cfg.p8;
+      parastichy13Checkbox.checked = cfg.p13;
+      showPathsCheckbox.checked = cfg.paths;
+      zoetropeCheckbox.checked = cfg.zoetrope;
+
+      colorPalette = Palettes.generatePalette(selectedColorTheme, numberOfPaletteColors);
+      populateInstant(cfg.seed !== undefined ? cfg.seed : cfg.nodes);
+      if (!isAnimating) {
+        togglePlay();
+      }
+    }
+
     presetButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        presetButtons.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        const key = btn.getAttribute('data-preset-2d');
-        const cfg = PRESETS_2D[key];
-        if (!cfg) return;
-
-        divergenceDeg = cfg.angle;
-        angleSlider.value = cfg.angle;
-        morphologySelect.value = cfg.morph;
-        lifecycleSpan = cfg.span !== undefined ? cfg.span : 34;
-        if (lifecycleSpanSlider) lifecycleSpanSlider.value = lifecycleSpan;
-        scaleConstant = cfg.scale;
-        scaleSlider.value = cfg.scale;
-        radialAcceleration = cfg.accel !== undefined ? cfg.accel : 0.0;
-        if (accelSlider) accelSlider.value = radialAcceleration;
-        primordiumBaseSize = cfg.size;
-        sizeSlider.value = cfg.size;
-        nodeGrowthFactor = cfg.growth !== undefined ? cfg.growth : 0.25;
-        if (growthSlider) growthSlider.value = nodeGrowthFactor;
-        numberOfPaletteColors = cfg.palette;
-        paletteSizeInput.value = cfg.palette;
-        selectedColorTheme = cfg.theme;
-        colorThemeSelect.value = cfg.theme;
-        cycleColorsCheckbox.checked = cfg.cycle;
-        isColorCycling = cfg.cycle;
-        if (nearestCountSelect) nearestCountSelect.value = String(cfg.nearest || 0);
-        if (nearestColorModeSelect) nearestColorModeSelect.value = cfg.nearestColor || 'rank';
-        if (showIntersectionsCheckbox) showIntersectionsCheckbox.checked = Boolean(cfg.intersections);
-        parastichy8Checkbox.checked = cfg.p8;
-        parastichy13Checkbox.checked = cfg.p13;
-        showPathsCheckbox.checked = cfg.paths;
-        zoetropeCheckbox.checked = cfg.zoetrope;
-
-        colorPalette = Palettes.generatePalette(selectedColorTheme, numberOfPaletteColors);
-        populateInstant(cfg.nodes);
+        applyPreset(btn.getAttribute('data-preset-2d'));
       });
     });
+
+    if (examplesSelect) {
+      examplesSelect.addEventListener('change', () => {
+        applyPreset(examplesSelect.value);
+      });
+    }
 
     // Keyboard shortcuts
     document.addEventListener('keydown', (event) => {
@@ -1767,6 +2097,10 @@
         case ' ':
           event.preventDefault();
           togglePlay();
+          break;
+        case 'm':
+        case 'M':
+          toggleSound();
           break;
         case 'r':
         case 'R':
@@ -1853,6 +2187,86 @@
           break;
       }
     });
+
+    window.GeometorPhyllotaxis2D = {
+      canvas,
+      ctx,
+      pause: () => {
+        if (isAnimating) togglePlay();
+      },
+      setState: (opts = {}) => {
+        if (opts.angle !== undefined) {
+          divergenceDeg = opts.angle;
+          angleSlider.value = opts.angle;
+        }
+        if (opts.morph !== undefined) morphologySelect.value = opts.morph;
+        if (opts.span !== undefined) {
+          lifecycleSpan = opts.span;
+          if (lifecycleSpanSlider) lifecycleSpanSlider.value = opts.span;
+        }
+        if (opts.scale !== undefined) {
+          scaleConstant = opts.scale;
+          scaleSlider.value = opts.scale;
+        }
+        if (opts.accel !== undefined) {
+          radialAcceleration = opts.accel;
+          if (accelSlider) accelSlider.value = opts.accel;
+        }
+        if (opts.size !== undefined) {
+          primordiumBaseSize = opts.size;
+          sizeSlider.value = opts.size;
+        }
+        if (opts.growth !== undefined) {
+          nodeGrowthFactor = opts.growth;
+          if (growthSlider) growthSlider.value = opts.growth;
+        }
+        if (opts.theme !== undefined || opts.palette !== undefined) {
+          if (opts.theme !== undefined) {
+            selectedColorTheme = opts.theme;
+            colorThemeSelect.value = opts.theme;
+          }
+          if (opts.palette !== undefined) {
+            numberOfPaletteColors = opts.palette;
+            paletteSizeInput.value = opts.palette;
+          }
+          colorPalette = Palettes.generatePalette(selectedColorTheme, numberOfPaletteColors);
+        }
+        if (opts.paletteOffset !== undefined) {
+          paletteCycleOffset = opts.paletteOffset;
+        }
+        if (opts.zoetropeRad !== undefined) {
+          zoetropeAngleRad = opts.zoetropeRad;
+        }
+        if (opts.nearest !== undefined && nearestCountSelect) {
+          nearestCountSelect.value = String(opts.nearest);
+        }
+        if (opts.nearestColor !== undefined && nearestColorModeSelect) {
+          nearestColorModeSelect.value = opts.nearestColor;
+        }
+        if (opts.curveCounts !== undefined && showCurveCountsCheckbox) {
+          showCurveCountsCheckbox.checked = Boolean(opts.curveCounts);
+        }
+        if (opts.intersections !== undefined && showIntersectionsCheckbox) {
+          showIntersectionsCheckbox.checked = Boolean(opts.intersections);
+        }
+        if (opts.paths !== undefined) showPathsCheckbox.checked = Boolean(opts.paths);
+        if (opts.p8 !== undefined) parastichy8Checkbox.checked = Boolean(opts.p8);
+        if (opts.p13 !== undefined) parastichy13Checkbox.checked = Boolean(opts.p13);
+        if (opts.zoom !== undefined) zoom = opts.zoom;
+        if (opts.panX !== undefined) panX = opts.panX;
+        if (opts.panY !== undefined) panY = opts.panY;
+
+        if (opts.nodes !== undefined && opts.nodes !== primordia.length) {
+          populateInstant(opts.nodes);
+        } else {
+          updateColors();
+          recalculatePositions();
+          draw();
+        }
+      },
+      resizeCanvas,
+      draw,
+    };
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
