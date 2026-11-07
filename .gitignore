@@ -16,13 +16,13 @@ scratch/
 *.mov
 *.wav
 *.mp3
-resources/videos/**/*_stage.html
-resources/videos/**/*_thumb.png
-resources/videos/**/*_thumb.jpg
-resources/videos/**/*_16x9_*.png
-resources/videos/**/*_9x16_*.png
-resources/videos/**/slides_16x9/
-resources/videos/**/slides_9x16/
-resources/videos/**/*_work/
-resources/videos/**/_*_concat.txt
+videos/**/*_stage.html
+videos/**/*_thumb.png
+videos/**/*_thumb.jpg
+videos/**/*_16x9_*.png
+videos/**/*_9x16_*.png
+videos/**/slides_16x9/
+videos/**/slides_9x16/
+videos/**/*_work/
+videos/**/_*_concat.txt
 
