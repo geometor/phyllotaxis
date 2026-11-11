@@ -1,0 +1,26 @@
+{
+  "short_code": "PHYL-01",
+  "channel": "@geometor",
+  "categoryId": "27",
+  "privacyStatus": "unlisted",
+  "title_1080p": "GEOMETOR Phyllotaxis \u2022 Unfolding the Golden Angle (137.5078\u00b0)",
+  "title_short": "Unfolding the Golden Angle \u2022 137.5\u00b0 Phyllotaxis #shorts",
+  "description": "Continuous botanical meristem unfolding driven by the golden angle (360\u00b0/\u03c6\u00b2 \u2248 137.5078\u00b0), revealing emergent Fibonacci parastichy spirals and recursive 3D node-as-path shoot architecture.\n\nExplore the interactive visualizer: https://geometor.github.io/phyllotaxis/demos/propagation_3d.html\nSource repository: https://github.com/geometor/phyllotaxis",
+  "tags": [
+    "GEOMETOR",
+    "Phyllotaxis",
+    "Golden Ratio",
+    "Golden Angle",
+    "Fibonacci Spirals",
+    "Sacred Geometry",
+    "Botanical Mathematics"
+  ],
+  "files": {
+    "wide_1080p_mp4": "phyllotaxis_unfolding_1080p.mp4",
+    "short_mp4": "phyllotaxis_unfolding_short.mp4",
+    "thumbnail_16x9_png": "phyllotaxis_unfolding_thumb.png"
+  },
+  "uploads": {},
+  "history": {},
+  "version": 1
+}

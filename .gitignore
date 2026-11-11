@@ -17,6 +17,11 @@ scratch/
 *.wav
 *.mp3
 videos/**/*_stage.html
+videos/**/stage.html
+videos/**/segments/
+videos/**/frames/
+videos/**/test_frames/
+videos/**/.tts_cache/
 videos/**/*_thumb.png
 videos/**/*_thumb.jpg
 videos/**/*_16x9_*.png
@@ -25,4 +30,5 @@ videos/**/slides_16x9/
 videos/**/slides_9x16/
 videos/**/*_work/
 videos/**/_*_concat.txt
+videos/**/clips_*.txt
 

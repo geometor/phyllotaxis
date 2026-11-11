@@ -1,0 +1,22 @@
+{
+  "prefix": "phyllotaxis_unfolding",
+  "mode": "motion",
+  "html": "../../docs/demos/propagation_3d.html",
+  "duration_sec": 45.64,
+  "fps": 30,
+  "warmup_frames": 15,
+  "scale_factor": 1.0,
+  "wide_mp4": "phyllotaxis_unfolding_1080p.mp4",
+  "wide_thumb": "phyllotaxis_unfolding_thumb.png",
+  "short_mp4": "phyllotaxis_unfolding_short.mp4",
+  "short_thumb": "phyllotaxis_unfolding_short_thumb.png",
+  "render_short": true,
+  "coordinate_system": "spherical",
+  "angle_unit": "deg",
+  "origin": [0.0, 4.0, 0.0],
+  "keyframes": [
+    {"t": 0.0, "camAz": 0.0, "camEl": 22.0, "camR": 18.0, "lookY": 3.5, "fov": 42.0},
+    {"t": 22.82, "camAz": 137.508, "camEl": 30.0, "camR": 15.5, "lookY": 4.5, "fov": 40.0},
+    {"t": 45.64, "camAz": 275.016, "camEl": 18.0, "camR": 19.0, "lookY": 4.0, "fov": 42.0}
+  ]
+}
