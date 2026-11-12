@@ -1,6 +1,13 @@
 changelog
 =========
 
+0.2.2
+-----
+*2026-11-12*
+
+- Aligned ``videos/STUDIO.md`` project overlay and ``videos/unfolding/`` motion and YouTube specifications with the unified ``photon_platform.studio`` 1440p QHD pipeline.
+- Updated GitHub Actions deployment workflow permissions.
+
 0.2.1
 -----
 *2026-11-03*
