@@ -31,4 +31,4 @@ videos/**/slides_9x16/
 videos/**/*_work/
 videos/**/_*_concat.txt
 videos/**/clips_*.txt
-
+.venv/

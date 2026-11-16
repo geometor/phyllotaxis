@@ -16,6 +16,13 @@ repo_name = "phyllotaxis"
 
 setup_globals(org, org_name, repo, repo_name)
 
+site_title = "Phyllotaxis"
+project = site_title
+html_title = f"{site_title} • {org_name}"
+
+if "intro.rst" not in exclude_patterns:
+    exclude_patterns.append("intro.rst")
+
 templates_path = ["_templates"] + list(globals().get("templates_path", []))
 html_css_files = list(globals().get("html_css_files", [])) + [
     "css/phyllotaxis-demos.css",
