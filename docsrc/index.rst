@@ -1,8 +1,14 @@
+:site_title: Phyllotaxis
+
+.. container:: author-overline
+
+   semantic digital archive • interactive studio
+
 ===========
 Phyllotaxis
 ===========
 
-Symbolic modeling, interactive 2D/3D web visualizations, and recursive meristem path propagations of botanical geometry.
+``geometor.phyllotaxis`` is the botanical morphogenesis studio of the interconnected `GEOMETOR <https://geometor.com/books/>`_ semantic digital archive. It investigates the mathematical and physical principles of plant architecture—from planar Vogel capitula to recursive 3D vascular path propagations—grounded in exact symbolic representations of the golden angle and Fibonacci rational convergents.
 
 .. math::
 
