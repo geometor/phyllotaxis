@@ -1,4 +1,3 @@
-:navigation: header
 :order: 20
 
 demos
