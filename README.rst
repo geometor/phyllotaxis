@@ -18,11 +18,11 @@ Mission
 Capabilities & Interactive Docs
 -------------------------------
 
-- **`Phyllotaxis Interactive Studio <https://geometor.github.io/phyllotaxis/>`_** — Overview of botanical geometry models and real-time interactive laboratories.
-- **`2D Apical Meristem & Parastichy Studio <https://geometor.github.io/phyllotaxis/demos/meristem_2d.html>`_** — Live planar growth, rational Fibonacci convergent scrubbing, and stroboscopic zoetrope rotation.
-- **`3D Node-as-Path & Recursive Meristem Studio <https://geometor.github.io/phyllotaxis/demos/propagation_3d.html>`_** — Interactive Three.js WebGL visualization of 3D vascular trajectories and recursive branching meristems.
-- **`Mission & Mathematical Principles <https://geometor.github.io/phyllotaxis/mission/>`_** — Exact symbolic divergence angles, Lucas sequences, and the divine proportion in nature.
-- **`Usage & Python API <https://geometor.github.io/phyllotaxis/usage/>`_** — CLI tools and programmatic generation of 3D meristem trees.
+- `Phyllotaxis Interactive Studio <https://geometor.github.io/phyllotaxis/>`_ — Overview of botanical geometry models and real-time interactive laboratories.
+- `2D Apical Meristem & Parastichy Studio <https://geometor.github.io/phyllotaxis/demos/meristem_2d.html>`_ — Live planar growth, rational Fibonacci convergent scrubbing, and stroboscopic zoetrope rotation.
+- `3D Node-as-Path & Recursive Meristem Studio <https://geometor.github.io/phyllotaxis/demos/propagation_3d.html>`_ — Interactive Three.js WebGL visualization of 3D vascular trajectories and recursive branching meristems.
+- `Mission & Mathematical Principles <https://geometor.github.io/phyllotaxis/mission/>`_ — Exact symbolic divergence angles, Lucas sequences, and the divine proportion in nature.
+- `Usage & Python API <https://geometor.github.io/phyllotaxis/usage/>`_ — CLI tools and programmatic generation of 3D meristem trees.
 
 Repository Contents
 -------------------
