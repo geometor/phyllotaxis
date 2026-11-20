@@ -8,6 +8,10 @@
 Phyllotaxis
 ===========
 
+.. image:: _static/medallion.svg
+   :alt: Phyllotaxis Medallion
+   :class: repo-medallion-hero
+
 ``geometor.phyllotaxis`` is the botanical morphogenesis studio of the interconnected `GEOMETOR <https://geometor.com/books/>`_ semantic digital archive. It investigates the mathematical and physical principles of plant architecture—from planar Vogel capitula to recursive 3D vascular path propagations—grounded in exact symbolic representations of the golden angle and Fibonacci rational convergents.
 
 .. math::
