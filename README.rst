@@ -3,6 +3,12 @@ GEOMETOR • phyllotaxis
 
 **Visit the Online Archive:** https://geometor.github.io/phyllotaxis/
 
+.. image:: docsrc/_static/logo.png
+   :alt: GEOMETOR • phyllotaxis Medallion
+   :target: https://geometor.github.io/phyllotaxis/
+   :width: 180px
+   :align: center
+
 .. image:: docsrc/_static/all-zoom.png
    :alt: GEOMETOR • phyllotaxis featured geometric construction
    :target: https://geometor.github.io/phyllotaxis/
